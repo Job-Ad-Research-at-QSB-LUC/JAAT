@@ -72,6 +72,27 @@ class TaskMatch():
                 count += 1
         #print("Found {} task sentences.".format(count), flush=True)
         return positive
+    
+    def get_candidates_batch(self, texts):
+        all_data = []
+        for i, t in enumerate(texts):
+            s = nltk.sent_tokenize(t.strip())
+            all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset([x[1] for x in all_data])
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        #print("Found {} task sentences.".format(count), flush=True)
+        return positive
 
     def get_tasks(self, text):
         positive = self.get_candidates(text)
@@ -95,10 +116,7 @@ class TaskMatch():
         return matched_tasks
     
     def get_tasks_batch(self, texts):
-        all_data = []
-        for i, t in enumerate(texts):
-            positive = self.get_candidates(t)
-            all_data.extend([(i, p) for p in positive])
+        all_data = self.get_candidates_batch(texts)
 
         q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
         if self.device == "cuda":
