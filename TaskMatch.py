@@ -40,9 +40,8 @@ class TaskMatch():
         self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
         tasks = pd.read_csv(impresources.files("data") / "Task_DWA.csv")[["Task ID", "Task"]].drop_duplicates()
         self.tasks = tasks.reset_index().drop("index", axis=1)
-        self.task_embed = self.embedding_model.encode(tasks.Task.to_list(), batch_size=64, show_progress_bar=True)
-        if self.device == "cuda":
-            self.task_embed = self.task_embed.to(self.device)
+        self.task_embed = self.embedding_model.encode(tasks.Task.to_list(), convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.task_embed = self.task_embed.to(self.device)
 
         print("Setting up pipeline...", flush=True)
         self.model = AutoModelForSequenceClassification.from_pretrained(impresources.files("models") / "task-classifier-mini-improved2")
