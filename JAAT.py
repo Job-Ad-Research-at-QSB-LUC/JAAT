@@ -223,7 +223,7 @@ class FirmExtract():
         else:
             return None
 
-        return company
+        return set(company)
 
     def get_firm(self, text):
         tagged = self.pipe(text)
