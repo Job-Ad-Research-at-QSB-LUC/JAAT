@@ -1,8 +1,7 @@
 # Job Ad Analysis Toolkit (JAAT)
 In this repository, you will find the code for efficient and accurate analysis of job ads. Running the code is simple!
 
-## Getting Started
-### TaskMatch
+## TaskMatch
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
 
 After importing the module, simply instantiate the `TaskMatch` object:
@@ -25,7 +24,7 @@ For batch processing, run:
 
 `tasks = TM.get_tasks_batch(LIST_OF_TEXTS)`
 
-### TitleMatch
+## TitleMatch
 The second module assists in matching input job ad titles to coded job titles from O*NET.
 
 After importing the module, simply instantiate the `TitleMatch` object:
@@ -43,7 +42,7 @@ Note that this function will work on either single texts or a list of input text
 
 Each tuple returned corresponds in order to the input text(s).
 
-### FirmExtract
+## FirmExtract
 The third module is capable of extracting the firm (company) name from a text (not necessarily only job ad texts).
 
 After importing the module, simply instantiate the `FirmExtract` object:
@@ -61,3 +60,9 @@ This will return a firm name if found, otherwise `None`.
 `firm_names = FE.get_firm_batch(LIST_OF_TEXTS)`
 
 This will return a list of firm names (or `None` where no name is found).
+
+
+## Data Citation
+In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
+
+`Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.`
