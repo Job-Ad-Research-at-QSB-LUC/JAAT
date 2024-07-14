@@ -190,7 +190,7 @@ class FirmExtract():
         else:
             self.device = "cpu"
         model = AutoModelForTokenClassification.from_pretrained("sjmeis/firmNER", token=HF_TOKEN, id2label={0: 'O', 1: 'B-ORG', 2: 'I-ORG'}, label2id={'O': 0, 'B-ORG': 1, 'I-ORG': 2})
-        tokenizer = AutoTokenizer.from_pretrained("sjmeis/firmNER")
+        tokenizer = AutoTokenizer.from_pretrained("sjmeis/firmNER", token=HF_TOKEN)
         self.pipe = pipeline("token-classification", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="max")
 
         remove = string.punctuation
