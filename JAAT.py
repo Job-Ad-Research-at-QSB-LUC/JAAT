@@ -218,12 +218,10 @@ class FirmExtract():
                 cands.append((r["word"], r["score"]))
 
         if len(cands) > 0:
-            company = max(cands, key=lambda x:x[1])[0]
+            company = sorted(cands, key=lambda x:x[1], reverse=True)
+            company = [self.clean_company(x[0]) for x in cands]
         else:
             return None
-
-        if company is not None:
-            company = self.clean_company(company)
 
         return company
 
