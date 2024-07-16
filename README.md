@@ -65,4 +65,4 @@ This will return a list of firm names (or `None` where no name is found).
 ## Data Citation
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
 
-`Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.`
+```Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.```
