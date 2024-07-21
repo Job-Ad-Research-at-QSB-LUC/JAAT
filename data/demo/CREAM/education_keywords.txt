@@ -1,0 +1,8 @@
+bachelor
+master
+degree
+high school
+education
+diploma
+ged
+certification

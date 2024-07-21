@@ -61,6 +61,38 @@ This will return a firm name if found, otherwise `None`.
 
 This will return a list of firm names (or `None` where no name is found).
 
+## CREAM
+`CREAM` is a tool that allows you to extract concepts that are hidden within texts. These concepts, called *classes*, can be defined arbitrarily by you - anything goes! All you need to do is two things:
+
+- **keywords**: each class should contain a list of relevant keywords, or words/phrases that would "trigger" a potential class candidate
+- **rules**: *rules* define archetypical text chunks that either support or refute an instance of a defined class given a found keyword. Rules should be manually define using domain expertise, and an arbitrary number of rules may be used.
+
+Keywords should be presented as a list of strings, e.g., `[k1, k2, ..., kn]`.
+
+Rules should be presented as list of tuples, in the form: `[(rule_1, label), (rule_2, label), ..., (rule_n, label)]`.
+In the most basic form, the *labels* are binary: 1 denotes the presence of a class, 0 not.
+
+Given these two inputs, one can instantiate the `CREAM` object.
+
+`C = CREAM(keywords=KEYWORDS, rules=RULES)`
+
+There are also three optional parameters:
+
+- `class_name`: the name of the class (i.e., labels)
+- `n`: useful for CREAM internals, essentially how any context words should be considered on either side of identified keywords
+- `threshold`: useful for embedding functions - the minimum similarity threshold a candidate text chunk should meet in order to be matched with a label. The higher the threshold, the stricter the matching criterion.
+
+With this set up, all you need to do is run `CREAM` on a list of texts, and the output will be a DataFrame will the relevant results.
+
+`res = C.run(LIST_OF_TEXTS)`
+
+Specifically, the output will be a Pandas DataFrame will the following columns:
+
+- **text**: the input texts
+- **inferred_rule**: the best matching rule, if any
+- **inferred_label**: the label assigned based on the best matching rule, if any
+- **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
+
 
 ## Data Citation
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
