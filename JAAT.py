@@ -10,6 +10,9 @@ import importlib_resources as impresources
 import multiprocessing as mp
 import re
 import string
+from operator import itemgetter
+
+tqdm.pandas()
 
 HF_TOKEN = None
 
@@ -235,3 +238,70 @@ class FirmExtract():
         for r in tqdm(self.pipe(batch), total=len(texts)):
             results.append(self.extract_firm(r))
         return results
+
+class CREAM():
+
+    def __init__(self, keywords, rules, class_name="label", n=4, threshold=0.9):
+        if not isinstance(keywords, list) or not isinstance(rules, list):
+            print("ERROR: keywords and rules must be given as a list of values. \n KEYWORDS: [k1, k2, ..., kn] \n RULES: [(rule_1, label), (rule_2, label), ..., (rule_n, label)]")
+            return
+        
+        print("INIT", flush=True)
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+        else:
+            self.device = "cpu"
+
+        self.class_name = class_name
+        self.n = n
+        self.threshold = threshold
+        self.keywords = keywords
+        rules = [(k, 0) for k in self.keywords] + rules
+        self.rules = pd.DataFrame(rules, columns=["rule", self.class_name])
+
+        self.model = SentenceTransformer("thenlper/gte-large", device=self.device)
+
+        self.encoded_rules = self.model.encode(self.rules['rule'].tolist())
+        self.rule_map = dict(zip(self.rules['rule'].tolist(), self.rules[self.class_name].tolist()))
+
+        print("Finished.", flush=True)
+
+    def get_sim(self, q):
+        sim_scores = util.cos_sim(self.model.encode([q]), self.encoded_rules)
+        return dict(zip(self.rule_map.keys(), sim_scores[0].tolist()))
+    
+    def label_from_max(self, scores):
+        max_rule = max(scores, key=scores.get)
+        label = self.rule_map[max_rule]
+        return max_rule, label, scores[max_rule]
+    
+    def get_context(self, text):
+        text = text.lower()
+        text = re.sub(r'[^a-z0-9]+', ' ', text)
+
+        words = text.split()
+        found_index = [i for i, w in enumerate(words) if any(k.strip() in w for k in self.keywords)]
+        context = [" ".join(words[max(0, idx-self.n):min(idx+self.n+1, len(words))]) for idx in found_index]
+
+        return '|'.join(context)
+    
+    def __helper__(self, text):
+        context = self.get_context(text).split('|')
+        
+        if len(context) > 0 and context[0] != "":
+            all_scores = []
+            for c in context:
+                scores = self.get_sim(c)
+                all_scores.append(self.label_from_max(scores))
+            max_score = max(all_scores, key=itemgetter(2))
+            if max_score[2] >= self.threshold:
+                return max_score[0], max_score[1], max_score[2]
+            else:
+                return None, 0, None
+        else:
+            return None, 0, None
+        
+    def run(self, texts):
+        df = pd.DataFrame(texts, columns=["text"])
+        df['inferred_rule'], df['inferred_label'], df['inferred_confidence'] = zip(*df["text"].progress_apply(self.__helper__))
+        return df

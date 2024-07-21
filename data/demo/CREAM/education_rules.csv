@@ -1,12 +1,4 @@
 ﻿rule,education
-bachelor,0
-master,0
-degree,0
-high school,0
-education,0
-diploma,0
-ged,0
-certification,0
 qualifications associate degree ,1
 accredited college or university ,1
 accredited college or university ,1
