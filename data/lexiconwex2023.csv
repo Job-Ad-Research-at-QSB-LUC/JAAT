@@ -1,0 +1,2258 @@
+code,activity,example
+010101,Sleeping,sleeping
+010101,Sleeping,waking up
+010101,Sleeping,falling asleep
+010101,Sleeping,dreaming
+010101,Sleeping,dozing off
+010101,Sleeping,cat napping
+010101,Sleeping,napping
+010101,Sleeping,getting some shut-eye
+010101,Sleeping,getting up
+010101,Sleeping,dozing
+010102,Sleeplessness,insomnia
+010102,Sleeplessness,lying awake
+010102,Sleeplessness,tossing and turning
+010102,Sleeplessness,counting sheep
+010201,"Washing, dressing and grooming oneself",bathing/showering
+010201,"Washing, dressing and grooming oneself",washing face
+010201,"Washing, dressing and grooming oneself",brushing/flossing teeth
+010201,"Washing, dressing and grooming oneself",washing hands
+010201,"Washing, dressing and grooming oneself",grooming
+010201,"Washing, dressing and grooming oneself",putting in contact lenses
+010201,"Washing, dressing and grooming oneself",blow-drying hair
+010201,"Washing, dressing and grooming oneself",shaving legs
+010201,"Washing, dressing and grooming oneself",brushing hair
+010201,"Washing, dressing and grooming oneself",cleaning contact lenses
+010201,"Washing, dressing and grooming oneself",putting on makeup
+010201,"Washing, dressing and grooming oneself",washing hair
+010201,"Washing, dressing and grooming oneself",shaving
+010201,"Washing, dressing and grooming oneself",filing nails
+010201,"Washing, dressing and grooming oneself",getting dressed/undressed
+010201,"Washing, dressing and grooming oneself",combing hair
+010201,"Washing, dressing and grooming oneself",changing clothes
+010201,"Washing, dressing and grooming oneself",gargling mouthwash
+010201,"Washing, dressing and grooming oneself",laying clothes out
+010201,"Washing, dressing and grooming oneself",putting on shoes
+010201,"Washing, dressing and grooming oneself",putting on hand cream
+010201,"Washing, dressing and grooming oneself",removing curlers
+010201,"Washing, dressing and grooming oneself",perming own hair
+010201,"Washing, dressing and grooming oneself",putting on night cream
+010201,"Washing, dressing and grooming oneself",doing own hair
+010201,"Washing, dressing and grooming oneself",cutting own hair
+010201,"Washing, dressing and grooming oneself",running bath
+010201,"Washing, dressing and grooming oneself",washing feet
+010201,"Washing, dressing and grooming oneself",doing nails
+010201,"Washing, dressing and grooming oneself",cleaning ears
+010201,"Washing, dressing and grooming oneself",putting on nail polish
+010201,"Washing, dressing and grooming oneself",brushing lint off clothing
+010201,"Washing, dressing and grooming oneself",using the bathroom
+010201,"Washing, dressing and grooming oneself",putting on pajamas
+010299,Grooming,mom braided my hair
+010299,Grooming,friend rubbed suntan lotion on me
+010299,Grooming,getting a haircut from spouse/friend (unpaid)
+010301,Health-related self care,doing childbirth exercises
+010301,Health-related self care,meditating (not religious)
+010301,Health-related self care,dressing a wound
+010301,Health-related self care,taking vitamins
+010301,Health-related self care,giving oneself a shot
+010301,Health-related self care,resting because of injury
+010301,Health-related self care,taking insulin
+010301,Health-related self care,taking cough drops
+010301,Health-related self care,putting ice on injury
+010301,Health-related self care,bandaging ankle
+010301,Health-related self care,gargling for sore throat
+010301,Health-related self care,giving oneself an injection
+010301,Health-related self care,resting because of illness
+010301,Health-related self care,testing blood sugar level
+010301,Health-related self care,taking medicine
+010301,Health-related self care,applying ointment
+010301,Health-related self care,doing stress management exercises
+010301,Health-related self care,changing oxygen
+010301,Health-related self care,checking my temperature
+010301,Health-related self care,checking my oxygen levels
+010301,Health-related self care,exercising or therapy for medical reasons
+010301,Health-related self care,taking my temperature before a telehealth/telemedicine appt
+010301,Health-related self care,taking my blood pressure before a telehealth/telemedicine appt
+010301,Health-related self care,taking my temperature before leaving for the airport
+010301,Health-related self care,self-administering a COVID test
+010399,Self care,feeling sick
+010401,Personal/Private activities,having sex
+010401,Personal/Private activities,"private activity, unspecified"
+010401,Personal/Private activities,making out
+010401,Personal/Private activities,"personal activity, unspecified"
+010401,Personal/Private activities,cuddling partner in bed
+010401,Personal/Private activities,spouse gave me a massage
+010401,Personal/Private activities,necking
+010501,Personal emergencies,being involved in a personal accident
+010501,Personal emergencies,stanching blood flow
+010501,Personal emergencies,losing consciousness
+010501,Personal emergencies,waiting for ambulance
+010501,Personal emergencies,being involved in an accident requiring emergency care
+020101,Interior cleaning,tidying up
+020101,Interior cleaning,picking up clothes
+020101,Interior cleaning,recycling/sorting newspapers for recycling
+020101,Interior cleaning,straightening up the house
+020101,Interior cleaning,cleaning windows/washing walls
+020101,Interior cleaning,picking up the house/cleaning the house
+020101,Interior cleaning,vacuuming/sweeping floors/sweeping
+020101,Interior cleaning,washing floor
+020101,Interior cleaning,making the bed/changing sheets
+020101,Interior cleaning,cleaning out drawers
+020101,Interior cleaning,cleaning bathrooms/cleaning bedroom
+020101,Interior cleaning,emptying ashtray
+020101,Interior cleaning,cleaning carpets/shampooing carpet
+020101,Interior cleaning,cleaning bathtub/cleaning toilet
+020101,Interior cleaning,polishing furniture/dusting
+020101,Interior cleaning,cleaning out closet
+020101,Interior cleaning,emptying trash cans/taking out the trash
+020101,Interior cleaning,scrubbing
+020101,Interior cleaning,cleaning cupboards
+020101,Interior cleaning,cleaning floors/mopping floors
+020101,Interior cleaning,picking up toys
+020102,Laundry,putting laundry in washer/dryer
+020102,Laundry,bringing in washing/laundry
+020102,Laundry,hanging clothes on clothesline
+020102,Laundry,putting towels in bathroom
+020102,Laundry,sorting laundry/folding clean laundry
+020102,Laundry,hand washing clothing
+020102,Laundry,treating stains/spot treating clothes
+020102,Laundry,taking clothes off the line
+020102,Laundry,ironing
+020102,Laundry,taking clothes out of washer
+020102,Laundry,putting clean laundry away
+020102,Laundry,washing curtains
+020102,Laundry,putting out clean towels
+020102,Laundry,folding clothes/hanging clothes
+020102,Laundry,removing lint from dryer
+020102,Laundry,adding fabric softener
+020102,Laundry,doing laundry/checking wash
+020103,"Sewing, repairing, & maintaining textiles",sewing on buttons/hemming garmets
+020103,"Sewing, repairing, & maintaining textiles",polishing shoes
+020103,"Sewing, repairing, & maintaining textiles",sewing a new dress/clothing
+020103,"Sewing, repairing, & maintaining textiles",repairing/caring for clothes/hats/shoes/curtains
+020103,"Sewing, repairing, & maintaining textiles",sewing curtains/other hh items
+020103,"Sewing, repairing, & maintaining textiles",cleaning shoes/sneakers
+020103,"Sewing, repairing, & maintaining textiles",knitting/crocheting blankets
+020103,"Sewing, repairing, & maintaining textiles","knitting/crocheting sweaters, clothing"
+020103,"Sewing, repairing, & maintaining textiles",altering clothing/sewing hem
+020103,"Sewing, repairing, & maintaining textiles",crocheting/crocheting quilt
+020104,"Storing interior hh items, inc. food",putting away the groceries/putting shopping away
+020104,"Storing interior hh items, inc. food",boxing things up for storage
+020104,"Storing interior hh items, inc. food",storing food/storing the groceries
+020104,"Storing interior hh items, inc. food",putting away decorations/Christmas decorations/holiday items
+020104,"Storing interior hh items, inc. food",moving stuff to attic/basement
+020201,Food and drink preparation,baking/cooking/broiling/boiling
+020201,Food and drink preparation,cooking dinner
+020201,Food and drink preparation,defrosting
+020201,Food and drink preparation,peeling potatoes
+020201,Food and drink preparation,packing food/lunches/picnics
+020201,Food and drink preparation,preparing salad
+020201,Food and drink preparation,making baby food
+020201,Food and drink preparation,baking a cake/baking biscuits
+020201,Food and drink preparation,mixing/heating up baby formula
+020201,Food and drink preparation,chopping/slicing vegetables
+020201,Food and drink preparation,mixing drinks
+020201,Food and drink preparation,putting roast in oven
+020201,Food and drink preparation,making coffee/tea
+020201,Food and drink preparation,smoking fish
+020201,Food and drink preparation,heating food up/cooking meals
+020201,Food and drink preparation,dehydrating food/drying food
+020201,Food and drink preparation,preparing food for company/guests
+020201,Food and drink preparation,thawing frozen food
+020201,Food and drink preparation,canning food/preserving food
+020201,Food and drink preparation,putting icing on cake
+020201,Food and drink preparation,preparing food for other hh members
+020201,Food and drink preparation,boiling water
+020201,Food and drink preparation,getting a drink/pouring water in glass
+020201,Food and drink preparation,butchering/carving/salting meat
+020201,Food and drink preparation,brewing beer or wine
+020201,Food and drink preparation,making a gingerbread house
+020201,Food and drink preparation,breast-pumping
+020201,Food and drink preparation,making jam/bottling fruit
+020201,Food and drink preparation,baking Christmas cookies
+020202,Food presentation,serving a meal/serving hors d'oeuvres
+020202,Food presentation,garnishing food
+020202,Food presentation,setting the table
+020202,Food presentation,putting out condiments
+020202,Food presentation,polishing silver
+020202,Food presentation,passing out drinks
+020202,Food presentation,filling salt/pepper/sugar
+020203,Kitchen and food clean-up,cleaning up after a meal/clearing the table
+020203,Kitchen and food clean-up,cleaning oven/stove/barbecue grill
+020203,Kitchen and food clean-up,loading the dishwasher/emptying dishwasher
+020203,Kitchen and food clean-up,cleaning high chair
+020203,Kitchen and food clean-up,washing/drying dishes
+020203,Kitchen and food clean-up,cleaning up plates and food
+020203,Kitchen and food clean-up,putting leftovers away
+020203,Kitchen and food clean-up,wiping table
+020203,Kitchen and food clean-up,cleaning up the kitchen only
+020203,Kitchen and food clean-up,rinsing dishes/washing pots and pans
+020203,Kitchen and food clean-up,cleaning kitchen cupboard
+020203,Kitchen and food clean-up,putting dishes away
+020203,Kitchen and food clean-up,cleaning freezer/defrosting freezer
+020203,Kitchen and food clean-up,throwing away leftovers
+020203,Kitchen and food clean-up,cleaning refrigerator
+020203,Kitchen and food clean-up,mopping the kitchen floor
+020203,Kitchen and food clean-up,cleaning microwave oven
+020301,"Interior arrangement, decoration, & repairs",decorating
+020301,"Interior arrangement, decoration, & repairs",fumigating house
+020301,"Interior arrangement, decoration, & repairs",moving/rearranging furniture
+020301,"Interior arrangement, decoration, & repairs",measuring windows for curtains
+020301,"Interior arrangement, decoration, & repairs",hanging pictures
+020301,"Interior arrangement, decoration, & repairs",making plumbing improvements
+020301,"Interior arrangement, decoration, & repairs",hanging curtains/wallpaper
+020301,"Interior arrangement, decoration, & repairs",stripping paint
+020301,"Interior arrangement, decoration, & repairs",painting
+020301,"Interior arrangement, decoration, & repairs",stripping wallpaper
+020301,"Interior arrangement, decoration, & repairs",laying linoleum/tile/wood floors
+020301,"Interior arrangement, decoration, & repairs",installing carpet
+020301,"Interior arrangement, decoration, & repairs",refitting kitchen/bathroom
+020301,"Interior arrangement, decoration, & repairs",hanging blinds/shades
+020301,"Interior arrangement, decoration, & repairs",remodeling interior of house
+020301,"Interior arrangement, decoration, & repairs",taking down towel bars
+020301,"Interior arrangement, decoration, & repairs",fixing leaks
+020301,"Interior arrangement, decoration, & repairs",decorating the Christmas tree
+020301,"Interior arrangement, decoration, & repairs",plastering
+020301,"Interior arrangement, decoration, & repairs",carving jack-o-lanterns
+020301,"Interior arrangement, decoration, & repairs",putting up shelves
+020301,"Interior arrangement, decoration, & repairs",setting up a manger (inside)
+020301,"Interior arrangement, decoration, & repairs",replacing fuses
+020301,"Interior arrangement, decoration, & repairs",hanging Christmas stockings
+020301,"Interior arrangement, decoration, & repairs",changing light bulbs
+020301,"Interior arrangement, decoration, & repairs",putting up Christmas decorations (inside)
+020301,"Interior arrangement, decoration, & repairs",putting up Christmas lights (inside)
+020301,"Interior arrangement, decoration, & repairs",setting up menorah candles (inside)
+020301,"Interior arrangement, decoration, & repairs",setting mousetraps
+020301,"Interior arrangement, decoration, & repairs",pulling out Christmas decorations
+020302,Building and repairing furniture,making furniture
+020302,Building and repairing furniture,making cabinets
+020302,Building and repairing furniture,refinishing furniture
+020302,Building and repairing furniture,stripping furniture
+020302,Building and repairing furniture,reupholstering furniture
+020302,Building and repairing furniture,sanding wood furniture
+020302,Building and repairing furniture,refinishing wood furniture
+020302,Building and repairing furniture,staining wood furniture
+020302,Building and repairing furniture,repairs to furniture
+020302,Building and repairing furniture,changing cabinet hardware
+020302,Building and repairing furniture,painting furniture
+020302,Building and repairing furniture,assembling furniture
+020303,Heating and cooling,chopping wood
+020303,Heating and cooling,collecting wood
+020303,Heating and cooling,lighting fireplace
+020303,Heating and cooling,stacking firewood
+020303,Heating and cooling,bringing in wood/kindling
+020303,Heating and cooling,setting the fire
+020303,Heating and cooling,shoveling coal
+020303,Heating and cooling,installing wood burning stove
+020303,Heating and cooling,filling heater with fuel
+020303,Heating and cooling,installing fireplace
+020303,Heating and cooling,installing window AC unit
+020303,Heating and cooling,opening/closing windows
+020303,Heating and cooling,changing furnace filter
+020401,Exterior cleaning,sweeping deck/patio/porch
+020401,Exterior cleaning,cleaning shed
+020401,Exterior cleaning,sweeping steps
+020401,Exterior cleaning,sweeping garage
+020401,Exterior cleaning,shoveling snow
+020401,Exterior cleaning,cleaning chimney
+020401,Exterior cleaning,removing ice from walkways
+020401,Exterior cleaning,washing outside windows
+020401,Exterior cleaning,putting away yard equipment
+020401,Exterior cleaning,picking up trash that blew into yard
+020401,Exterior cleaning,putting away bicycles
+020401,Exterior cleaning,sweeping sidewalk
+020401,Exterior cleaning,cleaning gutters
+020401,Exterior cleaning,putting away outside toys
+020401,Exterior cleaning,cleaning garage
+020402,"Exterior repair, improvements, & decoration",painting/staining porch/deck
+020402,"Exterior repair, improvements, & decoration",painting house exterior
+020402,"Exterior repair, improvements, & decoration",fixing the roof
+020402,"Exterior repair, improvements, & decoration",fixing mailbox
+020402,"Exterior repair, improvements, & decoration",fixing broken windows
+020402,"Exterior repair, improvements, & decoration",staining house exterior
+020402,"Exterior repair, improvements, & decoration",replacing screens
+020402,"Exterior repair, improvements, & decoration",fixing weatherboards
+020402,"Exterior repair, improvements, & decoration",building a deck
+020402,"Exterior repair, improvements, & decoration",fixing bird feeder
+020402,"Exterior repair, improvements, & decoration",building a garage/carport
+020402,"Exterior repair, improvements, & decoration",building a fence
+020402,"Exterior repair, improvements, & decoration",building a shed
+020402,"Exterior repair, improvements, & decoration",painting or staining fence
+020402,"Exterior repair, improvements, & decoration",putting new roof on house
+020402,"Exterior repair, improvements, & decoration",putting new roof on garage
+020402,"Exterior repair, improvements, & decoration",adding another room to house
+020402,"Exterior repair, improvements, & decoration",setting up garden furniture
+020402,"Exterior repair, improvements, & decoration",screening in a porch
+020402,"Exterior repair, improvements, & decoration",decorating outside for holidays
+020402,"Exterior repair, improvements, & decoration",installing a gate or fence
+020402,"Exterior repair, improvements, & decoration",hanging flags
+020402,"Exterior repair, improvements, & decoration",paving or blacktopping
+020402,"Exterior repair, improvements, & decoration",hanging address numbers
+020402,"Exterior repair, improvements, & decoration",making structural additions
+020402,"Exterior repair, improvements, & decoration",working on boat lift
+020402,"Exterior repair, improvements, & decoration",hanging outdoor lights
+020402,"Exterior repair, improvements, & decoration",repairing boat dock
+020402,"Exterior repair, improvements, & decoration",decorating outside for parties
+020402,"Exterior repair, improvements, & decoration",hanging up wind chimes
+020402,"Exterior repair, improvements, & decoration",putting up outdoor holiday decorations
+020402,"Exterior repair, improvements, & decoration",repairing wind chimes
+020402,"Exterior repair, improvements, & decoration",putting up Christmas lights (outside)
+020402,"Exterior repair, improvements, & decoration",putting up Christmas decorations (outside)
+020501,"Lawn, garden, and houseplant care",applying pesticides
+020501,"Lawn, garden, and houseplant care",picking fruit and vegetables
+020501,"Lawn, garden, and houseplant care",spraying for bugs
+020501,"Lawn, garden, and houseplant care",gathering nuts
+020501,"Lawn, garden, and houseplant care",gardening
+020501,"Lawn, garden, and houseplant care","collecting eggs, honey"
+020501,"Lawn, garden, and houseplant care",doing yard work
+020501,"Lawn, garden, and houseplant care",planting tomatoes
+020501,"Lawn, garden, and houseplant care",trimming branches/hedges
+020501,"Lawn, garden, and houseplant care",digging in the vegetable garden
+020501,"Lawn, garden, and houseplant care",pruning shrubs/flowers
+020501,"Lawn, garden, and houseplant care",laying paving stones
+020501,"Lawn, garden, and houseplant care","picking up branches, twigs"
+020501,"Lawn, garden, and houseplant care",fertilizing garden
+020501,"Lawn, garden, and houseplant care",raking leaves
+020501,"Lawn, garden, and houseplant care",planting beans
+020501,"Lawn, garden, and houseplant care",blowing leaves
+020501,"Lawn, garden, and houseplant care",planting fruit tree
+020501,"Lawn, garden, and houseplant care",planting
+020501,"Lawn, garden, and houseplant care",pruning tree
+020501,"Lawn, garden, and houseplant care",mulching
+020501,"Lawn, garden, and houseplant care",putting snail killer around vegetables
+020501,"Lawn, garden, and houseplant care",watering houseplants
+020501,"Lawn, garden, and houseplant care",sowing flower or vegetable seeds
+020501,"Lawn, garden, and houseplant care",weeding
+020501,"Lawn, garden, and houseplant care",spraying fruit trees
+020501,"Lawn, garden, and houseplant care",cutting the grass
+020501,"Lawn, garden, and houseplant care",spraying rose bushes
+020501,"Lawn, garden, and houseplant care",mowing the lawn
+020501,"Lawn, garden, and houseplant care",tying up tomatoes
+020501,"Lawn, garden, and houseplant care",edging
+020501,"Lawn, garden, and houseplant care",putting pesticides on lawn
+020501,"Lawn, garden, and houseplant care",adding chemicals to lawn
+020501,"Lawn, garden, and houseplant care",turning sprinkler on or off
+020501,"Lawn, garden, and houseplant care",fertilizing the lawn
+020501,"Lawn, garden, and houseplant care",watering outdoor plants
+020501,"Lawn, garden, and houseplant care",spreading mulch
+020501,"Lawn, garden, and houseplant care",hunting mushrooms
+020501,"Lawn, garden, and houseplant care",watering lawn/garden
+020501,"Lawn, garden, and houseplant care",weeding vegetable garden
+020501,"Lawn, garden, and houseplant care",seeding
+020501,"Lawn, garden, and houseplant care",weeding flower garden
+020501,"Lawn, garden, and houseplant care",planting fruit and vegetables
+020501,"Lawn, garden, and houseplant care",disposing/recycling lawn clippings
+020501,"Lawn, garden, and houseplant care",cleaning the yard
+020502,"Ponds, pools, and hot tubs",adding chemicals to pool
+020502,"Ponds, pools, and hot tubs",draining pool
+020502,"Ponds, pools, and hot tubs",chlorinating the pool
+020502,"Ponds, pools, and hot tubs",filling the pool
+020502,"Ponds, pools, and hot tubs","cleaning the pond, pool, hot tub"
+020502,"Ponds, pools, and hot tubs",adding chemicals to hot tub
+020502,"Ponds, pools, and hot tubs","putting in a pond, pool, hot tub"
+020502,"Ponds, pools, and hot tubs",testing ph in water
+020502,"Ponds, pools, and hot tubs","repairing pond, pool, hot tub"
+020502,"Ponds, pools, and hot tubs",turning on/off the hot tub
+020502,"Ponds, pools, and hot tubs",winterizing pool
+020601,Care for animals and pets (not veterinary care),caring for household pets
+020601,Care for animals and pets (not veterinary care),feeding rabbit
+020601,Care for animals and pets (not veterinary care),cleaning up after pets
+020601,Care for animals and pets (not veterinary care),feeding birds
+020601,Care for animals and pets (not veterinary care),watching kittens/puppies being born
+020601,Care for animals and pets (not veterinary care),grooming pets
+020601,Care for animals and pets (not veterinary care),feeding/watering pets
+020601,Care for animals and pets (not veterinary care),feeding fish
+020601,Care for animals and pets (not veterinary care),petting animals
+020601,Care for animals and pets (not veterinary care),grooming horse
+020601,Care for animals and pets (not veterinary care),clipping cat's claws
+020601,Care for animals and pets (not veterinary care),feeding guinea pig
+020601,Care for animals and pets (not veterinary care),adopting a pet
+020601,Care for animals and pets (not veterinary care),brushing dog
+020601,Care for animals and pets (not veterinary care),visiting an animal shelter to select pet
+020601,Care for animals and pets (not veterinary care),tending a wounded bird
+020601,Care for animals and pets (not veterinary care),clipping dog's nails
+020601,Care for animals and pets (not veterinary care),feeding a stray
+020601,Care for animals and pets (not veterinary care),cleaning the litter box
+020601,Care for animals and pets (not veterinary care),feeding a raccoon
+020601,Care for animals and pets (not veterinary care),providing medical care to pets
+020601,Care for animals and pets (not veterinary care),caring for an orphaned animal
+020601,Care for animals and pets (not veterinary care),burying animals
+020601,Care for animals and pets (not veterinary care),nursing a sick animal
+020601,Care for animals and pets (not veterinary care),feeding ducks
+020601,Care for animals and pets (not veterinary care),feeding squirrels
+020601,Care for animals and pets (not veterinary care),feeding the dog
+020601,Care for animals and pets (not veterinary care),feeding cat
+020601,Care for animals and pets (not veterinary care),bathing dog
+020601,Care for animals and pets (not veterinary care),filling the bird feeder
+020601,Care for animals and pets (not veterinary care),changing dog's water
+020601,Care for animals and pets (not veterinary care),feeding horses
+020601,Care for animals and pets (not veterinary care),putting together rabbit pen
+020601,Care for animals and pets (not veterinary care),letting the dog out
+020602,Walking / exercising / playing with animals,exercising pets
+020602,Walking / exercising / playing with animals,playing with animals
+020602,Walking / exercising / playing with animals,taking pets for a walk
+020602,Walking / exercising / playing with animals,playing with the dog
+020602,Walking / exercising / playing with animals,walking the dog
+020701,Vehicle repair and maintenance (by self),changing oil
+020701,Vehicle repair and maintenance (by self),changing wheel on motorcycle
+020701,Vehicle repair and maintenance (by self),adding oil
+020701,Vehicle repair and maintenance (by self),putting new chain on bicycle
+020701,Vehicle repair and maintenance (by self),putting air in tires
+020701,Vehicle repair and maintenance (by self),filling brake fluid
+020701,Vehicle repair and maintenance (by self),charging battery
+020701,Vehicle repair and maintenance (by self),checking battery
+020701,Vehicle repair and maintenance (by self),filling radiator
+020701,Vehicle repair and maintenance (by self),restoring car
+020701,Vehicle repair and maintenance (by self),changing spark plugs
+020701,Vehicle repair and maintenance (by self),checking tire pressure
+020701,Vehicle repair and maintenance (by self),washing/waxing cars or other vehicles
+020701,Vehicle repair and maintenance (by self),cleaning boat
+020701,Vehicle repair and maintenance (by self),replacing vehicle headlights
+020701,Vehicle repair and maintenance (by self),fixing bike
+020701,Vehicle repair and maintenance (by self),putting protective cover on vehicle
+020701,Vehicle repair and maintenance (by self),fixing motorcycle
+020701,Vehicle repair and maintenance (by self),scraping ice/snow off vehicle
+020701,Vehicle repair and maintenance (by self),cleaning/vacuuming vehicles
+020701,Vehicle repair and maintenance (by self),checking fluids
+020701,Vehicle repair and maintenance (by self),replacing vehicle taillights
+020701,Vehicle repair and maintenance (by self),changing/rotating tires
+020701,Vehicle repair and maintenance (by self),installing car CD player
+020701,Vehicle repair and maintenance (by self),replacing brakes
+020701,Vehicle repair and maintenance (by self),putting on registration stickers
+020701,Vehicle repair and maintenance (by self),adding equipment to vehicles
+020701,Vehicle repair and maintenance (by self),putting car/vehicle in garage
+020701,Vehicle repair and maintenance (by self),installing car stereo/speakers
+020701,Vehicle repair and maintenance (by self),checking tires
+020701,Vehicle repair and maintenance (by self),putting on license plates/tags
+020701,Vehicle repair and maintenance (by self),assembling bicycle
+020701,Vehicle repair and maintenance (by self),overhauling engine
+020701,Vehicle repair and maintenance (by self),rebuilding engine
+020701,Vehicle repair and maintenance (by self),doing a ring job
+020701,Vehicle repair and maintenance (by self),covering boat
+020701,Vehicle repair and maintenance (by self),doing a valve job
+020701,Vehicle repair and maintenance (by self),installing a trailer hitch
+020701,Vehicle repair and maintenance (by self),tuning up vehicles
+020701,Vehicle repair and maintenance (by self),hooking up trailer to car/truck
+020701,Vehicle repair and maintenance (by self),cleaning camper/RV
+020701,Vehicle repair and maintenance (by self),winterizing boat
+020701,Vehicle repair and maintenance (by self),checking to make sure car was locked
+020701,Vehicle repair and maintenance (by self),charging an electric car
+020701,Vehicle repair and maintenance (by self),waiting for car to charge
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",fixing household camera
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing a printer
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",setting up or fixing computer
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing a scanner
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",changing batteries in appliances
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing a modem
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",setting/winding clocks
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing a fax machine
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",repairing toys
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",connecting washing machine/dryer
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing appliances
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",maintaining tools and equipment
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",repairing appliances
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",charging batteries
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)","hooking up stereo, VCR"
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",loading software on computer
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",cleaning tools and equipment
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",waxing skis
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",repairing tools & equipment
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",restringing tennis racket
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",sharpening knives/other tools
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",repairing sporting equipment
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",cleaning/oiling lawnmowers
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",setting up doll house
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",setting up toy train track
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",installing heating or A/C equipment
+020801,"Appliance, tool, and toy set-up, repair, & maintenance (by self)",hooking up satellite dish
+020901,Financial management,paying the rent/mortgage/bills
+020901,Financial management,writing checks
+020901,Financial management,using computer to pay bills
+020901,Financial management,filing receipts
+020901,Financial management,making a budget/using computer to keep budget
+020901,Financial management,filling out tax forms
+020901,Financial management,balancing the checkbook/checking receipts against bank statements
+020901,Financial management,giving money to hh child or hh adult
+020901,Financial management,checking/trading/buying/selling stocks
+020901,Financial management,borrowing/lending money (not banking)
+020901,Financial management,researching investments
+020901,Financial management,looking at bills
+020901,Financial management,donating money
+020901,Financial management,checking cryptocurrency/bitcoin balance
+020901,Financial management,checking bank account balance
+020902,Household & personal organization and planning,making shopping lists
+020902,Household & personal organization and planning,unpacking/packing recreational vehicle for trip
+020902,Household & personal organization and planning,assigning chores
+020902,Household & personal organization and planning,organizing file cabinet
+020902,Household & personal organization and planning,getting organized for work (for self)
+020902,Household & personal organization and planning,making photocopies (for self or hh)
+020902,Household & personal organization and planning,organizing/planning hh parties or hh events
+020902,Household & personal organization and planning,unloading groceries/shopping items
+020902,Household & personal organization and planning,planning vacation/household trip
+020902,Household & personal organization and planning,putting pictures in albums
+020902,Household & personal organization and planning,planning household meals/menu
+020902,Household & personal organization and planning,labeling videos
+020902,Household & personal organization and planning,looking for misplaced items
+020902,Household & personal organization and planning,organizing boxes in garage
+020902,Household & personal organization and planning,borrowing/lending household items
+020902,Household & personal organization and planning,unpacking/packing car for trip
+020902,Household & personal organization and planning,carrying in groceries
+020902,Household & personal organization and planning,packing boxes for household move or trip
+020902,Household & personal organization and planning,sorting/doing/filling out paperwork
+020902,Household & personal organization and planning,unwrapping/opening packages
+020902,Household & personal organization and planning,sorting books/sorting household items
+020902,Household & personal organization and planning,packing/unpacking bags or suitcase (for self)
+020902,Household & personal organization and planning,filling a Christmas stocking/Easter basket
+020902,Household & personal organization and planning,organizing school stuff (for self)
+020902,Household & personal organization and planning,opening presents/gifts (alone)
+020902,Household & personal organization and planning,wrapping presents
+020902,Household & personal organization and planning,Loading/unloading the car
+020902,Household & personal organization and planning,dropping off/picking up household items
+020902,Household & personal organization and planning,looking at store purchases
+020902,Household & personal organization and planning,making dinner reservations
+020902,Household & personal organization and planning,making reservations
+020902,Household & personal organization and planning,creating shoppings lists on Alexa or similar technology
+020903,HH & personal mail & messages (except e-mail),"mailing letters, payments"
+020903,HH & personal mail & messages (except e-mail),collecting mail/reading mail
+020903,HH & personal mail & messages (except e-mail),checking phone messages
+020903,HH & personal mail & messages (except e-mail),writing Valentines/Christmas cards
+020903,HH & personal mail & messages (except e-mail),sending reg./cert. packages/mail/express mail
+020903,HH & personal mail & messages (except e-mail),mailing/picking up letters or packages
+020903,HH & personal mail & messages (except e-mail),bringing in newspaper/mail
+020903,HH & personal mail & messages (except e-mail),throwing away junk mail
+020903,HH & personal mail & messages (except e-mail),writing letters/cards (personal or hh)
+020903,HH & personal mail & messages (except e-mail),signing for certified mail
+020903,HH & personal mail & messages (except e-mail),looking at/checking/sorting mail
+020903,HH & personal mail & messages (except e-mail),addressing holiday cards
+020903,HH & personal mail & messages (except e-mail),checking to see if mail came/getting mail in
+020904,HH & personal e-mail and messages,reading/sending e-mail (personal or hh)
+020904,HH & personal e-mail and messages,cleaning out e-mail inbox (personal or hh)
+020904,HH & personal e-mail and messages,instant messaging (personal)
+020904,HH & personal e-mail and messages,reading/sending e-mail (unspecified)
+020904,HH & personal e-mail and messages,checking e-mail (personal or hh)
+020905,Home security,installing/maintaining smoke detectors
+020905,Home security,maintaining alarms/security systems
+020905,Home security,checking/changing locks
+020905,Home security,breaking into home if locked out
+020905,Home security,setting security alarm/installing alarms
+020905,Home security,closing house up
+020905,Home security,"locking doors, windows/turning out the lights"
+020905,Home security,closing the blinds/curtains
+020905,Home security,breaking into a locked house
+020905,Home security,locking up the house/locking up home
+020905,Home security,bolting doors/windows
+029999,Household activities,household emergency
+029999,Household activities,putting out a kitchen fire
+029999,Household activities,household accident
+030101,Physical care for hh children,dressing/bathing hh child
+030101,Physical care for hh children,feeding hh child
+030101,Physical care for hh children,changing hh child's diapers
+030101,Physical care for hh children,cutting hh child's hair
+030101,Physical care for hh children,helping hh child get dressed/brush teeth/bathe
+030101,Physical care for hh children,preparing a shower for a hh child
+030101,Physical care for hh children,breastfeeding/nursing hh baby
+030101,Physical care for hh children,soothing hh child/baby
+030101,Physical care for hh children,laying out clothes for hh child
+030101,Physical care for hh children,tucking in hh child
+030101,Physical care for hh children,giving hh child a bottle
+030101,Physical care for hh children,getting hh child up
+030101,Physical care for hh children,getting hh child ready to go somewhere
+030101,Physical care for hh children,Helping hh child feed him/herself
+030101,Physical care for hh children,waking hh child
+030101,Physical care for hh children,helping hh child use the bathroom
+030101,Physical care for hh children,getting hh child ready for bed
+030101,Physical care for hh children,drawing a bath for a hh child
+030101,Physical care for hh children,putting hh child to bed
+030101,Physical care for hh children,giving hh child a bath
+030101,Physical care for hh children,rocking/cuddling/holding hh child
+030101,Physical care for hh children,getting hh child ready for school
+030101,Physical care for hh children,carrying hh child/baby
+030102,Reading to/with hh children,reading to or with hh child
+030102,Reading to/with hh children,helping hh child read
+030102,Reading to/with hh children,listening to a hh child read
+030103,"Playing with hh children, not sports",playing with hh child
+030103,"Playing with hh children, not sports",horsing around with hh child
+030103,"Playing with hh children, not sports",tickling hh child
+030103,"Playing with hh children, not sports",dancing with hh child
+030103,"Playing with hh children, not sports",playing games w/hh child only
+030103,"Playing with hh children, not sports",entertaining hh child
+030103,"Playing with hh children, not sports",giving hh child a piggyback ride
+030104,Arts and crafts with hh children,making holiday decorations w/hh child
+030104,Arts and crafts with hh children,organizing coin collection with hh child
+030104,Arts and crafts with hh children,helping hh child make arts and crafts
+030104,Arts and crafts with hh children,building model planes with hh child
+030105,Playing sports with hh children,riding bikes with hh child
+030105,Playing sports with hh children,playing basketball with hh child
+030105,Playing sports with hh children,strolling with a hh child
+030105,Playing sports with hh children,teaching hh child how to play a sport
+030105,Playing sports with hh children,teaching hh child to ride a bike
+030105,Playing sports with hh children,walking with a hh child
+030106,Talking with/listening to hh children,talking with hh child
+030106,Talking with/listening to hh children,telling hh child to brush teeth
+030106,Talking with/listening to hh children,fussing at/scolding/lecturing hh child
+030106,Talking with/listening to hh children,telling hh child to get ready for bed
+030106,Talking with/listening to hh children,listening to hh child sing/recite
+030106,Talking with/listening to hh children,singing to hh child
+030106,Talking with/listening to hh children,singing with hh child
+030106,Talking with/listening to hh children,hearing about hh child's day
+030108,Organization & planning for hh children,planning parties/activities/events for hh child
+030108,Organization & planning for hh children,helping with parties for hh child
+030108,Organization & planning for hh children,making costume for hh child
+030108,Organization & planning for hh children,organizing activities for hh child
+030108,Organization & planning for hh children,packing/unpacking hh child's bag
+030108,Organization & planning for hh children,signing hh child up for activities
+030108,Organization & planning for hh children,planning play dates for hh child
+030108,Organization & planning for hh children,organizing closet for hh child
+030109,Looking after hh children (as a primary activity),supervising/monitoring/keeping tabs on hh child
+030109,Looking after hh children (as a primary activity),checking on hh child
+030109,Looking after hh children (as a primary activity),watching but not interacting with hh child
+030109,Looking after hh children (as a primary activity),supervising hh child swimming
+030109,Looking after hh children (as a primary activity),sitting with hh child
+030109,Looking after hh children (as a primary activity),accompanying hh child visiting Santa Claus
+030109,Looking after hh children (as a primary activity),accompanying hh child trick-or-treating
+030110,Attending hh children's events,watching hh child's sporting event or school play
+030110,Attending hh children's events,attending hh child's recital
+030110,Attending hh children's events,watching hh child's dance class
+030110,Attending hh children's events,watching hh child's karate lesson
+030110,Attending hh children's events,watching hh child's baseball practice
+030111,Waiting for/with hh children,waiting to pick up hh child
+030111,Waiting for/with hh children,waiting for hh child to get ready
+030111,Waiting for/with hh children,waiting for school bus with hh child
+030111,Waiting for/with hh children,waiting for hh child to finish his/her activity
+030112,Picking up/dropping off hh children,dropping off hh child at friend's house
+030112,Picking up/dropping off hh children,dropping off hh child at babysitter's
+030112,Picking up/dropping off hh children,picking up hh child from day care/school/church
+030112,Picking up/dropping off hh children,dropping off hh child at soccer practice
+030112,Picking up/dropping off hh children,putting hh child on bus
+030199,Caring for & helping hh children,adopting a child
+030201,Homework (hh children),helping hh child with homework
+030201,Homework (hh children),signing hh child's homework log
+030201,Homework (hh children),reviewing hh child's homework
+030201,Homework (hh children),checking hh child's homework for completion
+030201,Homework (hh children),helping hh child with a school project
+030201,Homework (hh children),picking up hh child's books/assignments
+030201,Homework (hh children),quizzing hh child before a test
+030202,Meetings and school conferences (hh children),observing hh child's class
+030202,Meetings and school conferences (hh children),meeting with guidance counselor of hh child
+030202,Meetings and school conferences (hh children),attending hh child's parent-teacher conference
+030202,Meetings and school conferences (hh children),meeting with principal of hh child
+030202,Meetings and school conferences (hh children),attending hh child's back-to-school night
+030202,Meetings and school conferences (hh children),talking to/with hh child's tutor
+030202,Meetings and school conferences (hh children),meeting w/school psychologist of hh child
+030202,Meetings and school conferences (hh children),meeting with hh child's tutor
+030202,Meetings and school conferences (hh children),talking with teachers of hh child
+030202,Meetings and school conferences (hh children),attending hh child's school open house
+030202,Meetings and school conferences (hh children),attending a PTA meeting
+030202,Meetings and school conferences (hh children),meeting w/school speech pathologist of hh child
+030202,Meetings and school conferences (hh children),emailing teacher of hh child
+030202,Meetings and school conferences (hh children),virtual/web/online meeting with teacher of hh child
+030202,Meetings and school conferences (hh children),attending hh child's virtual/web/online school meeting
+030203,Home schooling of hh children,home schooling a hh child
+030203,Home schooling of hh children,sitting with hh child during their virtual/web/online class
+030203,Home schooling of hh children,helping hh child set up virtual/web/online class
+030203,Home schooling of hh children,helping hh child sign in to virtual/web/online class
+030203,Home schooling of hh children,teaching hh child long division
+030203,Home schooling of hh children,planning hh child's class schedule
+030203,Home schooling of hh children,teaching hh child to read
+030204,Waiting associated with hh children's education,waiting to meet with hh child's teacher
+030204,Waiting associated with hh children's education,waiting for hh child's virtual/web/online class to start
+030299,Activities related to hh child's education,helping hh child practice piano
+030299,Activities related to hh child's education,helping hh child research colleges
+030301,Providing medical care to hh children,taking hh child's temperature
+030301,Providing medical care to hh children,putting medicine on hh child's cuts
+030301,Providing medical care to hh children,giving hh child medicine
+030301,Providing medical care to hh children,giving hh child's insulin shot
+030301,Providing medical care to hh children,sitting with sick hh child
+030301,Providing medical care to hh children,bandaging hh child's scrapes
+030301,Providing medical care to hh children,putting medicine on hh child's burn
+030301,Providing medical care to hh children,helping hh child w/physical therapy
+030301,Providing medical care to hh children,bandaging hh child's cuts/burns
+030302,Obtaining medical care for hh children,accompanying hh child to medical appt
+030302,Obtaining medical care for hh children,sitting with hh child on telehealth/telemedicine appt
+030302,Obtaining medical care for hh children,talking with hh child's doctor
+030302,Obtaining medical care for hh children,talking with hh child's nurse
+030303,Waiting associated with hh children's health,waiting while doctor examines hh child
+030303,Waiting associated with hh children's health,waiting with hh child at hospital
+030303,Waiting associated with hh children's health,waiting with hh child at physician's office
+030399,Activities related to hh child's health,visiting hh child in hospital
+030401,Physical care for hh adults,bathing hh adult
+030401,Physical care for hh adults,putting hh adult to bed
+030401,Physical care for hh adults,feeding hh adult
+030401,Physical care for hh adults,providing physical aid to hh adult
+030401,Physical care for hh adults,dressing hh adult
+030401,Physical care for hh adults,helping hh adult dress
+030401,Physical care for hh adults,getting hh adult ready to go somewhere
+030401,Physical care for hh adults,cutting hh adult's hair
+030401,Physical care for hh adults,waking hh adult
+030402,Looking after hh adult (as a primary activity),supervising hh adult
+030402,Looking after hh adult (as a primary activity),checking on hh adult
+030402,Looking after hh adult (as a primary activity),monitoring hh adult
+030403,Providing medical care to hh adult,giving hh adult medicine
+030403,Providing medical care to hh adult,bandaging hh adult
+030404,Obtaining medical and care services for hh adult,accompanying hh adult to medical appt.
+030404,Obtaining medical and care services for hh adult,meeting with adult care provider
+030404,Obtaining medical and care services for hh adult,talking to hh adult's doctors/nurses
+030404,Obtaining medical and care services for hh adult,talking to/with adult daycare provider
+030404,Obtaining medical and care services for hh adult,sitting with hh adult on telehealth/telemedicine appt
+030405,Waiting associated with caring for household adults,waiting while doctor examines hh adult
+030405,Waiting associated with caring for household adults,waiting with hh adult at hospital
+030405,Waiting associated with caring for household adults,waiting with hh adult at physician's office
+030405,Waiting associated with caring for household adults,waiting to meet a hh adult's care provider
+030501,Helping hh adults,helping hh adult w/computer
+030501,Helping hh adults,shopping for hh adult (not self)
+030501,Helping hh adults,helping hh adult w/taxes/bills
+030502,Organization & planning for hh adults,planning activities for hh adult
+030502,Organization & planning for hh adults,packing hh adult's bags
+030502,Organization & planning for hh adults,organizing parties for hh adult
+030502,Organization & planning for hh adults,planning events for hh adult
+030502,Organization & planning for hh adults,making things for hh adult
+030502,Organization & planning for hh adults,planning parties for hh adult
+030503,Picking up/dropping off hh adult,dropping hh adult off at senior center
+030503,Picking up/dropping off hh adult,picking up hh adult from hh adult's event
+030503,Picking up/dropping off hh adult,helping hh adult get into car
+030504,Waiting associated with helping hh adults,waiting to pick up hh adult
+030599,Helping household adults,waiting for hh adult to get ready
+040101,Physical care for nonhh children,dressing/bathing nonhh child
+040101,Physical care for nonhh children,feeding nonhh child
+040101,Physical care for nonhh children,changing nonhh child's diapers
+040101,Physical care for nonhh children,cutting nonhh child's hair
+040101,Physical care for nonhh children,laying out clothes for nonhh child
+040101,Physical care for nonhh children,preparing a shower for nonhh child
+040101,Physical care for nonhh children,giving nonhh child a bottle
+040101,Physical care for nonhh children,soothing nonhh child/baby
+040101,Physical care for nonhh children,getting nonhh child ready to go somewhere
+040101,Physical care for nonhh children,tucking in nonhh child
+040101,Physical care for nonhh children,waking nonhh child
+040101,Physical care for nonhh children,helping nonhh child feed him/herself
+040101,Physical care for nonhh children,putting nonhh child to bed
+040101,Physical care for nonhh children,helping nonhh child use the bathroom
+040101,Physical care for nonhh children,cuddling/rocking/holding nonhh child
+040101,Physical care for nonhh children,drawing a bath for nonhh child
+040101,Physical care for nonhh children,carrying nonhh child/baby
+040101,Physical care for nonhh children,helping nonhh child get dressed/brush teeth/bathe
+040102,Reading to/with nonhh children,reading to or with nonhh children
+040102,Reading to/with nonhh children,helping nonhh child read
+040102,Reading to/with nonhh children,listening to a nonhh child read
+040103,"Playing with nonhh children, not sports",playing with nonhh child
+040103,"Playing with nonhh children, not sports",horsing around w/nonhh child
+040103,"Playing with nonhh children, not sports",tickling nonhh child
+040103,"Playing with nonhh children, not sports",dancing with nonhh child
+040103,"Playing with nonhh children, not sports",playing games w/nonhh child only
+040103,"Playing with nonhh children, not sports",entertaining nonhh child
+040103,"Playing with nonhh children, not sports",giving nonhh child a piggyback ride
+040104,Arts and crafts with nonhh children,making holiday decorations w/nonhh child
+040104,Arts and crafts with nonhh children,organizing coin collection with nonhh child
+040104,Arts and crafts with nonhh children,helping nonhh child make arts and crafts
+040104,Arts and crafts with nonhh children,building model planes with nonhh child
+040105,Playing sports with nonhh children,riding bikes with nonhh child
+040105,Playing sports with nonhh children,playing basketball with nonhh child
+040105,Playing sports with nonhh children,strolling with a nonhh child
+040105,Playing sports with nonhh children,teaching nonhh child how to play a sport
+040105,Playing sports with nonhh children,teaching nonhh child to ride a bike
+040105,Playing sports with nonhh children,walking with a nonhh child
+040106,Talking with/listening to nonhh children,talking with nonhh child
+040106,Talking with/listening to nonhh children,telling nonhh child to brush teeth
+040106,Talking with/listening to nonhh children,fussing at/scolding/lecturing nonhh child
+040106,Talking with/listening to nonhh children,telling nonhh child to get ready for bed
+040106,Talking with/listening to nonhh children,listening to a nonhh child sing
+040106,Talking with/listening to nonhh children,singing to nonhh child
+040106,Talking with/listening to nonhh children,singing with nonhh child
+040106,Talking with/listening to nonhh children,hearing about nonhh child's day
+040108,Organization & planning for nonhh children,planning party/activities for nonhh child
+040108,Organization & planning for nonhh children,helping w/party for nonhh child
+040108,Organization & planning for nonhh children,making costumes for nonhh child
+040108,Organization & planning for nonhh children,organizing activities for nonhh child
+040108,Organization & planning for nonhh children,packing/unpacking nonhh child's bag
+040108,Organization & planning for nonhh children,signing nonhh child up for activities
+040108,Organization & planning for nonhh children,planning play dates for nonhh child
+040109,Looking after nonhh children (as primary activity),supervising/monitoring/keeping tabs on nonhh child
+040109,Looking after nonhh children (as primary activity),checking on nonhh child
+040109,Looking after nonhh children (as primary activity),watching but not interacting w/nonhh child
+040109,Looking after nonhh children (as primary activity),supervising nonhh child swimming
+040109,Looking after nonhh children (as primary activity),accompanying nonhh child trick-or-treating
+040109,Looking after nonhh children (as primary activity),accompanying nonhh child visiting Santa Claus
+040110,Attending nonhh children's events,watching nonhh child's sporting event or school play
+040110,Attending nonhh children's events,attending nonhh child's recital
+040110,Attending nonhh children's events,watching nonhh child's dance class
+040110,Attending nonhh children's events,watching nonhh child's karate clas
+040110,Attending nonhh children's events,watching nonhh child's baseball practice
+040111,Waiting for/with nonhh children,waiting to pick up nonhh child
+040111,Waiting for/with nonhh children,waiting for nonhh child to get ready
+040111,Waiting for/with nonhh children,waiting for school bus with nonhh child
+040111,Waiting for/with nonhh children,waiting for nonhh child to finish his/her activity
+040112,Dropping off/picking up nonhh children,dropping off nonhh child at friend's house
+040112,Dropping off/picking up nonhh children,dropping off nonhh child at babysitter's
+040112,Dropping off/picking up nonhh children,picking up nonhh child from day care/school
+040112,Dropping off/picking up nonhh children,dropping off nonhh child at soccer practice
+040112,Dropping off/picking up nonhh children,putting nonhh child on bus
+040199,Caring for and helping nonhh children,handing out Halloween candy
+040201,Homework (nonhh children),helping a nonhh child w/homework
+040201,Homework (nonhh children),signing nonhh child's homework log
+040201,Homework (nonhh children),reviewing nonhh child's homework
+040201,Homework (nonhh children),checking nonhh child's homework
+040201,Homework (nonhh children),helping nonhh child with sch. project
+040201,Homework (nonhh children),picking up nonhh child's books/assignments
+040201,Homework (nonhh children),quizzing nonhh child before a test
+040202,Meetings and school conferences (nonhh children),observing nonhh child's class
+040202,Meetings and school conferences (nonhh children),meeting w/school speech pathologist of nonhh child
+040202,Meetings and school conferences (nonhh children),observing nonhh child's class
+040202,Meetings and school conferences (nonhh children),meeting with guidance counselor of nonhh child
+040202,Meetings and school conferences (nonhh children),attending non-hh child's parent-teacher conference
+040202,Meetings and school conferences (nonhh children),meeting with principal of nonhh child
+040202,Meetings and school conferences (nonhh children),attending non-hh child's back-to-school night
+040202,Meetings and school conferences (nonhh children),talking to/with nonhh child's tutor
+040202,Meetings and school conferences (nonhh children),meeting w/school psychologist of nonhh child
+040202,Meetings and school conferences (nonhh children),meeting with nonhh child's tutor
+040202,Meetings and school conferences (nonhh children),talking with teachers of nonhh child
+040202,Meetings and school conferences (nonhh children),attending nonhh child's school open house
+040202,Meetings and school conferences (nonhh children),attending PTA meeting
+040202,Meetings and school conferences (nonhh children),emailing teacher of nonhh child
+040202,Meetings and school conferences (nonhh children),virtual/web/online meeting with teacher of nonhh child
+040202,Meetings and school conferences (nonhh children),attending nonhh child's virtual/web/online school meeting
+040203,Home schooling of nonhh children,home schooling a nonhh child
+040203,Home schooling of nonhh children,sitting with nonhh child during their virtual/web/online class
+040203,Home schooling of nonhh children,helping nonhh child set up their virtual/web/online class
+040203,Home schooling of nonhh children,teaching nonhh child long division
+040203,Home schooling of nonhh children,planning nonhh child's class schedule
+040203,Home schooling of nonhh children,helping nonhh child sign in to virtual/web/online class
+040203,Home schooling of nonhh children,teaching nonhh child to read
+040204,Waiting associated with nonhh children's education,waiting to meet with nonhh child's teacher
+040204,Waiting associated with nonhh children's education,waiting for nonhh child's virtual/web/online class to start
+040301,Providing medical care to nonhh children,taking a nonhh child's temperature
+040301,Providing medical care to nonhh children,giving  nonhh child medicine
+040301,Providing medical care to nonhh children,putting medicine on nonhh child's cuts
+040301,Providing medical care to nonhh children,sitting with sick nonhh child
+040301,Providing medical care to nonhh children,giving nonhh child's insulin shot
+040301,Providing medical care to nonhh children,putting medicine on nonhh child's burn
+040301,Providing medical care to nonhh children,bandaging nonhh child's scrapes/cuts
+040301,Providing medical care to nonhh children,bandaging nonhh child's cuts/burns
+040301,Providing medical care to nonhh children,helping nonhh child w/phys. therapy
+040302,Obtaining medical care for nonhh children,accompanying nonhh child to medical appt
+040302,Obtaining medical care for nonhh children,talking with nonhh child's nurse
+040302,Obtaining medical care for nonhh children,talking with nonhh child's doctor
+040302,Obtaining medical care for nonhh children,sitting with nonhh child on telehealth/telemedicine appt
+040303,Waiting associated with nonhh children's health,waiting while doctor examines nonhh child
+040303,Waiting associated with nonhh children's health,waiting with nonhh child at hospital
+040303,Waiting associated with nonhh children's health,waiting with nonhh child at physician's office
+040399,Activities related to nonhh child's health,visiting a nonhh child in the hospital
+040401,Physical care for nonhh adults,bathing nonhh adult
+040401,Physical care for nonhh adults,putting nonhh adult to bed
+040401,Physical care for nonhh adults,feeding nonhh adult
+040401,Physical care for nonhh adults,providing physical aid to nonhh adult
+040401,Physical care for nonhh adults,dressing nonhh adult
+040401,Physical care for nonhh adults,helping nonhh adult dress
+040401,Physical care for nonhh adults,getting nonhh adult ready to go somewhere
+040401,Physical care for nonhh adults,cutting nonhh adult's hair
+040401,Physical care for nonhh adults,waking nonhh adult
+040402,Looking after nonhh adult (as a primary activity),supervising nonhh adult
+040402,Looking after nonhh adult (as a primary activity),checking on nonhh adult
+040402,Looking after nonhh adult (as a primary activity),monitoring nonhh adult
+040403,Providing medical care to nonhh adult,giving nonhh adult medicine
+040403,Providing medical care to nonhh adult,bandaging nonhh adult
+040404,Obtaining medical and care services for nonhh adult,accompanying nonhh adult to medical appt.
+040404,Obtaining medical and care services for nonhh adult,meeting w/nonhh adult care provider
+040404,Obtaining medical and care services for nonhh adult,talking to nonhh adult's doctors/nurses
+040404,Obtaining medical and care services for nonhh adult,talking to/with nonhh adult care provider
+040404,Obtaining medical and care services for nonhh adult,sitting with nonhh adult on telehealth/telemedicine appt
+040405,Waiting associated with caring for nonhh adults,waiting while doctor examines nonhh adult
+040405,Waiting associated with caring for nonhh adults,waiting with nonhh adult at hospital
+040405,Waiting associated with caring for nonhh adults,waiting with nonhh adult at physician's office
+040405,Waiting associated with caring for nonhh adults,waiting to meet a nonhh adult care provider
+040501,"Housework, cooking, & shopping assistance for nonhh adults",doing housework for nonhh adult
+040501,"Housework, cooking, & shopping assistance for nonhh adults",shopping for nonhh adult (not self)
+040501,"Housework, cooking, & shopping assistance for nonhh adults",doing laundry for nonhh adult (not self)
+040501,"Housework, cooking, & shopping assistance for nonhh adults",cooking/preparing food for nonhh adult
+040502,House & lawn maintenance & repair assistance for nonhh adults,mowing the lawn for nonhh adult
+040502,House & lawn maintenance & repair assistance for nonhh adults,mending fence for nonhh adult
+040502,House & lawn maintenance & repair assistance for nonhh adults,fixing plumbing leak for nonhh adult
+040502,House & lawn maintenance & repair assistance for nonhh adults,painting house for nonhh adult
+040502,House & lawn maintenance & repair assistance for nonhh adults,disposing of trash for nonhh adult
+040503,Animal & pet care assistance for nonhh adults,feeding pets for nonhh adult
+040503,Animal & pet care assistance for nonhh adults,walking dog for nonhh adult
+040503,Animal & pet care assistance for nonhh adults,bathing dog for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,changing tires for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,fixing computer for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,adjusting brakes for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,fixing car for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,fixing appliances for nonhh adult
+040504,Vehicle & appliance maintenance/repair assistance for nonhh adults,maintaining sports equipment for nonhh adults
+040505,Financial management assistance for nonhh adults,helping nonhh adult w/computer applications
+040505,Financial management assistance for nonhh adults,helping nonhh adult w/taxes/bills
+040506,Household management & paperwork assistance for nonhh adults,running errands for nonhh adult (not self)
+040506,Household management & paperwork assistance for nonhh adults,packing nonhh adult's bags
+040506,Household management & paperwork assistance for nonhh adults,planning activities for nonhh adult
+040506,Household management & paperwork assistance for nonhh adults,planning events for nonhh adult
+040506,Household management & paperwork assistance for nonhh adults,organizing party for nonhh adult
+040506,Household management & paperwork assistance for nonhh adults,planning party for nonhh adult
+040506,Household management & paperwork assistance for nonhh adults,making things for nonhh adult
+040506,Household management & paperwork assistance for nonhh adults,doing paperwork for nonhh adult
+040507,Picking up/dropping off nonhh adult,dropping nonhh adult off at senior center
+040507,Picking up/dropping off nonhh adult,picking up nonhh adult from adult's event
+040507,Picking up/dropping off nonhh adult,helping nonhh adult get into car
+040508,Waiting associated with helping nonhh adults,waiting to pick up nonhh adult
+040508,Waiting associated with helping nonhh adults,waiting for nonhh adult to get ready
+050101,"Work, main job",at work (main job)
+050101,"Work, main job",putting in overtime at work (main job)
+050101,"Work, main job",working extra hours (main job)
+050101,"Work, main job",talking to instructor (class for main job)
+050101,"Work, main job",on-the-job training (main job)
+050101,"Work, main job",surfing the Internet (main job)
+050101,"Work, main job",reading and writing (main job)
+050101,"Work, main job",doing research/homework (main job)
+050101,"Work, main job",computer use (main job)
+050101,"Work, main job",registering for class (main job)
+050101,"Work, main job",telephone calls (main job)
+050101,"Work, main job",attending typing training (main job)
+050101,"Work, main job",attending class (main job)
+050101,"Work, main job",phone calls to/from supervisors (main job)
+050101,"Work, main job",registering for training (main job)
+050101,"Work, main job",phone calls to/from customers (main job)
+050101,"Work, main job",attending conferences/convention (main job)
+050101,"Work, main job",leading a blessing (main job)
+050101,"Work, main job",making reserv. on the Internet (main job)
+050101,"Work, main job",phone calls to/from coworkers (main job)
+050101,"Work, main job",teaching/leading Bible study (main job)
+050101,"Work, main job",phone calls to/from clients (main job)
+050101,"Work, main job",leading religious youth group (main job)
+050101,"Work, main job",attending sales training (main job)
+050101,"Work, main job",reading the Bible/Torah/scriptures (main job)
+050101,"Work, main job",teaching bat/bar mitzvah class (main job)
+050101,"Work, main job",teaching confirmation class (main job)
+050101,"Work, main job",teaching religious class (main job)
+050101,"Work, main job",organizing/preparing materials (main job)
+050101,"Work, main job",hearing confession (main job)
+050101,"Work, main job",designing/updating a website (main job)
+050101,"Work, main job",marking assignments (main job)
+050101,"Work, main job",reading a book/other material (main job)
+050101,"Work, main job",checking e-mail (main job)
+050101,"Work, main job","reviewing notes, briefs, or papers (main job)"
+050101,"Work, main job",calling leads for stories/information (main job)
+050101,"Work, main job",preparing lesson plans/grading papers (main job)
+050101,"Work, main job",enrollment in training/classes (main job)
+050101,"Work, main job",writing memos/papers/letters (main job)
+050101,"Work, main job",talking to other conference attendees (main job)
+050101,"Work, main job",checking voicemail messages (main job)
+050101,"Work, main job",reading/sending e-mail (main job)
+050101,"Work, main job",teleworking (main job)
+050101,"Work, main job",phone/video conferences to/from supervisor (main job)
+050101,"Work, main job",phone/videoconferences to/from coworkers (main job)
+050102,"Work, other job(s)",at work (other job)
+050102,"Work, other job(s)",hearing confession (other job)
+050102,"Work, other job(s)",extra hours at other job
+050102,"Work, other job(s)",phone calls to/from coworkers (other job)
+050102,"Work, other job(s)",on-the-job training (other job)
+050102,"Work, other job(s)",phone calls to/from clients (other job)
+050102,"Work, other job(s)",reading and writing (other job)
+050102,"Work, other job(s)",attending typing training (other job)
+050102,"Work, other job(s)",computer use (other job)
+050102,"Work, other job(s)",teaching confirmation class (other job)
+050102,"Work, other job(s)",telephone calls (other job)
+050102,"Work, other job(s)",phone calls to/from supervisors (other job)
+050102,"Work, other job(s)",attending class (other job)
+050102,"Work, other job(s)",phone calls to/from customers (other job)
+050102,"Work, other job(s)",registering for training (other job)
+050102,"Work, other job(s)",checking e-mail (other job)
+050102,"Work, other job(s)",attending conferences/convention (other job)
+050102,"Work, other job(s)",teaching bat/bar mitzvah class (other job)
+050102,"Work, other job(s)",talking to instructor (class for other job)
+050102,"Work, other job(s)",moonlighting
+050102,"Work, other job(s)",reading the Bible/Torah/scriptures (other job)
+050102,"Work, other job(s)",leading a blessing (other job)
+050102,"Work, other job(s)",teaching/leading Bible study (other job)
+050102,"Work, other job(s)",attending sales training (other job)
+050102,"Work, other job(s)",leading religious youth group (other job)
+050102,"Work, other job(s)",doing research/homework (other job)
+050102,"Work, other job(s)",surfing the Internet (other job)
+050102,"Work, other job(s)",calling leads for stories/information (other job)
+050102,"Work, other job(s)",organizing/preparing materials (other job)
+050102,"Work, other job(s)",teaching religious class (other job)
+050102,"Work, other job(s)",reading a book/other material (other job)
+050102,"Work, other job(s)",enrollment in training/classes (other job)
+050102,"Work, other job(s)","reviewing notes, briefs, or papers (other job)"
+050102,"Work, other job(s)",making reserv. on the Internet (other job)
+050102,"Work, other job(s)",preparing lesson plans/grading papers (other job)
+050102,"Work, other job(s)",checking voicemail messages (other job)
+050102,"Work, other job(s)",writing memos/papers/letters (other job)
+050102,"Work, other job(s)",registering for class (other job)
+050102,"Work, other job(s)",marking assignments (other job)
+050102,"Work, other job(s)",talking to other conference attendees (other job)
+050102,"Work, other job(s)",designing/updating a website (other job)
+050102,"Work, other job(s)",reading/sending e-mail (other job)
+050102,"Work, other job(s)",teleworking (other job)
+050102,"Work, other job(s)",phone/video conferences to/from supervisor (other job)
+050102,"Work, other job(s)",phone/video conferences to/from co-workers (other job)
+050103,Security procedures related to work,opening bags for security search (work)
+050103,Security procedures related to work,passing through metal detector (work)
+050103,Security procedures related to work,being searched at security checkpoint (work)
+050199,Working,getting temperature check at workplace
+050201,"Socializing, relaxing, and leisure as part of job",attending social event w/coworkers (part of job)
+050201,"Socializing, relaxing, and leisure as part of job",attending social event w/bosses (part of job)
+050201,"Socializing, relaxing, and leisure as part of job",talking w/co-workers at social event (part of job)
+050201,"Socializing, relaxing, and leisure as part of job",talking w/clients at social event (part of job)
+050202,Eating and drinking as part of job,eating/drinking w/clients (part of job)
+050202,Eating and drinking as part of job,eating/drinking w/bosses (part of job)
+050202,Eating and drinking as part of job,eating/drinking w/customers (part of job)
+050202,Eating and drinking as part of job,having lunch/dinner w/clients (part of job)
+050202,Eating and drinking as part of job,eating/drinking w/coworkers (part of job)
+050203,Sports and exercise as part of job,playing golf w/clients (part of job)
+050203,Sports and exercise as part of job,attending sporting event w/boss (part of job)
+050203,Sports and exercise as part of job,working out w/clients (part of job)
+050204,Security procedures as part of job,opening bags for security search (part of job)
+050204,Security procedures as part of job,passing through metal detector (part of job)
+050204,Security procedures as part of job,being searched at security checkpoint (part of job)
+050301,"Income-generating hobbies, crafts, and food",preparing food or drink for sale
+050301,"Income-generating hobbies, crafts, and food",making baskets for sale
+050301,"Income-generating hobbies, crafts, and food","drawing, painting, or sketching for sale"
+050301,"Income-generating hobbies, crafts, and food",doing woodworking for sale
+050301,"Income-generating hobbies, crafts, and food",making pottery for sale
+050301,"Income-generating hobbies, crafts, and food",making tapestries/quilts for sale
+050301,"Income-generating hobbies, crafts, and food",making furniture for sale
+050301,"Income-generating hobbies, crafts, and food",making dinners for sale
+050302,Income-generating performances,playing in a band for pay
+050302,Income-generating performances,singing for pay
+050302,Income-generating performances,acting in a play for pay
+050302,Income-generating performances,dancing for pay
+050303,Income-generating services,babysitting for pay
+050303,Income-generating services,shoveling snow for pay
+050303,Income-generating services,mowing lawns for pay
+050303,Income-generating services,home improvements for pay
+050303,Income-generating services,doing household chores for pay
+050303,Income-generating services,typing paper for pay
+050304,Income-generating rental property activities,maintaining/renovating rental property
+050304,Income-generating rental property activities,making repairs to rental property
+050399,Other income-generating activities,redeeming winning lottery ticket
+050399,Other income-generating activities,listing/selling items online
+050399,Other income-generating activities,"selling items at auction, yard sale"
+050399,Other income-generating activities,listing/selling items on e-bay
+050399,Other income-generating activities,selling items at flea market
+050399,Other income-generating activities,collecting aluminum cans to sell for self
+050399,Other income-generating activities,selling own used textbooks for pay
+050399,Other income-generating activities,selling items at a garage sale
+050399,Other income-generating activities,sorting items for garage sale
+050399,Other income-generating activities,organizing items for yard sale
+050401,Job search activities,contacting employer
+050401,Job search activities,reading ads in paper/on Internet
+050401,Job search activities,sending out resumes
+050401,Job search activities,checking vacancies
+050401,Job search activities,sending resumes to employers
+050401,Job search activities,writing/updating resume
+050401,Job search activities,placing/answering ads
+050401,Job search activities,picking up job application
+050401,Job search activities,researching details about a job
+050401,Job search activities,making phone calls to prospective. employer
+050401,Job search activities,asking about job openings
+050401,Job search activities,asking former employers to provide references
+050401,Job search activities,researching an employer
+050401,Job search activities,auditioning for acting role (non-volunteer)
+050401,Job search activities,submitting applications
+050401,Job search activities,auditioning for band/symphony (non-volunteer)
+050401,Job search activities,meeting with headhunter/temp agency
+050401,Job search activities,filling out job application
+050403,Job interviewing,interviewing by phone or in person
+050403,Job interviewing,preparing for interview
+050403,Job interviewing,scheduling/canceling interview (for self)
+050404,Waiting associated with job search or interview,waiting to go in for an interview
+050405,Security procedures rel. to job search/interviewing,opening bags for security search (job search)
+050405,Security procedures rel. to job search/interviewing,passing through metal detector (job search)
+050405,Security procedures rel. to job search/interviewing,being searched at security checkpoint (job search)
+060101,"Taking class for degree, certification, or licensure","attending class (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","talking to classmates (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","auditing a course (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","listening to a lecture (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking a field trip (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","attending a seminar (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","attending practicum/internships (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking on-line course (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking exams (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","talking to teacher (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking driving lessons (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking driver's education (degree, certificate, or license)"
+060101,"Taking class for degree, certification, or licensure","taking virtual/web/online class (degree, certificate, or license)"
+060102,Taking class for personal interest,"taking an art, craft, hobby, recreational course (personal int.)"
+060102,Taking class for personal interest,taking virtual/web/online class (personal int)
+060102,Taking class for personal interest,attending Lamaze class
+060102,Taking class for personal interest,taking a car maintenance/repair class (personal int.)
+060102,Taking class for personal interest,taking a cooking class (personal int.)
+060102,Taking class for personal interest,dance class (personal int.)
+060102,Taking class for personal interest,taking a financial planning class (personal int.)
+060102,Taking class for personal interest,taking a sewing class (personal int.)
+060102,Taking class for personal interest,taking a retirement planning seminar
+060102,Taking class for personal interest,taking a pottery class (personal int.)
+060102,Taking class for personal interest,taking personal development classes (personal int.)
+060102,Taking class for personal interest,taking a wine appreciation class (personal int.)
+060102,Taking class for personal interest,taking music/voice lessons (personal int.)
+060102,Taking class for personal interest,taking parenting class
+060102,Taking class for personal interest,taking photography class (personal int.)
+060102,Taking class for personal interest,taking a massage class (personal int.)
+060102,Taking class for personal interest,taking academic class (personal int.)
+060102,Taking class for personal interest,taking on-line course (personal interest)
+060102,Taking class for personal interest,"taking CPR, first aid (personal int.)"
+060102,Taking class for personal interest,talking to teacher (class for personal int.)
+060102,Taking class for personal interest,prenatal/child care classes (personal int.)
+060102,Taking class for personal interest,talking to classmates (class for personal int.)
+060102,Taking class for personal interest,taking self-defense (personal int.)
+060103,Waiting associated with taking classes,waiting for the teacher
+060104,Security procedures rel. to taking classes,opening bags for security search (taking classes)
+060104,Security procedures rel. to taking classes,passing through metal detector (taking classes)
+060104,Security procedures rel. to taking classes,being searched at security checkpoint (taking classes)
+060199,Taking class,"attending class, reason unknown"
+060199,Taking class,taking GRE prep course
+060199,Taking class,taking a CPA prep course
+060199,Taking class,taking SAT prep course
+060199,Taking class,having detention
+060199,Taking class,taking GMAT prep course
+060199,Taking class,attending study hall
+060199,Taking class,taking LSAT prep course
+060199,Taking class,having a free period
+060201,Extracurricular club activities,"attending Key Club activities, including meetings"
+060201,Extracurricular club activities,attending National Honor Society activities
+060201,Extracurricular club activities,attending language club activities
+060201,Extracurricular club activities,attending pep club activities
+060201,Extracurricular club activities,attending math club activities
+060201,Extracurricular club activities,"attending American Field Service activities, inc mtgs"
+060201,Extracurricular club activities,"participating in chess club activities, inc. meetings"
+060201,Extracurricular club activities,practicing for debate club competition
+060201,Extracurricular club activities,"participating in academic club activities, inc meetings"
+060201,Extracurricular club activities,attending science club activities
+060202,Extracurricular music & performance activities,attending band practice
+060202,Extracurricular music & performance activities,attending play practice
+060202,Extracurricular music & performance activities,attending choir practice as extracurricular school activity
+060203,Extracurricular student government activities,attending student government meetings
+060203,Extracurricular student government activities,preparing for student govt elections
+060204,Waiting associated with extracurricular activities,waiting for band practice to start
+060204,Waiting associated with extracurricular activities,waiting for an after-school meeting to start
+060301,"Research/homework for class for degree, certification, or licensure","listening to language cd (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","organizing notes (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","writing paper/essay (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","reading (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","attending study group (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","reading/sending e-mail (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","studying (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","reading the Bible/scriptures (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","practicing driving to get license (degree, certificate, or licensure)"
+060301,"Research/homework for class for degree, certification, or licensure","studying for a driver's license (degree, certificate, or licensure)"
+060302,Research/homework for class for pers. interest,listening to language cd (class for personal int.)
+060302,Research/homework for class for pers. interest,organizing notes (class for personal int.)
+060302,Research/homework for class for pers. interest,writing paper/essay (class for personal int.)
+060302,Research/homework for class for pers. interest,reading (class for personal int.)
+060302,Research/homework for class for pers. interest,attending study group (class for personal int.)
+060302,Research/homework for class for pers. interest,reading/sending e-mail (class for personal int.)
+060302,Research/homework for class for pers. interest,studying (class for personal int.)
+060303,Waiting associated with research/homework,waiting for study group
+060399,Research/homework n.e.c.*,studying for the SAT
+060399,Research/homework n.e.c.*,studying for the CPA exam
+060399,Research/homework n.e.c.*,studying for the GRE
+060399,Research/homework n.e.c.*,preparing for SAT
+060399,Research/homework n.e.c.*,studying for the LSAT
+060399,Research/homework n.e.c.*,preparing for the GRE
+060399,Research/homework n.e.c.*,studying for the GMAT
+060399,Research/homework n.e.c.*,preparing for the LSAT
+060399,Research/homework n.e.c.*,studying English (personal interest)
+060401,"Administrative activities: class for degree, certification, or licensure","enrolling in class (degree, certificate, or licensure)"
+060401,"Administrative activities: class for degree, certification, or licensure","getting ID for class (degree, certificate, or licensure)"
+060401,"Administrative activities: class for degree, certification, or licensure","registering for class (degree, certificate, or licensure)"
+060401,"Administrative activities: class for degree, certification, or licensure",paying tuition/fees for class (degree)
+060401,"Administrative activities: class for degree, certification, or licensure","looking at course descriptions/listings (degree, certificate, or licensure)"
+060401,"Administrative activities: class for degree, certification, or licensure","getting parking pass for class
+ (degree, certificate, or licensure)"
+060402,Administrative activities: class for personal interest,enrolling in class (personal interest)
+060402,Administrative activities: class for personal interest,paying tuition for class (personal interest)
+060402,Administrative activities: class for personal interest,registering for class (personal interest)
+060402,Administrative activities: class for personal interest,getting parking pass for class (personal interest)
+060402,Administrative activities: class for personal interest,getting ID for class (personal interest)
+060402,Administrative activities: class for personal interest,paying fees for class (personal interest)
+060403,Waiting associated w/admin. activities (education),waiting in line to register/get ID
+060403,Waiting associated w/admin. activities (education),waiting in line to pay tuition/fees
+060403,Waiting associated w/admin. activities (education),waiting to enroll in class
+060499,Administrative for education,registering for LSAT
+060499,Administrative for education,registering for test prep class
+060499,Administrative for education,registering for GMAT
+060499,Administrative for education,registering for GRE
+060499,Administrative for education,registering for CPA exam
+060499,Administrative for education,registering for SAT
+060499,Administrative for education,registering for MCAT
+069999,Education,attending own graduation ceremony
+069999,Education,taking the LSAT
+069999,Education,taking the GMAT
+069999,Education,taking the GRE
+069999,Education,taking the CPA exam
+069999,Education,taking the SAT
+069999,Education,taking the MCAT
+070101,Grocery shopping,buying/ordering/paying for groceries
+070101,Grocery shopping,talking to the produce manager
+070101,Grocery shopping,ordering groceries online
+070101,Grocery shopping,ordering groceries via Alexa or similar technology
+070101,Grocery shopping,picking up pre-ordered groceries from the grocery store
+070102,Purchasing gas,buying gas/paying for gasoline
+070102,Purchasing gas,talking to gas station attendant
+070102,Purchasing gas,pumping gas
+070103,Purchasing food (not groceries),paying the pizza delivery person
+070103,Purchasing food (not groceries),paying for meal at restaurant
+070103,Purchasing food (not groceries),paying check for a meal/drink/snack
+070103,Purchasing food (not groceries),picking up take-out food
+070103,Purchasing food (not groceries),buying fast food
+070103,Purchasing food (not groceries),placing order at a deli/fast food place
+070103,Purchasing food (not groceries),paying for fast food at drive-through
+070103,Purchasing food (not groceries),talking to fast food cashier/talking to the waiter
+070104,"Shopping, except groceries, food and gas",buying movie tickets
+070104,"Shopping, except groceries, food and gas",paying for purchases
+070104,"Shopping, except groceries, food and gas",browsing/shopping but not yet buying
+070104,"Shopping, except groceries, food and gas",paying for movie tickets
+070104,"Shopping, except groceries, food and gas","shopping at warehouse stores (Wal-Mart, Costco, Super-K, etc.)"
+070104,"Shopping, except groceries, food and gas",buying/ordering clothes
+070104,"Shopping, except groceries, food and gas",shopping at mall
+070104,"Shopping, except groceries, food and gas",buying books/CDs/other items
+070104,"Shopping, except groceries, food and gas",ordering products
+070104,"Shopping, except groceries, food and gas",looking at products
+070104,"Shopping, except groceries, food and gas",shopping at e-bay/flea markets/auctions
+070104,"Shopping, except groceries, food and gas",shopping at yard sales
+070104,"Shopping, except groceries, food and gas",shopping for a new or used car
+070104,"Shopping, except groceries, food and gas",buying gardening supplies
+070104,"Shopping, except groceries, food and gas",test-driving a vehicle
+070104,"Shopping, except groceries, food and gas",renting a tuxedo
+070104,"Shopping, except groceries, food and gas",buying/paying for a new or used car
+070104,"Shopping, except groceries, food and gas",renting a rug shampooer
+070104,"Shopping, except groceries, food and gas",checking out of hotel/motel/B&B
+070104,"Shopping, except groceries, food and gas",renting lawn equipment
+070104,"Shopping, except groceries, food and gas",browsing/shopping at fundraisers
+070104,"Shopping, except groceries, food and gas",ordering concert tickets/ordering football tickets
+070104,"Shopping, except groceries, food and gas",dropping off products for repairs
+070104,"Shopping, except groceries, food and gas",visiting a book fair
+070104,"Shopping, except groceries, food and gas",buying everyday consumer goods
+070104,"Shopping, except groceries, food and gas",talking to the salesclerk
+070104,"Shopping, except groceries, food and gas",buying a pet
+070104,"Shopping, except groceries, food and gas",returning videotapes to store/renting a movie
+070104,"Shopping, except groceries, food and gas",buying appliances
+070104,"Shopping, except groceries, food and gas",picking up prescriptions/film
+070104,"Shopping, except groceries, food and gas",renting products
+070104,"Shopping, except groceries, food and gas",looking through catalogs
+070104,"Shopping, except groceries, food and gas",returning consumer goods
+070104,"Shopping, except groceries, food and gas",looking at products in catalogs
+070104,"Shopping, except groceries, food and gas",renting a car/truck/van
+070104,"Shopping, except groceries, food and gas",buying postage stamps
+070104,"Shopping, except groceries, food and gas",paying for a rental car/truck/van
+070104,"Shopping, except groceries, food and gas",window shopping
+070104,"Shopping, except groceries, food and gas",buying airline tickets online
+070104,"Shopping, except groceries, food and gas",checking into hotel/motel/B&B
+070104,"Shopping, except groceries, food and gas",shopping for clothes online via Alexa or similar technology
+070105,Waiting associated with shopping,waiting in line to purchase groceries
+070105,Waiting associated with shopping,waiting in line to pay for goods/buy gas
+070201,Comparison shopping,researching items/prices/availability
+070201,Comparison shopping,browsing through circulars
+070201,Comparison shopping,reading product reviews
+070201,Comparison shopping,comparing prices at different stores
+070201,Comparison shopping,comparison shopping on the Internet
+070201,Comparison shopping,comparing prices for a new vehicle via Alexa or similar technology
+070301,Security procedures rel. to consumer purchases,"opening bags for security search 
+(consumer purchases)"
+070301,Security procedures rel. to consumer purchases,"passing through metal detector
+ (consumer purchases)"
+070301,Security procedures rel. to consumer purchases,being searched at security checkpoint (consumer purchases)
+080101,Using paid childcare services,hiring a nanny or babysitter
+080101,Using paid childcare services,"paying for lessons, instructions"
+080101,Using paid childcare services,paying for daycare
+080101,Using paid childcare services,paying for tutorial services
+080101,Using paid childcare services,checking out daycare facility
+080101,Using paid childcare services,hiring a tutor
+080101,Using paid childcare services,paying for summer camp
+080101,Using paid childcare services,paying for after school care program
+080101,Using paid childcare services,talking to/with the daycare provider
+080101,Using paid childcare services,meeting with daycare providers
+080101,Using paid childcare services,talking to/with the camp counselor
+080101,Using paid childcare services,talking to/with babysitter
+080102,Waiting associated w/purchasing childcare svcs,waiting to meet a childcare provider
+080201,Banking,doing banking
+080201,Banking,finding out information about loans
+080201,Banking,"making a withdrawal, deposit, transfer"
+080201,Banking,meeting with loan officer
+080201,Banking,applying for a loan or mortgage
+080201,Banking,talking to/with the bank manager
+080201,Banking,filling in loan applications
+080201,Banking,talking to/with a teller
+080201,Banking,using the ATM
+080201,Banking,talking to/with a loan officer
+080201,Banking,applying for a loan online
+080202,Using other financial services,meeting with an accountant
+080202,Using other financial services,meeting with claims adjuster
+080202,Using other financial services,meeting with stockbroker
+080202,Using other financial services,talking to/with claims adjusters
+080202,Using other financial services,completing a credit card application
+080202,Using other financial services,talking to/with an accountant
+080202,Using other financial services,meeting w/insurance agent
+080202,Using other financial services,talking to/with stock broker
+080202,Using other financial services,talking to/with insurance agents
+080202,Using other financial services,applying for a credit card online
+080203,Waiting associated w/banking/financial services,waiting in line at the bank
+080301,Using legal services,paying a lawyer
+080301,Using legal services,talking to/with a mediator
+080301,Using legal services,meeting with a lawyer/paralegal
+080301,Using legal services,talking to/with a paralegal/arbitrator
+080301,Using legal services,talking to/with a lawyer
+080301,Using legal services,meeting with arbitrator/mediator
+080302,Waiting associated with legal services,waiting to meet a lawyer
+080401,Using health and care services outside the home,having dental work done
+080401,Using health and care services outside the home,talking to/with a pharmacist
+080401,Using health and care services outside the home,having an eye exam
+080401,Using health and care services outside the home,having wisdom teeth removed
+080401,Using health and care services outside the home,having inpatient treatment
+080401,Using health and care services outside the home,attending group therapy
+080401,Using health and care services outside the home,having outpatient treatment
+080401,Using health and care services outside the home,having acupuncture
+080401,Using health and care services outside the home,having a doctor's appointment
+080401,Using health and care services outside the home,talking to/with a doctor
+080401,Using health and care services outside the home,having a physical
+080401,Using health and care services outside the home,talking to/with a nurse
+080401,Using health and care services outside the home,seeing a psychologist
+080401,Using health and care services outside the home,talking to/with a healthcare practitioner
+080401,Using health and care services outside the home,receiving physical therapy
+080401,Using health and care services outside the home,purchasing adult daycare
+080401,Using health and care services outside the home,seeing a chiropractor
+080401,Using health and care services outside the home,paying for adult care services
+080401,Using health and care services outside the home,making a co-payment
+080401,Using health and care services outside the home,paying for long-term care
+080401,Using health and care services outside the home,paying for healthcare services
+080401,Using health and care services outside the home,purchasing elder care services
+080401,Using health and care services outside the home,talking to/with a physical therapist
+080401,Using health and care services outside the home,purchasing hospice/respite care
+080401,Using health and care services outside the home,talking to/with a psychologist
+080401,Using health and care services outside the home,checking out adult care facility
+080401,Using health and care services outside the home,paying the doctor
+080401,Using health and care services outside the home,having blood drawn
+080401,Using health and care services outside the home,having lab work done
+080401,Using health and care services outside the home,having lab tests done
+080401,Using health and care services outside the home,meeting with doctor virtually for telehealth/telemedicine appt
+080401,Using health and care services outside the home,getting tested for COVID-19 at doctor's office
+080401,Using health and care services outside the home,getting tested for COVID-19 at stand-alone testing site
+080402,Using in-home health and care services,receiving in-home healthcare
+080402,Using in-home health and care services,hiring someone to look after hh adult
+080403,Waiting associated with medical services,waiting at the physician's office
+080403,Waiting associated with medical services,waiting for surgery
+080403,Waiting associated with medical services,waiting for lab test results
+080499,Using medical services,getting temperature check at hair salon
+080499,Using medical services,getting temperature check at barbershop
+080499,Using medical services,getting temperature check at nail salon
+080501,Using personal care services,getting a haircut
+080501,Using personal care services,talking to/with the hair stylist
+080501,Using personal care services,having nails done
+080501,Using personal care services,talking to/with the manicurist
+080501,Using personal care services,having a facial
+080501,Using personal care services,having a pedicure
+080501,Using personal care services,having a massage
+080501,Using personal care services,getting hair done
+080501,Using personal care services,paying for a haircut
+080501,Using personal care services,getting a tan at the tanning salon
+080502,Waiting associated w/personal care services,waiting for the barber
+080599,Using personal care services,getting temperature check at nail salon
+080599,Using personal care services,getting temperature check at barbershop
+080599,Using personal care services,getting temperature check at hair salon
+080601,Activities rel. to purchasing/selling real estate,looking at property
+080601,Activities rel. to purchasing/selling real estate,talking to/with a home buyer
+080601,Activities rel. to purchasing/selling real estate,"purchasing house, apartment, land"
+080601,Activities rel. to purchasing/selling real estate,talking to/with a home seller
+080601,Activities rel. to purchasing/selling real estate,reviewing house information
+080601,Activities rel. to purchasing/selling real estate,writing a contract on an apartment
+080601,Activities rel. to purchasing/selling real estate,reading real estate ads
+080601,Activities rel. to purchasing/selling real estate,"putting up ""for sale"" signs for house"
+080601,Activities rel. to purchasing/selling real estate,"renting house, apartment, land"
+080601,Activities rel. to purchasing/selling real estate,attending open house (real estate)
+080601,Activities rel. to purchasing/selling real estate,writing a contract on a house/property
+080601,Activities rel. to purchasing/selling real estate,talking to home inspector
+080601,Activities rel. to purchasing/selling real estate,renting storage space
+080601,Activities rel. to purchasing/selling real estate,meeting a real estate agent
+080601,Activities rel. to purchasing/selling real estate,closing on house/condominium
+080601,Activities rel. to purchasing/selling real estate,signing a lease
+080601,Activities rel. to purchasing/selling real estate,talking to/with a real estate agent
+080601,Activities rel. to purchasing/selling real estate,signing a housing contract
+080602,Waiting associated w/purchasing/selling real estate,waiting for a real estate agent
+080701,Using veterinary services,purchasing medicine for a pet
+080701,Using veterinary services,talking to/with vet assistant/vet tech.
+080701,Using veterinary services,paying for veterinary services
+080701,Using veterinary services,paying for pet health insurance
+080701,Using veterinary services,talking to/with vet
+080702,Waiting associated with veterinary services,waiting for the vet
+080801,Security procedures rel. to professional/personal svcs.,opening bags for security search (professional svcs)
+080801,Security procedures rel. to professional/personal svcs.,passing through metal detector (professional svcs)
+080801,Security procedures rel. to professional/personal svcs.,being searched at security checkpoint (professional svcs)
+089999,Professional and personal services,sitting for photos at a portrait studio
+089999,Professional and personal services,having a family portrait made
+089999,Professional and personal services,meeting with a wedding planner
+090101,Using interior cleaning services,hiring a cleaning service or maid
+090101,Using interior cleaning services,talking to/meeting with the maid/maid service
+090101,Using interior cleaning services,hiring a butler
+090101,Using interior cleaning services,hiring carpet cleaners
+090101,Using interior cleaning services,paying a cleaning service
+090102,Using meal preparation services,hiring a caterer
+090102,Using meal preparation services,meeting a caterer
+090102,Using meal preparation services,hiring wait staff/bartender for a party
+090102,Using meal preparation services,tipping the wait staff or bartender
+090102,Using meal preparation services,hiring a personal chef
+090102,Using meal preparation services,talking to/meeting with caterer
+090102,Using meal preparation services,paying the caterer
+090102,Using meal preparation services,talking to/meeting with reception planner
+090102,Using meal preparation services,paying the wait staff
+090103,Using clothing repair and cleaning services,dropping off clothes at the dry cleaners
+090103,Using clothing repair and cleaning services,having a suit tailored
+090103,Using clothing repair and cleaning services,having a garment altered
+090103,Using clothing repair and cleaning services,having a dress hemmed
+090103,Using clothing repair and cleaning services,having shirts laundered
+090103,Using clothing repair and cleaning services,paying the drycleaner
+090103,Using clothing repair and cleaning services,picking up clothing at the dry cleaners
+090103,Using clothing repair and cleaning services,paying the tailor
+090104,Waiting associated with using household services,waiting for the cleaning service
+090104,Waiting associated with using household services,waiting for meal preparation services
+090104,Waiting associated with using household services,watching paid cook prepare a meal
+090201,Using home maint/repair/décor/construction svcs,hiring an electrician or plumber
+090201,Using home maint/repair/décor/construction svcs,hiring someone to clean house siding
+090201,Using home maint/repair/décor/construction svcs,hiring/meeting w/interior designer
+090201,Using home maint/repair/décor/construction svcs,hiring/meeting w/interior decorator
+090201,Using home maint/repair/décor/construction svcs,hiring a prof. home remodeling svc.
+090201,Using home maint/repair/décor/construction svcs,hiring someone to repair house siding
+090201,Using home maint/repair/décor/construction svcs,hiring a contractor
+090201,Using home maint/repair/décor/construction svcs,meeting with a contractor
+090201,Using home maint/repair/décor/construction svcs,hiring/meeting with an architect
+090201,Using home maint/repair/décor/construction svcs,talking to/with electrician or plumber
+090201,Using home maint/repair/décor/construction svcs,paying to have your roof repaired
+090201,Using home maint/repair/décor/construction svcs,talking to/with the interior designer
+090201,Using home maint/repair/décor/construction svcs,hiring someone to build an addition
+090201,Using home maint/repair/décor/construction svcs,talking to/with the contractor
+090201,Using home maint/repair/décor/construction svcs,hiring appliance repairer
+090201,Using home maint/repair/décor/construction svcs,talking to/with computer technician
+090201,Using home maint/repair/décor/construction svcs,hiring someone to fix your computer
+090201,Using home maint/repair/décor/construction svcs,hiring movers
+090201,Using home maint/repair/décor/construction svcs,paying a contractor
+090201,Using home maint/repair/décor/construction svcs,talking to/meeting with movers
+090201,Using home maint/repair/décor/construction svcs,paying a plumber or electrician
+090201,Using home maint/repair/décor/construction svcs,paying a decorator
+090201,Using home maint/repair/décor/construction svcs,hiring window washers
+090201,Using home maint/repair/décor/construction svcs,hiring driveway pavers
+090201,Using home maint/repair/décor/construction svcs,hiring deck cleaners/refinishers
+090202,Waiting associated w/ home main/repair/décor/constr,waiting for architect
+090202,Waiting associated w/ home main/repair/décor/constr,waiting while repairs are made
+090202,Waiting associated w/ home main/repair/décor/constr,watching repair person
+090202,Waiting associated w/ home main/repair/décor/constr,watching movers
+090202,Waiting associated w/ home main/repair/décor/constr,waiting for cleaners to finish
+090301,Using pet services,attending animal obedience classes
+090301,Using pet services,hiring a pet trainer
+090301,Using pet services,hiring a pet sitter/walker
+090301,Using pet services,meeting with pet trainer
+090301,Using pet services,paying the pet sitter/walker
+090301,Using pet services,meeting with kennel caretakers
+090301,Using pet services,talking to/with animal trainer
+090301,Using pet services,talking to/with animal caretaker
+090301,Using pet services,talking to/with the groomer
+090301,Using pet services,paying the pet groomer
+090301,Using pet services,talking to/with the pet sitter
+090301,Using pet services,paying the animal trainer
+090302,Waiting associated with pet services,waiting for pet services
+090302,Waiting associated with pet services,watching pet groomer
+090302,Waiting associated with pet services,watching pet trainer
+090401,Using lawn and garden services,hiring a landscaper
+090401,Using lawn and garden services,talking to person who cuts your grass
+090401,Using lawn and garden services,hiring someone to water houseplants
+090401,Using lawn and garden services,hiring someone to water lawn/flowers
+090401,Using lawn and garden services,hiring someone to cut grass
+090401,Using lawn and garden services,hiring someone to shovel snow
+090401,Using lawn and garden services,meeting with landscaper
+090401,Using lawn and garden services,hiring someone to rake leaves
+090401,Using lawn and garden services,talking to/with a plant-sitter
+090401,Using lawn and garden services,paying the landscaper
+090401,Using lawn and garden services,talking to/with the landscaper
+090402,Waiting associated with using lawn & garden services,waiting for landscaper
+090402,Waiting associated with using lawn & garden services,watching landscaper
+090501,Using vehicle maintenance or repair services,paying for a tune-up/oil change
+090501,Using vehicle maintenance or repair services,talking to/with mechanic
+090501,Using vehicle maintenance or repair services,paying for a car wash
+090501,Using vehicle maintenance or repair services,talking to/with auto body repair person
+090501,Using vehicle maintenance or repair services,paying for repair work done on car
+090501,Using vehicle maintenance or repair services,paying a mechanic
+090501,Using vehicle maintenance or repair services,talking to/with service person
+090502,Waiting associated with vehicle main. or repair svcs,waiting while car is repaired
+090502,Waiting associated with vehicle main. or repair svcs,watching car being washed
+090502,Waiting associated with vehicle main. or repair svcs,waiting while car is washed
+099999,Using household services,talking to telephone repairperson
+099999,Using household services,using butchering services
+100101,Using police and fire services,obtaining police or fire services
+100101,Using police and fire services,helping the police with something
+100101,Using police and fire services,being questioned by police
+100101,Using police and fire services,talking to police officer
+100101,Using police and fire services,being stopped for traffic violation
+100101,Using police and fire services,meeting with detective
+100102,Using social services,applying for social services
+100102,Using social services,collecting social security/workers comp
+100102,Using social services,filling out forms to receive compensation
+100102,Using social services,applying for relief services
+100102,Using social services,applying for unemployment benefits
+100102,Using social services,filling out forms to receive benefits
+100102,Using social services,"applying for welfare, food stamps,  etc"
+100102,Using social services,talking to a social services worker
+100102,Using social services,collecting unemployment benefits
+100102,Using social services,meeting social worker
+100103,"Obtaining licenses & paying fines, fees, taxes",getting driver's license or tags
+100103,"Obtaining licenses & paying fines, fees, taxes",paying for a pet or sporting license
+100103,"Obtaining licenses & paying fines, fees, taxes",getting car inspected
+100103,"Obtaining licenses & paying fines, fees, taxes",paying for a marriage license
+100103,"Obtaining licenses & paying fines, fees, taxes",obtaining boat licensing
+100103,"Obtaining licenses & paying fines, fees, taxes",paying overdue library book fines
+100103,"Obtaining licenses & paying fines, fees, taxes",obtaining parking permits
+100103,"Obtaining licenses & paying fines, fees, taxes",paying parking/speeding ticket
+100103,"Obtaining licenses & paying fines, fees, taxes",getting a passport
+100103,"Obtaining licenses & paying fines, fees, taxes",getting fishing/crabbing license
+100103,"Obtaining licenses & paying fines, fees, taxes",taking a driving exam
+100103,"Obtaining licenses & paying fines, fees, taxes",paying property taxes at gov't. office
+100103,"Obtaining licenses & paying fines, fees, taxes",taking a pilot's exam
+100103,"Obtaining licenses & paying fines, fees, taxes",talking to a motor vehicle admin. clerk
+100103,"Obtaining licenses & paying fines, fees, taxes",getting a pet or sporting license
+100103,"Obtaining licenses & paying fines, fees, taxes",getting a marriage license
+100201,Civic obligations & participation,serving on jury duty
+100201,Civic obligations & participation,meeting w/congressperson
+100201,Civic obligations & participation,making a court appearance
+100201,Civic obligations & participation,acting as a witness in court
+100201,Civic obligations & participation,participating in naturalization ceremony
+100201,Civic obligations & participation,talking to a parole officer or judge
+100201,Civic obligations & participation,meeting with a parole officer
+100201,Civic obligations & participation,talking to immigration/naturalization agent
+100201,Civic obligations & participation,"interviewing with INS, IRS, etc."
+100201,Civic obligations & participation,doing court-ordered community service
+100201,Civic obligations & participation,voting
+100201,Civic obligations & participation,meeting w/State/local govt rep.
+100201,Civic obligations & participation,participating in government surveys
+100201,Civic obligations & participation,attending zoning hearings
+100201,Civic obligations & participation,attending a Congressional session
+100201,Civic obligations & participation,talking to a political representative
+100201,Civic obligations & participation,attending a town hall meeting
+100401,Security procedures rel. to govt svcs/civic obligations,opening bags for security search (govt svcs)
+100401,Security procedures rel. to govt svcs/civic obligations,passing through metal detector (govt svcs)
+100401,Security procedures rel. to govt svcs/civic obligations,being searched at security checkpoint (govt svcs)
+110101,Eating and drinking,taking a lunch break
+110201,Waiting associated w/eating & drinking,waiting for the pizza delivery person
+110201,Waiting associated w/eating & drinking,waiting for the check
+110201,Waiting associated w/eating & drinking,waiting for food to be delivered
+110201,Waiting associated w/eating & drinking,waiting to place an order
+110201,Waiting associated w/eating & drinking,waiting for a table
+120101,Socializing and communicating with others,entertaining family
+120101,Socializing and communicating with others,hugging/kissing acquaintances/others
+120101,Socializing and communicating with others,hanging out with family
+120101,Socializing and communicating with others,greeting other parents
+120101,Socializing and communicating with others,spending time with family
+120101,Socializing and communicating with others,hugging/kissing neighbors
+120101,Socializing and communicating with others,talking with family
+120101,Socializing and communicating with others,giving gifts to friends
+120101,Socializing and communicating with others,arguing with family
+120101,Socializing and communicating with others,giving presents to adults
+120101,Socializing and communicating with others,greeting family
+120101,Socializing and communicating with others,opening birthday presents (with others)
+120101,Socializing and communicating with others,hugging or kissing family
+120101,Socializing and communicating with others,opening Christmas gifts (with others)
+120101,Socializing and communicating with others,visiting with family
+120101,Socializing and communicating with others,opening gifts (with others)
+120101,Socializing and communicating with others,accompanying family while they run errands
+120101,Socializing and communicating with others,opening wedding presents (with others)
+120101,Socializing and communicating with others,entertaining friends
+120101,Socializing and communicating with others,visiting household/nonhh adult in hospital
+120101,Socializing and communicating with others,hanging out with friends
+120101,Socializing and communicating with others,visiting adult in nursing home
+120101,Socializing and communicating with others,spending time with friends
+120101,Socializing and communicating with others,"accompanying family/friends to look at 
+family/friend's new house"
+120101,Socializing and communicating with others,talking with friends
+120101,Socializing and communicating with others,talking with neighbors
+120101,Socializing and communicating with others,arguing with friends
+120101,Socializing and communicating with others,talking to/with other parents
+120101,Socializing and communicating with others,greeting friends
+120101,Socializing and communicating with others,talking with acquaintances
+120101,Socializing and communicating with others,hugging/kissing friends
+120101,Socializing and communicating with others,greeting neighbors/acquaintances
+120101,Socializing and communicating with others,visiting with friends
+120101,Socializing and communicating with others,accompanying friends while they run errands
+120201,Attending or hosting parties/receptions/ceremonies,attending graduation ceremonies (for adults)
+120201,Attending or hosting parties/receptions/ceremonies,attending birthday parties
+120201,Attending or hosting parties/receptions/ceremonies,attending a charity social event
+120201,Attending or hosting parties/receptions/ceremonies,attending bachelor/ette party
+120201,Attending or hosting parties/receptions/ceremonies,attending receptions
+120201,Attending or hosting parties/receptions/ceremonies,attending housewarming
+120201,Attending or hosting parties/receptions/ceremonies,attending parties
+120201,Attending or hosting parties/receptions/ceremonies,attending holiday open house
+120202,Attending meetings for personal interest (not volunteering),attending a senior citizens meeting
+120202,Attending meetings for personal interest (not volunteering),attending a Boy Scout/Girl Scout meeting (for self)
+120202,Attending meetings for personal interest (not volunteering),attending an Al-anon meeting
+120202,Attending meetings for personal interest (not volunteering),attending professional meetings (not work)
+120202,Attending meetings for personal interest (not volunteering),attending a homeowner's association meeting
+120202,Attending meetings for personal interest (not volunteering),attending fraternity/sorority meetings
+120202,Attending meetings for personal interest (not volunteering),attending a fraternal lodge meeting
+120202,Attending meetings for personal interest (not volunteering),attending book club meetings
+120202,Attending meetings for personal interest (not volunteering),attending AA meetings
+120202,Attending meetings for personal interest (not volunteering),attending club meetings (not school)
+120202,Attending meetings for personal interest (not volunteering),attending a Weight Watchers meeting
+120301,"Relaxing, thinking",doing nothing/goofing off/wasting time
+120301,"Relaxing, thinking",sunbathing
+120301,"Relaxing, thinking",hanging around/hanging out (alone)
+120301,"Relaxing, thinking",grieving
+120301,"Relaxing, thinking",sitting in the hot tub/Jacuzzi/whirlpool/sauna
+120301,"Relaxing, thinking",worrying/crying
+120301,"Relaxing, thinking","breaks at work, unspecified activity"
+120301,"Relaxing, thinking",watching husband assemble lawnmower
+120301,"Relaxing, thinking",watching wife garden/watching husband cook dinner
+120301,"Relaxing, thinking",resting/relaxing/lounging
+120301,"Relaxing, thinking",lying around/sitting around
+120301,"Relaxing, thinking",reflecting/daydreaming/fantasizing/wondering
+120302,Tobacco and drug use,smoking a cigarette/cigar/pipe
+120302,Tobacco and drug use,smoking marijuana/pot/weed
+120302,Tobacco and drug use,having a cigarette/rolling a cigarette
+120302,Tobacco and drug use,chewing tobacco/using recreational drugs
+120302,Tobacco and drug use,vaping
+120303,Television and movies (not religious),watching TV or a DVD/video/instructional video
+120303,Television and movies (not religious),watching home movies/home videos
+120303,Television and movies (not religious),setting the VCR or DVD player
+120303,Television and movies (not religious),borrowing movies from or returning movies to the library
+120303,Television and movies (not religious),watching videos on YouTube
+120303,Television and movies (not religious),watching TV/DVDs on computer (personal interest)
+120303,Television and movies (not religious),setting TiVo/DVR
+120303,Television and movies (not religious),streaming movies
+120303,Television and movies (not religious),watching shows on Netflix/Hulu or similar technology
+120304,Television (religious),watching religious broadcasting
+120305,Listening to the radio,listening to public radio/a radio talk show
+120305,Listening to the radio,listening to the top ten on the radio
+120305,Listening to the radio,listening to podcast
+120305,Listening to the radio,listening to Pandora
+120305,Listening to the radio,listening to music on the radio
+120305,Listening to the radio,listening to the news on Alexa or similar technology
+120305,Listening to the radio,listening to a podcast on Amazon Echo or similar technology
+120306,Listening to/playing music (not radio),listening to recorded music/records/CDs/DVDs/tapes
+120306,Listening to/playing music (not radio),listening to someone play the piano
+120306,Listening to/playing music (not radio),playing musical instrument (leisure)
+120306,Listening to/playing music (not radio),composing music
+120306,Listening to/playing music (not radio),singing/singing karaoke/Christmas caroling
+120306,Listening to/playing music (not radio),tuning musical instruments
+120307,Playing games,playing board games/Scrabble/cards
+120307,Playing games,hitting a pinata
+120307,Playing games,playing computer games/playing games over the Internet
+120307,Playing games,spinning dreidels
+120307,Playing games,hiding matzo (Passover)/hiding Easter eggs
+120307,Playing games,working jigsaw puzzles/crossword puzzles
+120307,Playing games,playing poker
+120307,Playing games,playing bingo
+120308,Computer use for leisure (exc. Games),"computer use, unspecified"
+120308,Computer use for leisure (exc. Games),"computer use, leisure (personal interest)"
+120308,Computer use for leisure (exc. Games),surfing the internet/web (personal interest)
+120308,Computer use for leisure (exc. Games),browsing on the internet (personal interest)
+120308,Computer use for leisure (exc. Games),"downloading files, music, pictures (personal interest)"
+120308,Computer use for leisure (exc. Games),participating in a chat room (personal interest)
+120308,Computer use for leisure (exc. Games),burning CDs (personal interest)
+120308,Computer use for leisure (exc. Games),designing/updating website (personal interest)
+120308,Computer use for leisure (exc. Games),Using Twitter or tweeting
+120308,Computer use for leisure (exc. Games),checking Facebook/Instagram
+120308,Computer use for leisure (exc. Games),writing computer software (personal interest)
+120308,Computer use for leisure (exc. Games),computer programming (personal interest)
+120308,Computer use for leisure (exc. Games),checking MySpace
+120309,Arts and crafts as a hobby,"scrapbooking, making a scrapbook"
+120309,Arts and crafts as a hobby,making Halloween costumes (for self)
+120309,Arts and crafts as a hobby,making holiday/other decorations
+120309,Arts and crafts as a hobby,dyeing Easter eggs
+120309,Arts and crafts as a hobby,videotaping/photography/model making/jewelry making
+120309,Arts and crafts as a hobby,artistic painting
+120309,Arts and crafts as a hobby,making pottery/sculpting/wood working
+120309,Arts and crafts as a hobby,making Christmas decorations
+120309,Arts and crafts as a hobby,taking pictures/snapshots/photographs
+120309,Arts and crafts as a hobby,sketching/drawing
+120309,Arts and crafts as a hobby,making a TikTok video
+120309,Arts and crafts as a hobby,making podcast
+120310,Collecting as a hobby,collecting/organizing stamps or coin collection
+120311,"Hobbies, except arts & crafts and collecting",bird watching
+120311,"Hobbies, except arts & crafts and collecting",researching family tree
+120312,Reading for personal interest,reading a magazine/book/newspaper (personal interest)
+120312,Reading for personal interest,checking out library books
+120312,Reading for personal interest,flipping/leafing through magazine (personal interest)
+120312,Reading for personal interest,being read to (personal interest)
+120312,Reading for personal interest,listening to books on tape/audio books (personal interest)
+120312,Reading for personal interest,"reading, unspecified"
+120312,Reading for personal interest,borrowing books from the library
+120312,Reading for personal interest,returning library books/browsing at the library
+120312,Reading for personal interest,doing research (personal interest)
+120312,Reading for personal interest,reading a book on a Kindle or other electronic book reader (personal interest)
+120313,Writing for personal interest,writing in diary/journal (personal interest)
+120313,Writing for personal interest,writing stories (personal interest)
+120313,Writing for personal interest,writing lyrics
+120313,Writing for personal interest,editing (personal interest)
+120313,Writing for personal interest,blogging (personal interest)
+120399,Relaxing and leisure,looking at pictures in photo album
+120399,Relaxing and leisure,looking at photos on computer or camera
+120401,Attending performing arts,attending comedy club
+120401,Attending performing arts,attending plays
+120401,Attending performing arts,attending opera
+120401,Attending performing arts,attending musicals
+120401,Attending performing arts,attending a concert
+120401,Attending performing arts,attending the theater
+120401,Attending performing arts,attending the ballet
+120401,Attending performing arts,attending jazz bar
+120401,Attending performing arts,attending dance troupe performances
+120402,Attending museums,attending an art gallery
+120402,Attending museums,attending an arboretum
+120402,Attending museums,visiting the zoo
+120402,Attending museums,attending a botanical garden
+120402,Attending museums,attending exhibitions
+120403,Attending movies/film,attending the movies
+120404,Attending gambling establishments,gambling
+120404,Attending gambling establishments,playing craps
+120404,Attending gambling establishments,attending a casino
+120404,Attending gambling establishments,playing keno
+120404,Attending gambling establishments,betting on the horses
+120405,Security procedures rel. to arts & entertainment,"opening bags for security search 
+(art/entertainment)"
+120405,Security procedures rel. to arts & entertainment,"passing through metal detector 
+(art/entertainment)"
+120405,Security procedures rel. to arts & entertainment,being searched at security checkpoint (art/entertainment)
+120499,Arts and entertainment,attending an art/history/music lecture
+120499,Arts and entertainment,setting off fireworks
+120499,Arts and entertainment,taking a guided nature walk
+120499,Arts and entertainment,visiting historic sites
+120499,Arts and entertainment,attending a flower show
+120499,Arts and entertainment,attending the county fair
+120499,Arts and entertainment,attending an amusement park
+120499,Arts and entertainment,attending the circus
+120499,Arts and entertainment,attending a festival
+120499,Arts and entertainment,attending a carnival
+120499,Arts and entertainment,attending a poetry reading
+120499,Arts and entertainment,watching a parade/fireworks
+120499,Arts and entertainment,attending a book signing
+120499,Arts and entertainment,attending an auto show
+120499,Arts and entertainment,sightseeing
+120499,Arts and entertainment,participating in an escape room
+130101,Doing aerobics,doing step aerobics
+130101,Doing aerobics,doing low-impact aerobics
+130101,Doing aerobics,doing high-impact aerobics
+130101,Doing aerobics,talking to aerobics instructor
+130101,Doing aerobics,Zumba
+130102,Playing baseball,talking to baseball coach
+130103,Playing basketball,talking to basketball referee
+130104,Biking,registering for a bike race
+130104,Biking,spinning
+130104,Biking,riding a stationary bike
+130104,Biking,biking/mountain biking
+130105,Playing billiards,shooting pool
+130105,Playing billiards,playing snooker
+130106,Boating,sailing
+130106,Boating,yachting
+130106,Boating,kayaking
+130106,Boating,rafting
+130106,Boating,canoeing
+130106,Boating,crewing
+130107,Bowling,playing duck pins
+130107,Bowling,playing ten pins
+130108,"Climbing, spelunking, caving",rock climbing
+130108,"Climbing, spelunking, caving",mountain climbing
+130110,Participating in equestrian sports,horseback riding
+130110,Participating in equestrian sports,playing polo
+130110,Participating in equestrian sports,steeple chase
+130112,Fishing,deep-sea fishing
+130112,Fishing,ice fishing
+130112,Fishing,fly fishing
+130112,Fishing,crabbing
+130112,Fishing,clam-digging
+130112,Fishing,talking to the boat captain
+130113,Playing football,playing touch football
+130113,Playing football,talking to the football referee
+130113,Playing football,playing flag football
+130114,Golfing,playing the front 9
+130114,Golfing,practicing putting
+130114,Golfing,playing the back 9
+130114,Golfing,talking to the caddy
+130114,Golfing,hitting balls at the driving range
+130115,Doing gymnastics,tumbling
+130115,Doing gymnastics,using uneven bars
+130115,Doing gymnastics,using the balance beam
+130115,Doing gymnastics,using the pommel horse
+130115,Doing gymnastics,using parallel bars
+130115,Doing gymnastics,talking to the gymnastics coach
+130117,Playing hockey,playing ice hockey
+130117,Playing hockey,talking to the hockey coach
+130117,Playing hockey,playing field hockey
+130118,Hunting,hunting game
+130118,Hunting,hunting ducks
+130118,Hunting,hunting deer/elk
+130118,Hunting,talking to the hunting guide
+130119,Participating in martial arts,doing karate
+130119,Participating in martial arts,talking to martial arts instructor
+130119,Participating in martial arts,doing kickboxing
+130119,Participating in martial arts,doing tae kwon do
+130120,Playing racquet sports,playing tennis
+130120,Playing racquet sports,playing badminton
+130120,Playing racquet sports,playing squash
+130120,Playing racquet sports,talking to the tennis coach
+130120,Playing racquet sports,playing handball
+130120,Playing racquet sports,playing lacrosse
+130120,Playing racquet sports,playing racquetball
+130121,Participating in rodeo competitions,calf roping
+130121,Participating in rodeo competitions,barrel riding
+130122,Rollerblading,roller-skating
+130122,Rollerblading,skateboarding
+130122,Rollerblading,inline skating
+130124,Running,jogging
+130124,Running,talking to race officials
+130124,Running,running a marathon
+130124,Running,running cross country
+130124,Running,running a race/organized run
+130124,Running,running on a treadmill
+130125,"Skiing, ice skating, snowboarding",snow tubing
+130125,"Skiing, ice skating, snowboarding",sledding
+130127,Softball,playing wiffle ball
+130128,Using cardiovascular equipment,using the Stairmaster
+130128,Using cardiovascular equipment,exercising on the treadmill
+130128,Using cardiovascular equipment,using the elliptical
+130128,Using cardiovascular equipment,using the treadmill
+130128,Using cardiovascular equipment,using the rowing machine
+130129,Vehicle touring/racing,stock car racing
+130129,Vehicle touring/racing,4-wheeling
+130129,Vehicle touring/racing,drag racing
+130129,Vehicle touring/racing,riding in a go-cart
+130129,Vehicle touring/racing,doing motocross
+130129,Vehicle touring/racing,riding in or driving a dune buggy
+130129,Vehicle touring/racing,snowmobiling
+130130,Playing volleyball,playing Wally ball
+130131,Walking,walking on a treadmill
+130131,Walking,speed walking
+130131,Walking,power walking
+130132,Participating in water sports,swimming
+130132,Participating in water sports,river tubing
+130132,Participating in water sports,playing water polo
+130132,Participating in water sports,surfing
+130132,Participating in water sports,diving
+130132,Participating in water sports,body surfing
+130132,Participating in water sports,waterskiing
+130132,Participating in water sports,boogie-boarding
+130132,Participating in water sports,snorkeling
+130132,Participating in water sports,talking to the swimming coach
+130132,Participating in water sports,scuba diving
+130132,Participating in water sports,water aerobics
+130133,Weightlifting/strength training,lifting weights
+130133,Weightlifting/strength training,bodybuilding
+130134,"Working out, unspecified",stretching
+130134,"Working out, unspecified",doing cardio (unspecified)
+130134,"Working out, unspecified",doing calisthenics
+130134,"Working out, unspecified",doing Crossfit
+130135,Wrestling,freestyle wrestling
+130135,Wrestling,talking to the wrestling referee
+130135,Wrestling,Greco-Roman wrestling
+130136,Doing yoga,Pilates
+130136,Doing yoga,talking to the yoga instructor
+130199,Playing sports n.e.c.*,bungee jumping
+130199,Playing sports n.e.c.*,ping-pong
+130199,Playing sports n.e.c.*,cricket
+130199,Playing sports n.e.c.*,table tennis
+130199,Playing sports n.e.c.*,tai chi
+130199,Playing sports n.e.c.*,horseshoes
+130199,Playing sports n.e.c.*,paintball
+130199,Playing sports n.e.c.*,croquet
+130199,Playing sports n.e.c.*,baton twirling
+130199,Playing sports n.e.c.*,archery
+130199,Playing sports n.e.c.*,curling
+130199,Playing sports n.e.c.*,skeet-shooting
+130199,Playing sports n.e.c.*,cheerleading
+130199,Playing sports n.e.c.*,target practice
+130199,Playing sports n.e.c.*,footbag
+130199,Playing sports n.e.c.*,throwing darts
+130199,Playing sports n.e.c.*,setting up camping tent
+130199,Playing sports n.e.c.*,boxing
+130199,Playing sports n.e.c.*,starting a campfire
+130199,Playing sports n.e.c.*,shooting league
+130199,Playing sports n.e.c.*,digging a latrine
+130199,Playing sports n.e.c.*,javelin
+130199,Playing sports n.e.c.*,collecting firewood for camp
+130199,Playing sports n.e.c.*,pole vaulting
+130199,Playing sports n.e.c.*,playing in the snow
+130199,Playing sports n.e.c.*,discus
+130199,Playing sports n.e.c.*,ballooning
+130199,Playing sports n.e.c.*,playing Frisbee golf
+130199,Playing sports n.e.c.*,skydiving
+130199,Playing sports n.e.c.*,throwing a Frisbee
+130199,Playing sports n.e.c.*,windsurfing
+130199,Playing sports n.e.c.*,hang-gliding
+130199,Playing sports n.e.c.*,kite flying
+130199,Playing sports n.e.c.*,playing ultimate frisbee
+130199,Playing sports n.e.c.*,parkour
+130199,Playing sports n.e.c.*,attending track practice
+130204,Watching biking,watching a bicycle race
+130205,Watching billiards,watching pool players
+130205,Watching billiards,watching snooker players
+130206,Watching boating,watching sailing
+130206,Watching boating,watching yachting
+130206,Watching boating,watching kayaking
+130206,Watching boating,watching rafting
+130206,Watching boating,watching canoeing
+130206,Watching boating,watching crewing
+130207,Watching bowling,watching ten pins
+130207,Watching bowling,watching duck pins
+130210,Watching equestrian sports,watching horseback riding
+130210,Watching equestrian sports,watching polo game
+130210,Watching equestrian sports,watching a steeple chase
+130212,Watching fishing,watching deep-sea fishing
+130212,Watching fishing,watching crabbing
+130212,Watching fishing,watching fly fishing
+130212,Watching fishing,watching clam-digging
+130213,Watching football,watching touch football
+130213,Watching football,watching tag football
+130214,Watching golfing,watching a golf tournament
+130215,Watching gymnastics,watching tumbling
+130215,Watching gymnastics,watching parallel bar competition
+130215,Watching gymnastics,watching balance beam completion
+130216,Watching hockey,watching ice hockey
+130216,Watching hockey,watching field hockey
+130217,Watching martial arts,watching karate
+130217,Watching martial arts,watching kickboxing
+130218,Watching racquet sports,watching tennis
+130218,Watching racquet sports,watching racquetball
+130218,Watching racquet sports,watching squash
+130218,Watching racquet sports,watching badminton
+130218,Watching racquet sports,watching handball
+130218,Watching racquet sports,watching lacrosse
+130220,Watching rollerblading,watching roller-skating
+130220,Watching rollerblading,watching skateboarding
+130222,Watching running,watching a marathon
+130222,Watching running,watching cross country running
+130222,Watching running,watching a running race
+130222,Watching running,watching an organized run
+130223,"Watching skiing, ice skating, snowboarding",watching snow tubing
+130225,Watching softball,watching wiffle ball
+130226,Watching vehicle touring/racing,watching a stock car race
+130226,Watching vehicle touring/racing,watching snowmobiling
+130226,Watching vehicle touring/racing,watching a drag race
+130226,Watching vehicle touring/racing,watching 4-wheeling
+130226,Watching vehicle touring/racing,watching a motocross race
+130227,Watching volleyball,watching Wally ball
+130228,Watching walking,watching a walking sporting event
+130229,Watching water sports,watching a swim/dive meet
+130229,Watching water sports,watching water aerobics
+130229,Watching water sports,watching a water polo match
+130230,Watching weightlifting/strength training,watching weightlifting competition
+130299,Attending sporting events,watching discus
+130299,Attending sporting events,watching ping-pong
+130299,Attending sporting events,watching hang-gliding
+130299,Attending sporting events,watching croquet game
+130299,Attending sporting events,watching ballooning
+130299,Attending sporting events,watching archery
+130299,Attending sporting events,watching skydiving
+130299,Attending sporting events,watching skeet-shooting
+130299,Attending sporting events,watching windsurfing
+130299,Attending sporting events,watching dart playing
+130299,Attending sporting events,watching bungee jumping
+130299,Attending sporting events,watching boxing
+130299,Attending sporting events,watching baton twirling
+130299,Attending sporting events,watching javelin
+130299,Attending sporting events,watching cheerleading
+130299,Attending sporting events,watching pole vaulting
+130401,Security related to playing sports or exercising,opening bags for security search (playing sports)
+130401,Security related to playing sports or exercising,passing through metal detector (playing sports)
+130401,Security related to playing sports or exercising,being searched at security checkpoint (playing sports)
+130402,Security related to attending sporting events,opening bags for security search (attending sports)
+130402,Security related to attending sporting events,passing through metal detector (attending sports)
+130402,Security related to attending sporting events,being searched at security checkpoint (attending sports)
+140101,Attending religious services,attending church services/synagogue/temple/mosque
+140101,Attending religious services,leading blessings
+140101,Attending religious services,"attending funerals/attending wakes, memorial services"
+140101,Attending religious services,attending/participating in weddings
+140101,Attending religious services,attending/hearing confession
+140101,Attending religious services,attending church revival
+140101,Attending religious services,attending a bar mitzvah/bat mitzvah/briss
+140101,Attending religious services,attending a blessing
+140101,Attending religious services,attending a baptism/christening
+140101,Attending religious services,attending confirmation service
+140101,Attending religious services,"watching religious services via Zoom/YouTube/Facebook-live/ Instagram, etc"
+140102,Participation in religious practices,reading the Bible/Koran/Torah/Talmud/scriptures
+140102,Participation in religious practices,lighting advent wreath
+140102,Participation in religious practices,studying the Bible/Koran/sciptures
+140102,Participation in religious practices,praying alone
+140102,Participation in religious practices,ushering for religious services
+140102,Participation in religious practices,saying prayers for a Seder
+140102,Participation in religious practices,singing in the church choir
+140102,Participation in religious practices,"leading church choir, musical groups"
+140102,Participation in religious practices,visiting graves/putting flowers on graves
+140102,Participation in religious practices,playing the church organ
+140102,Participation in religious practices,rehearsing/decorating for religious ceremonies
+140102,Participation in religious practices,participating in church musical performance
+140102,Participation in religious practices,attending a wedding rehearsal
+140102,Participation in religious practices,opening advent calendar day
+140102,Participation in religious practices,cleaning up after religious ceremonies
+140102,Participation in religious practices,conducting religious rites in the home
+140102,Participation in religious practices,attending church choir practice
+140102,Participation in religious practices,meditating for religious purposes
+140102,Participation in religious practices,attending a religious retreat
+140102,Participation in religious practices,preparing the sacrament/communion
+140102,Participation in religious practices,praying with others
+140102,Participation in religious practices,lighting menorah candles (Hanukkah)
+140102,Participation in religious practices,preparing food for a Seder
+140102,Participation in religious practices,attending Passover Seder
+140102,Participation in religious practices,praying with hh child
+140102,Participation in religious practices,praying with nonhh child
+140102,Participation in religious practices,listening to Bible audio
+140102,Participation in religious practices,attending church circle meeting
+140103,Waiting associated w/religious & spiritual activities,Waiting associated w/ religious & spiritual activities
+140104,Security procedures rel. to religious & spiritual activities,"opening bags for security search 
+(religious activities)"
+140104,Security procedures rel. to religious & spiritual activities,passing through metal detector (religious activities)
+140104,Security procedures rel. to religious & spiritual activities,being searched at security checkpoint (religious activities)
+140105,Religious education activities,attending confirmation class/attending Sunday school
+140105,Religious education activities,teaching Sunday school
+140105,Religious education activities,attending Bible study
+140105,Religious education activities,preparing materials for Bible study
+140105,Religious education activities,teaching/leading Bible study
+140105,Religious education activities,teaching bat/bar mitvah class
+140105,Religious education activities,distributing religious literature
+140105,Religious education activities,attending pre-Cana class
+140105,Religious education activities,reading (other: confirmation class)
+140105,Religious education activities,leading religious youth group
+140105,Religious education activities,memorizing verses for confirmation class
+140105,Religious education activities,reading/studying scriptures for Sunday school
+149999,Religious and spiritual activities,getting temperature check at church
+150101,Computer use,writing/sending e-mail (volunteer)
+150101,Computer use,"computer use, unspecified (volunteer)"
+150101,Computer use,checking e-mail (volunteer)
+150101,Computer use,surfing the internet (volunteer)
+150101,Computer use,designing website for volunteer org.
+150101,Computer use,setting up computer (volunteer)
+150101,Computer use,loading computer software (volunteer)
+150102,Organizing and preparing,preparing for a meeting (volunteer)
+150102,Organizing and preparing,filing (volunteer)
+150102,Organizing and preparing,organizing volunteer materials
+150102,Organizing and preparing,preparing/organizing schedules (volunteer)
+150102,Organizing and preparing,stuffing envelopes (volunteer)
+150102,Organizing and preparing,addressing envelopes (volunteer)
+150102,Organizing and preparing,completing paperwork (volunteer)
+150102,Organizing and preparing,re-shelving library books (volunteer)
+150102,Organizing and preparing,reviewing applications (volunteer)
+150103,Reading,"reviewing notes, briefs, papers (volunteer)"
+150103,Reading,reading the Bible (volunteer)
+150103,Reading,"reading books, journals, newspapers (volunteer)"
+150103,Reading,reading scriptures (volunteer)
+150104,Telephone calls (except hotline counseling),making phone calls (volunteer)
+150104,Telephone calls (except hotline counseling),answering phones (volunteer)
+150105,Writing,editing newsletters (volunteer)
+150105,Writing,writing letters/memos (volunteer)
+150106,Fundraising,collecting monetary donations (volunteer)
+150106,Fundraising,ringing a bell for the Salvation Army (volunteer)
+150106,Fundraising,raising money for charitable causes (volunteer)
+150106,Fundraising,selling nonfood items at a concession stand (volunteer)
+150106,Fundraising,raising money for political candidates (volunteer)
+150106,Fundraising,helping with a yard sale (volunteer)
+150106,Fundraising,selling items at a yard sale (volunteer)
+150106,Fundraising,selling items at a bazaar (volunteer)
+150106,Fundraising,soliciting pledges (volunteer)
+150106,Fundraising,selling raffle tickets (volunteer)
+150106,Fundraising,selling tickets (volunteer)
+150106,Fundraising,setting up a silent auction (volunteer)
+150106,Fundraising,planning a benefit (volunteer)
+150106,Fundraising,selling Girl Scout cookies (volunteer)
+150106,Fundraising,donating money (volunteer)
+150106,Fundraising,running a race to raise money (volunteer)
+150199,Administrative & support activities,counted church offering (volunteer)
+150199,Administrative & support activities,collecting signatures for a petition (volunteer)
+150201,"Food preparation, presentation, clean-up",working in a soup kitchen (volunteer)
+150201,"Food preparation, presentation, clean-up",distributing groceries at food bank (volunteer)
+150201,"Food preparation, presentation, clean-up",preparing food for a fundraiser (volunteer)
+150201,"Food preparation, presentation, clean-up",serving food at a homeless shelter (volunteer)
+150201,"Food preparation, presentation, clean-up",delivering/serving meals to shut-ins (volunteer)
+150201,"Food preparation, presentation, clean-up",selling food or unknown items at a concession stand (volunteer)
+150201,"Food preparation, presentation, clean-up",baking cookies for the PTA bake sale (volunteer)
+150201,"Food preparation, presentation, clean-up",donating food to a food bank (volunteer)
+150201,"Food preparation, presentation, clean-up",serving food to racers (volunteer)
+150202,Collecting & delivering clothing & other goods,collecting clothing for disaster relief (volunteer)
+150202,Collecting & delivering clothing & other goods,donating clothing (volunteer)
+150202,Collecting & delivering clothing & other goods,distributing blankets at a homeless shelter (volunteer)
+150202,Collecting & delivering clothing & other goods,sorting books (volunteer)
+150202,Collecting & delivering clothing & other goods,donating books (volunteer)
+150202,Collecting & delivering clothing & other goods,sorting clothing (volunteer)
+150202,Collecting & delivering clothing & other goods,assembling gift baskets (volunteer)
+150202,Collecting & delivering clothing & other goods,loading items into vehicle (volunteer)
+150202,Collecting & delivering clothing & other goods,donating tooys (voluteer)
+150202,Collecting & delivering clothing & other goods,unloading items from vehicle (volunteer)
+150202,Collecting & delivering clothing & other goods,collecting toys (volunteer)
+150202,Collecting & delivering clothing & other goods,collecting school supplies (volunteer)
+150202,Collecting & delivering clothing & other goods,collecting used electronics (volunteer)
+150203,Providing care,visiting shut-ins or the elderly (volunteer)
+150203,Providing care,spending time with hospice patients (volunteer)
+150203,Providing care,reading to the blind (volunteer)
+150203,Providing care,walking dogs at animal shelter (volunteer)
+150203,Providing care,acting as an interpreter (volunteer)
+150203,Providing care,playing with children (volunteer)
+150203,Providing care,visiting with others (volunteer)
+150203,Providing care,chaperoning (volunteer)
+150203,Providing care,supervising children (volunteer)
+150204,"Teaching, leading, counseling, mentoring",being a Big Brother/Big Sister (volunteer)
+150204,"Teaching, leading, counseling, mentoring",counseling at a halfway house (volunteer)
+150204,"Teaching, leading, counseling, mentoring",tutoring (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading Boy Scout meeting (volunteer)
+150204,"Teaching, leading, counseling, mentoring",working a hotline for victim support svcs. (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching/leading Bible study (volunteer)
+150204,"Teaching, leading, counseling, mentoring",coaching teams (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching bat/bar mitzvah class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",assisting in a classroom (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching/leading religious class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading religious youth group (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching confirmation class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching Sunday school (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching religious class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching parenting classes (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading a blessing (volunteer)
+150204,"Teaching, leading, counseling, mentoring",doing vocational training (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching a cooking class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading a tour (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading a choir (volunteer)
+150204,"Teaching, leading, counseling, mentoring",teaching a class (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading a musical group (volunteer)
+150204,"Teaching, leading, counseling, mentoring",leading story time at library (volunteer)
+150204,"Teaching, leading, counseling, mentoring",providing a demo (volunteer)
+150299,Social service & care activities,sewing items to donate (volunteer)
+150299,Social service & care activities,knitting (volunteer)
+150299,Social service & care activities,making quilts for soldiers (volunteer)
+150299,Social service & care activities,making crafts (volunteer)
+150301,"Building houses, wildlife sites, & other structures",building houses for Habitat for Humanity (volunteer)
+150301,"Building houses, wildlife sites, & other structures",building playgrounds (volunteer)
+150301,"Building houses, wildlife sites, & other structures",building a wildlife refuge area (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",cleaning parks/streets (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",doing environmental clean-up (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",picking up trash (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",repairing cars (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",renovating a house (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",maintaining hiking trails (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",repairing tools or equipment (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",planting trees (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",gardening (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",watering trees (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",weeding (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",clearing brush (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",planting flowers (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",landscaping (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",mowing the lawn (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up",painting (volunteer)
+150302,"Indoor & outdoor maintenance, repair, & clean-up","cleaning up yards, buildings (volunteer)"
+150401,Performing,acting in a performance (volunteer)
+150401,Performing,emceeing a charity function (volunteer)
+150401,Performing,dancing in a performance (volunteer)
+150401,Performing,auctioneering a benefit auction (volunteer)
+150401,Performing,performing music (volunteer)
+150401,Performing,practicing for a performance (volunteer)
+150402,Serving at volunteer events & cultural activities,manning an information booth (volunteer)
+150402,Serving at volunteer events & cultural activities,being a docent/museum guide (volunteer)
+150402,Serving at volunteer events & cultural activities,ushering for a benefit performance (volunteer)
+150402,Serving at volunteer events & cultural activities,ushering at a theatre performance (volunteer)
+150402,Serving at volunteer events & cultural activities,manning a booth (volunteer)
+150402,Serving at volunteer events & cultural activities,running a carnival/festival booth (volunteer)
+150402,Serving at volunteer events & cultural activities,working a booth at a fair (volunteer)
+150402,Serving at volunteer events & cultural activities,distributing race packets (volunteer)
+150402,Serving at volunteer events & cultural activities,distributing event T-shirts (volunteer)
+150402,Serving at volunteer events & cultural activities,supporting racers (volunteer)
+150402,Serving at volunteer events & cultural activities,cleaning up after an event (volunteer)
+150402,Serving at volunteer events & cultural activities,setting up for an event (volunteer)
+150402,Serving at volunteer events & cultural activities,setting up for a walk-a-thon (volunteer)
+150402,Serving at volunteer events & cultural activities,serving at a marathon (volunteer)
+150402,Serving at volunteer events & cultural activities,designing a set for a performance (volunteer)
+150402,Serving at volunteer events & cultural activities,designing a float for a parade (volunteer)
+150402,Serving at volunteer events & cultural activities,constructing a float for a parade (volunteer)
+150402,Serving at volunteer events & cultural activities,testing sound system (volunteer)
+150402,Serving at volunteer events & cultural activities,setting up music equipment (volunteer)
+150402,Serving at volunteer events & cultural activities,setting up lighting (volunteer)
+150402,Serving at volunteer events & cultural activities,driving a float in a parade (volunteer)
+150402,Serving at volunteer events & cultural activities,directing a child's school play (volunteer)
+150501,"Attending meetings, conferences, & training",attending training (volunteer)
+150501,"Attending meetings, conferences, & training",serving on a board (volunteer)
+150501,"Attending meetings, conferences, & training",attending meetings (volunteer)
+150501,"Attending meetings, conferences, & training",serving on a finance committee (volunteer)
+150501,"Attending meetings, conferences, & training",attending conferences (volunteer)
+150501,"Attending meetings, conferences, & training",chairing a committee (volunteer)
+150501,"Attending meetings, conferences, & training",attending seminars (volunteer)
+150601,Public health activities,donating blood (volunteer)
+150601,Public health activities,providing medical care (volunteer)
+150602,Public safety activities,being on duty as firefighter (volunteer)
+150602,Public safety activities,patrolling for neighborhood crime watch (volunteer)
+150801,Security procedures related to volunteer activities,opening bags for security search (volunteer)
+150801,Security procedures related to volunteer activities,passing through metal detector (volunteer)
+150801,Security procedures related to volunteer activities,being searched at security checkpoint (volunteer)
+159999,Volunteer activities,shopping (volunteer)
+159999,Volunteer activities,picketing (volunteer)
+159999,Volunteer activities,ushering at church (volunteer)
+159999,Volunteer activities,handing out political flyers (volunteer)
+159999,Volunteer activities,monitoring water quality (volunteer)
+159999,Volunteer activities,handing out flyers (volunteer)
+159999,Volunteer activities,inventorying bird or other wildlife populations (volunteer)
+159999,Volunteer activities,greeting people at church (volunteer)
+159999,Volunteer activities,taping religious services (volunteer)
+159999,Volunteer activities,running a race (volunteer)
+160101,Telephone calls to/from family members,talking on phone to relatives
+160101,Telephone calls to/from family members,Skyping with my sister
+160101,Telephone calls to/from family members,placing a call to my mother on Amazon Echo or similar technology
+160101,Telephone calls to/from family members,FaceTime/Video chat with family
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",talking on phone to friends/neighbors/acquaintances
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",talking on phone to girlfriend
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",talking on phone to boyfriend
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",talking on phone to fiancee
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",texting with a friend
+160102,"Telephone calls to/from friends, neighbors, or acquaintances",FaceTime/Video chat with friends
+160103,Telephone calls to/from education services providers,talking on phone to a teacher
+160103,Telephone calls to/from education services providers,talking on phone to an instructor
+160103,Telephone calls to/from education services providers,talking on phone to a principal
+160103,Telephone calls to/from education services providers,talking on phone to a school nurse
+160103,Telephone calls to/from education services providers,talking on phone to a professor
+160103,Telephone calls to/from education services providers,talking on phone to a school cafeteria worker
+160104,Telephone calls to/from salespeople,talking on phone to a sales clerk
+160104,Telephone calls to/from salespeople,talking on phone to a cashier
+160104,Telephone calls to/from salespeople,talking on phone to a store manager
+160104,Telephone calls to/from salespeople,talking on phone to a salesperson
+160104,Telephone calls to/from salespeople,talking on phone to a customer service representative
+160104,Telephone calls to/from salespeople,talking on phone to a telemarketer
+160104,Telephone calls to/from salespeople,talking on phone to a store counter person
+160104,Telephone calls to/from salespeople,talking to credit card company
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a banker/insurance agent/loan officer
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a barber/hairstylist/manicurist
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a lawyer/mediator/paralegal
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a pharmacist
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a doctor/nurse/veterinarian
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to an accountant
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a real estate agent
+160105,Telephone calls to/from professional or personal care svcs providers,talking on phone to a massage therapist
+160106,Telephone calls to/from household services providers,talking on phone to a pet sitter/pet walker
+160106,Telephone calls to/from household services providers,talking on phone to gas company representative
+160106,Telephone calls to/from household services providers,talking on phone to a cleaning service/caterer
+160106,Telephone calls to/from household services providers,talking on phone to an architect
+160106,Telephone calls to/from household services providers,talking on phone to a plumber/electrician/contractor
+160106,Telephone calls to/from household services providers,talking on phone to a decorator
+160106,Telephone calls to/from household services providers,talking on phone to a landscaper/gardener
+160106,Telephone calls to/from household services providers,talking on phone to electric company representative
+160106,Telephone calls to/from household services providers,talking on phone to a mechanic/auto body repair person
+160107,Telephone calls to/from paid child or adult care providers,talking on phone to day care provider
+160107,Telephone calls to/from paid child or adult care providers,talking on phone to a tutor
+160107,Telephone calls to/from paid child or adult care providers,talking on phone to a babysitter
+160108,Telephone calls to/from government officials,talking on phone to police or firefighters
+160108,Telephone calls to/from government officials,talking on phone to a court employee
+160108,Telephone calls to/from government officials,talking on phone to a public librarian
+160108,Telephone calls to/from government officials,talking on phone to a politician
+160108,Telephone calls to/from government officials,talking on phone to a U.S. postal employee
+160108,Telephone calls to/from government officials,talking on phone to a congressperson
+160108,Telephone calls to/from government officials,talking on phone to a county council member
+160199,Telephone calls (to or from),"talking on phone, no more info provided"
+160199,Telephone calls (to or from),talking on phone to ex-husband
+160201,Waiting associated with telephone calls,waiting to use a pay phone
+160201,Waiting associated with telephone calls,waiting for a phone call
+181205,Travel as a form of entertainment,"driving, no purpose (pleasure driving)"
+181205,Travel as a form of entertainment,driving around looking at Christmas lights
+181205,Travel as a form of entertainment,sightseeing on a tour bus
+181801,Security procedures related to traveling,being searched at security checkpoint (traveling)
+181801,Security procedures related to traveling,opening bags for security search (traveling)
+181801,Security procedures related to traveling,passing through metal detector
+181801,Security procedures related to traveling,waiting in line at security checkpoint
+189999,Traveling,travel emergency
+189999,Traveling,exchanging insurance info after accident
+189999,Traveling,car accident
+189999,Traveling,hailing help after accident/emergency
+189999,Traveling,changing a flat tire
+189999,Traveling,walking to get help after travel accident
+189999,Traveling,"driving, no purpose (DP changed mind)"
+189999,Traveling,riding in a tow truck after accident
+189999,Traveling,travel accident
+189999,Traveling,checking in for flight
+189999,Traveling,picking up baggage (traveling)
+189999,Traveling,checking bags (traveling)
+189999,Traveling,taking airport shuttle to/from gate (in airport)
+189999,Traveling,boarding flight
+189999,Traveling,waiting to check bags for flight
+189999,Traveling,walking to baggage claim
+189999,Traveling,walking to gate in airport
+189999,Traveling,checking in for flight online via Amazon Echo or similar technology
+189999,Traveling,getting off plane
