@@ -48,31 +48,8 @@ class StdName():
     sub_dict = None
    
     def __init__(self):
-        sub = []
-        rep = []
-
-        # read in parsers
-        s_path = Path(impresources.files("sub")).rglob("*.csv")
-        s_path = sorted([x for x in s_path])
-        
-        for f in s_path:
-            with open(f, 'r') as sub_file:
-                lines = sub_file.readlines()
-                lines = [x.strip().rstrip().lower() for x in lines]
-                lines = [x.split(',') if x != ',' else [','] for x in lines]
-
-                if "remove" in f.stem:
-                    temp = [(x[0], "") for x in lines]
-                    rep.extend(temp)
-                elif "rpl" in f.stem:
-                    temp = [(x[0], " ") for x in lines]
-                    rep.extend(temp)
-                else:
-                    temp = [(x[0], x[1]) for x in lines]
-                    sub.extend(temp)
-
-        sub = rep + sub
-        self.sub_dict = dict(sub)
+        with open(impresources.files("data") / "sub_dict.json", 'r') as f:
+            self.sub_dict = json.load(f)
 
     def standardize(self, text):
         # account for boundaries
@@ -84,7 +61,7 @@ class StdName():
             else:
                 text = text.replace(" "+k+" ", " "+v+" ")
 
-        return "".join(text.split())
+        return " ".join(text.split())
 
 class TaskMatch():
     def __init__(self, threshold=0.9):
@@ -247,7 +224,6 @@ class FirmExtract():
     STD = None
 
     def __init__(self, standardize=False):
-        print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
         else:
