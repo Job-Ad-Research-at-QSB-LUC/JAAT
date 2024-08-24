@@ -11,10 +11,28 @@ import multiprocessing as mp
 import re
 import string
 from operator import itemgetter
+from pathlib import Path
+import json
+import pickle
 
 tqdm.pandas()
 
 HF_TOKEN = None
+
+def sent_tokenize(text):
+    text = text.replace("\n", ".").replace("..", ".")
+    return nltk.sent_tokenize(text)
+
+def init_pool(classifier):
+    global clf
+    clf = classifier
+
+def classify(contexts):
+    global clf
+    if contexts is None:
+        return 0
+    res = clf.predict(contexts)
+    return 1 if sum(res) > 0 else 0
 
 class ListDataset(Dataset):
     def __init__(self, original_list):
@@ -26,6 +44,47 @@ class ListDataset(Dataset):
     def __getitem__(self, i):
         return self.original_list[i]
 
+class StdName():
+    sub_dict = None
+   
+    def __init__(self):
+        sub = []
+        rep = []
+
+        # read in parsers
+        s_path = Path(impresources.files("sub")).rglob("*.csv")
+        s_path = sorted([x for x in s_path])
+        
+        for f in s_path:
+            with open(f, 'r') as sub_file:
+                lines = sub_file.readlines()
+                lines = [x.strip().rstrip().lower() for x in lines]
+                lines = [x.split(',') if x != ',' else [','] for x in lines]
+
+                if "remove" in f.stem:
+                    temp = [(x[0], "") for x in lines]
+                    rep.extend(temp)
+                elif "rpl" in f.stem:
+                    temp = [(x[0], " ") for x in lines]
+                    rep.extend(temp)
+                else:
+                    temp = [(x[0], x[1]) for x in lines]
+                    sub.extend(temp)
+
+        sub = rep + sub
+        self.sub_dict = dict(sub)
+
+    def standardize(self, text):
+        # account for boundaries
+        text = " " + text + " "
+
+        for k, v in self.sub_dict.items():
+            if len(k) == 1 and (v == "" or v == " "):
+                text = text.replace(k, v)
+            else:
+                text = text.replace(" "+k+" ", " "+v+" ")
+
+        return "".join(text.split())
 
 class TaskMatch():
     def __init__(self, threshold=0.9):
@@ -58,7 +117,7 @@ class TaskMatch():
         print("Finished.", flush=True)
 
     def get_candidates(self, text):
-        s = nltk.sent_tokenize(text.strip())
+        s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 48]
 
         positive = []
@@ -79,7 +138,7 @@ class TaskMatch():
     def get_candidates_batch(self, texts):
         all_data = []
         for i, t in enumerate(texts):
-            s = nltk.sent_tokenize(t.strip())
+            s = sent_tokenize(t.strip())
             all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
 
         positive = []
@@ -185,8 +244,9 @@ class TitleMatch():
         return results
     
 class FirmExtract():
+    STD = None
 
-    def __init__(self):
+    def __init__(self, standardize=False):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -199,6 +259,10 @@ class FirmExtract():
         remove = string.punctuation
         remove = remove.replace(".", "").replace(",", "").replace("-", "").replace("&", "").replace("'","")
         self.pattern = r"[{}]".format(remove)
+
+        self.standardize = standardize
+        if self.standardize == True:
+            self.STD = StdName()
 
     def clean_company(self, company):
         company = company.replace('\\', '')
@@ -225,6 +289,9 @@ class FirmExtract():
             company = [self.clean_company(x[0]) for x in cands]
         else:
             return None
+        
+        if self.standardize == True:
+            company = [self.STD.standardize(x) for x in company]
 
         return set(company)
 
@@ -240,7 +307,6 @@ class FirmExtract():
         return results
 
 class CREAM():
-
     def __init__(self, keywords, rules, class_name="label", n=4, threshold=0.9):
         if not isinstance(keywords, list) or not isinstance(rules, list):
             print("ERROR: keywords and rules must be given as a list of values. \n KEYWORDS: [k1, k2, ..., kn] \n RULES: [(rule_1, label), (rule_2, label), ..., (rule_n, label)]")
@@ -305,3 +371,154 @@ class CREAM():
         df = pd.DataFrame(texts, columns=["text"])
         df['inferred_rule'], df['inferred_label'], df['inferred_confidence'] = zip(*df["text"].progress_apply(self.__helper__))
         return df
+
+class ActivityMatch():
+    def __init__(self, threshold=0.9):
+        print("INIT", flush=True)
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+            self.batch_size = 2048
+        else:
+            self.device = "cpu"
+            self.batch_size = 64
+
+        self.threshold = threshold
+
+        print("Preparing embeddings...", flush=True)
+        self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
+        self.activities = pd.read_csv(impresources.files("data") / "lexiconwex2023.csv").drop_duplicates()
+        self.activities = self.activities.reset_index().drop("index", axis=1)
+        self.act_embed = self.embedding_model.encode(self.activities.example.to_list(), convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.act_embed = self.act_embed.to(self.device)
+
+        print("Setting up pipeline...", flush=True)
+        self.model = AutoModelForSequenceClassification.from_pretrained(impresources.files("models") / "task-classifier-mini-improved2")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            impresources.files("models") / "task-classifier-mini-improved2",
+            use_fast=True,
+            max_length=64,
+            truncation=True
+        )
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        print("Finished.", flush=True)
+
+    def get_candidates(self, text):
+        s = sent_tokenize(text.strip())
+        all_data = [ss for ss in s if len(ss.split()) <= 48]
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset(all_data)
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+    
+    def get_candidates_batch(self, texts):
+        all_data = []
+        for i, t in enumerate(texts):
+            s = sent_tokenize(t.strip())
+            all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset([x[1] for x in all_data])
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+
+    def get_activities(self, text):
+        positive = self.get_candidates(text)
+        if len(positive) == 0:
+            return []
+
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.act_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_acts = []
+        for x in search:
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_acts.append((str(self.activities.iloc[x[0]["corpus_id"]]["code"]), self.activities.iloc[x[0]["corpus_id"]]["activity"], self.activities.iloc[x[0]["corpus_id"]]["example"]))
+
+        return matched_acts
+    
+    def get_activities_batch(self, texts):
+        all_data = self.get_candidates_batch(texts)
+
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.act_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_acts = []
+        for _ in range(len(texts)):
+            matched_acts.append([])
+        for x, y in zip(search, all_data):
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_acts[y[0]].append((str(self.activities.iloc[x[0]["corpus_id"]]["code"]), self.activities.iloc[x[0]["corpus_id"]]["activity"], self.activities.iloc[x[0]["corpus_id"]]["example"]))
+
+        return matched_acts
+    
+class JobTag():
+    def __init__(self, class_name, n=4):
+        with open(impresources.files("data") / "keywords.json", 'r') as f:
+            self.keywords = json.load(f)
+
+        self.classes = sorted([x for x in self.keywords])
+
+        if class_name not in self.classes:
+            print("Usage Error: please select one of the available classes:\n[{}]".format(" | ".join(self.classes)))
+            return
+        
+        self.class_name = class_name
+        self.clf = pickle.load(open(impresources.files("models") / "jobtag" / self.class_name, 'rb'))
+        self.n = n
+
+    def get_context(self, text):
+        text = text.lower()
+        text = re.sub(r'[^a-z0-9]+', ' ', text)
+
+        words = text.split()
+        found_index = [i for i, w in enumerate(words) if any(k.strip() in w for k in self.keywords[self.class_name])]
+        context = [" ".join(words[max(0, idx-self.n):min(idx+self.n+1, len(words))]) for idx in found_index]
+
+        if len(context) > 0:
+            return context
+        else:
+            return None
+
+    def get_tag(self, text):
+        contexts = self.get_context(text)
+        if contexts is None:
+            return (self.class_name, 0)
+        res = self.clf.predict(contexts)
+        return (self.class_name, 1 if sum(res) > 0 else 0)
+    
+    def get_tag_batch(self, texts):
+        all_contexts = [self.get_context(x) for x in texts]
+        with mp.Pool(mp.cpu_count(), init_pool(self.clf)) as pool:
+            p = tqdm(pool.imap(classify, all_contexts), total=len(all_contexts))
+            res = list(p)
+            pool.close()
+        return res
