@@ -1,0 +1,11 @@
+{
+    "wfh":["home", "remote", "telecommut", "telework", "virtual", "videoconferenc", "internet", "anywhere"],  
+    "ind_contractor":["contract"], 
+    "proflicenses":["licens", "credential", "certifi", "apprentice"], 
+    "yesunion":["collective", "bargain", "contract", "union"],
+    "CitizenshipReq": ["citizen"],
+    "WorkAuthReq": ["authoriz"],
+    "VisaInclude":["visa", "1b"],
+    "VisaExclude":["visa", "1b"]
+}
+  
