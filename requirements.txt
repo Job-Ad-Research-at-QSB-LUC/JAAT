@@ -7,3 +7,4 @@ torch
 tqdm
 transformers
 xlrd
+swifter
