@@ -49,7 +49,9 @@ After importing the module, simply instantiate the `FirmExtract` object:
 
 `FE = FirmExtract()`
 
-This initiates the firm extraction object with our custom NER model: firmNER. Following this, run it on any given (job ad) text:
+This initiates the firm extraction object with our custom NER model: firmNER. Optionally, you can choose to have all extracted firm names standardized according to the methid proposed by [Wasi and Flaeen](https://www.aaronflaaen.com/uploads/3/1/2/4/31243277/wasi_flaaen_statarecordlinkageutilities_20140401.pdf). This can be done by setting the `standardize` parameter to `True`.
+
+Following this, run it on any given (job ad) text:
 
 `firms = FE.get_firm(TEXT)`
 
