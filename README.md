@@ -93,6 +93,27 @@ Specifically, the output will be a Pandas DataFrame will the following columns:
 - **inferred_label**: the label assigned based on the best matching rule, if any
 - **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
 
+## JobTag
+`JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
+
+As of now the following classes are supported:
+`['CitizenshipReq', 'VisaExclude', 'VisaInclude', 'WorkAuthReq', 'ind_contractor', 'proflicenses', 'wfh', 'yesunion']`
+
+To get started, create a new `JobTag` object by doing the following:
+
+`J = JobTag(class_name=CLASS)`
+
+where `CLASS` is replaced by one of the supported classes. Optionally, you can also specify an `n` parameter (default: 4), which defines how large of a context window around keywords to consider.
+
+Then, you can classify any text (binary classification, 1 == positive) by calling the following function:
+
+`prediction = J.get_tag(TEXT)`
+
+This will return a tuple of the form `(class_name, 1/0)`. For larger batches of texts, use the batch function:
+
+`predictions = J.get_tag_batch(LIST_OF_TEXTS)`
+
+This now will return a list of 1/0 predictions, in the same order as the input texts.
 
 ## Data Citation
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
