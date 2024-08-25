@@ -99,7 +99,7 @@ Specifically, the output will be a Pandas DataFrame will the following columns:
 `JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
 
 As of now the following classes are supported:
-`['CitizenshipReq', 'VisaExclude', 'VisaInclude', 'WorkAuthReq', 'ind_contractor', 'proflicenses', 'wfh', 'yesunion']`
+`['CitizenshipReq', 'GovContract', 'VisaExclude', 'VisaInclude', 'WorkAuthReq', 'driverslicense', 'ind_contractor', 'proflicenses', 'wfh', 'yesunion']`
 
 To get started, create a new `JobTag` object by doing the following:
 
