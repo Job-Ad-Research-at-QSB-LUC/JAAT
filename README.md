@@ -1,6 +1,11 @@
 # Job Ad Analysis Toolkit (JAAT)
 In this repository, you will find the code for efficient and accurate analysis of job ads. Running the code is simple!
 
+## Installation
+To install JAAT, simply run the following:
+
+`pip install JAAT`
+
 ## TaskMatch
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
 
