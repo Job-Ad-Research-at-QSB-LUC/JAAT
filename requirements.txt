@@ -8,3 +8,5 @@ tqdm
 transformers
 xlrd
 swifter
+openpyxl
+transformers

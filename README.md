@@ -122,7 +122,11 @@ This will return a tuple of the form `(class_name, 1/0)`. For larger batches of 
 
 This now will return a list of 1/0 predictions, in the same order as the input texts.
 
-## Data Citation
+## Acknowledgements
+
+This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
+
+### Data Citation
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
 
 ```Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.```
