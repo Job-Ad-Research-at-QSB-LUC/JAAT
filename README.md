@@ -100,6 +100,23 @@ Specifically, the output will be a Pandas DataFrame will the following columns:
 - **inferred_label**: the label assigned based on the best matching rule, if any
 - **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
 
+## ActivityMatch
+In a similar way to `TaskMatch`, `ActivityMatch` will extract general activity statements from your texts, according to a set of predefined daily activities (see `data/lexiconwex2023.csv`).
+
+`AM = ActivityMatch()`
+
+Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
+
+`AM = ActivityMatch(threshold=0.85)`
+
+Then, run it on any given text:
+
+`activities = AM.get_activities(TEXT)`
+
+For batch processing, run:
+
+`activities = AM.get_activities_batch(LIST_OF_TEXTS)`
+
 ## JobTag
 `JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
 
