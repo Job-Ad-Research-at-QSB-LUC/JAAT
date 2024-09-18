@@ -14,6 +14,7 @@ from operator import itemgetter
 from pathlib import Path
 import json
 import pickle
+from functools import partial
 
 tqdm.pandas()
 
@@ -31,6 +32,19 @@ def classify(contexts):
         return 0
     res = clf.predict(contexts)
     return 1 if sum(res) > 0 else 0
+
+def get_context(text, keywords, n):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9]+', ' ', text)
+
+    words = text.split()
+    found_index = [i for i, w in enumerate(words) if any(k.strip() in w for k in keywords)]
+    context = [" ".join(words[max(0, idx-n):min(idx+1, len(words))]) for idx in found_index]
+
+    if len(context) > 0:
+        return context
+    else:
+        return None
 
 class ListDataset(Dataset):
     def __init__(self, original_list):
@@ -469,19 +483,6 @@ class JobTag():
         self.clf = pickle.load(open(impresources.files("models") / "jobtag" / self.class_name, 'rb'))
         self.n = n
 
-    def get_context(self, text):
-        text = text.lower()
-        text = re.sub(r'[^a-z0-9]+', ' ', text)
-
-        words = text.split()
-        found_index = [i for i, w in enumerate(words) if any(k.strip() in w for k in self.keywords[self.class_name])]
-        context = [" ".join(words[max(0, idx-self.n):min(idx+self.n+1, len(words))]) for idx in found_index]
-
-        if len(context) > 0:
-            return context
-        else:
-            return None
-
     def get_tag(self, text):
         contexts = self.get_context(text)
         if contexts is None:
@@ -489,10 +490,14 @@ class JobTag():
         res = self.clf.predict(contexts)
         return (self.class_name, 1 if sum(res) > 0 else 0)
     
-    def get_tag_batch(self, texts):
-        all_contexts = [self.get_context(x) for x in texts]
+    def get_tag_batch(self, texts, progress_bar=False):
         with mp.Pool(mp.cpu_count(), init_pool(self.clf)) as pool:
-            p = tqdm(pool.imap(classify, all_contexts), total=len(all_contexts))
+            c = pool.imap(partial(get_context, keywords=self.keywords[self.class_name], n=self.n), texts)
+            all_contexts = list(c)
+            if progress_bar == True:
+                p = tqdm(pool.imap(classify, all_contexts), total=len(all_contexts))
+            else:
+                p = pool.imap(classify, all_contexts)
             res = list(p)
             pool.close()
         return res
