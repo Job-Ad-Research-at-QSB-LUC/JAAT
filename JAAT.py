@@ -484,7 +484,7 @@ class JobTag():
         self.n = n
 
     def get_tag(self, text):
-        contexts = get_context(text)
+        contexts = get_context(text, keywords=self.keywords[self.class_name], n=self.n)
         if contexts is None:
             return (self.class_name, 0)
         res = self.clf.predict(contexts)
