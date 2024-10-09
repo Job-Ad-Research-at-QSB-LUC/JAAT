@@ -1,12 +1,21 @@
 # Job Ad Analysis Toolkit (JAAT)
 In this repository, you will find the code for efficient and accurate analysis of job ads. Running the code is simple!
 
+## Installation
+To install JAAT, simply run the following:
+
+`pip install JAAT`
+
+Then, import JAAT using the following command:
+
+`from JAAT import JAAT`
+
 ## TaskMatch
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
 
 After importing the module, simply instantiate the `TaskMatch` object:
 
-`TM = TaskMatch()`
+`TM = JAAT.TaskMatch()`
 
 Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
 
@@ -29,8 +38,7 @@ The second module assists in matching input job ad titles to coded job titles fr
 
 After importing the module, simply instantiate the `TitleMatch` object:
 
-`TM = TitleMatch()`
-
+`TM = JAAT.TitleMatch()`
 
 Then, run it on any given (job ad) text:
 
@@ -47,7 +55,7 @@ The third module is capable of extracting the firm (company) name from a text (n
 
 After importing the module, simply instantiate the `FirmExtract` object:
 
-`FE = FirmExtract()`
+`FE = JAAT.FirmExtract()`
 
 This initiates the firm extraction object with our custom NER model: firmNER. Optionally, you can choose to have all extracted firm names standardized according to the method proposed by [Wasi and Flaeen](https://www.aaronflaaen.com/uploads/3/1/2/4/31243277/wasi_flaaen_statarecordlinkageutilities_20140401.pdf). This can be done by setting the `standardize` parameter to `True`.
 
@@ -76,7 +84,7 @@ In the most basic form, the *labels* are binary: 1 denotes the presence of a cla
 
 Given these two inputs, one can instantiate the `CREAM` object.
 
-`C = CREAM(keywords=KEYWORDS, rules=RULES)`
+`C = JAAT.CREAM(keywords=KEYWORDS, rules=RULES)`
 
 There are also three optional parameters:
 
@@ -95,6 +103,23 @@ Specifically, the output will be a Pandas DataFrame will the following columns:
 - **inferred_label**: the label assigned based on the best matching rule, if any
 - **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
 
+## ActivityMatch
+In a similar way to `TaskMatch`, `ActivityMatch` will extract general activity statements from your texts, according to a set of predefined daily activities (see `data/lexiconwex2023.csv`).
+
+`AM = JAAT.ActivityMatch()`
+
+Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
+
+`AM = ActivityMatch(threshold=0.85)`
+
+Then, run it on any given text:
+
+`activities = AM.get_activities(TEXT)`
+
+For batch processing, run:
+
+`activities = AM.get_activities_batch(LIST_OF_TEXTS)`
+
 ## JobTag
 `JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
 
@@ -103,7 +128,7 @@ As of now the following classes are supported:
 
 To get started, create a new `JobTag` object by doing the following:
 
-`J = JobTag(class_name=CLASS)`
+`J = JAAT.JobTag(class_name=CLASS)`
 
 where `CLASS` is replaced by one of the supported classes. Optionally, you can also specify an `n` parameter (default: 4), which defines how large of a context window around keywords to consider.
 
@@ -117,7 +142,11 @@ This will return a tuple of the form `(class_name, 1/0)`. For larger batches of 
 
 This now will return a list of 1/0 predictions, in the same order as the input texts.
 
-## Data Citation
+## Acknowledgements
+
+This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
+
+### Data Citation
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
 
 ```Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.```

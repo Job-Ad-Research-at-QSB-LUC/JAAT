@@ -8,3 +8,7 @@ tqdm
 transformers
 xlrd
 swifter
+openpyxl
+transformers
+pure-predict
+compress_pickle
