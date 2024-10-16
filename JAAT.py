@@ -106,6 +106,8 @@ class TaskMatch():
         print("Finished.", flush=True)
 
     def get_candidates(self, text):
+        text = ". ".join(text.split("\n"))
+        text = text.replace(";", ".")
         s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 48]
 
@@ -121,12 +123,13 @@ class TaskMatch():
             if y['label'] == 'LABEL_1':
                 positive.append(x)
                 count += 1
-        #print("Found {} task sentences.".format(count), flush=True)
         return positive
     
     def get_candidates_batch(self, texts):
         all_data = []
         for i, t in enumerate(texts):
+            t = ". ".join(t.split("\n"))
+            t = t.replace(";", ".")
             s = sent_tokenize(t.strip())
             all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
 
@@ -142,7 +145,6 @@ class TaskMatch():
             if y['label'] == 'LABEL_1':
                 positive.append(x)
                 count += 1
-        #print("Found {} task sentences.".format(count), flush=True)
         return positive
 
     def get_tasks(self, text):
