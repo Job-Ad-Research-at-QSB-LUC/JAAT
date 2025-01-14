@@ -1,0 +1,13 @@
+{
+    "wfh":["home", "remote", "telecommut", "telework", "virtual", "videoconferenc", "internet", "anywhere"],  
+    "ind_contractor":["contract"], 
+    "proflicenses":["licens", "credential", "certifi", "apprentice"], 
+    "driverslicense":["licens", "credential", "certifi", "apprentice"],
+    "yesunion":["collective", "bargain", "contract", "union"],
+    "GovContract":["affirmative", "opportunity", "eoe", " aa ", "eeo", "contract", "women", "disabled", "minorit", "veteran"],
+    "CitizenshipReq": ["citizen"],
+    "WorkAuthReq": ["authoriz"],
+    "VisaInclude":["visa", "1b"],
+    "VisaExclude":["visa", "1b"]
+}
+  
