@@ -503,3 +503,148 @@ class JobTag():
             res = list(p)
             pool.close()
         return res
+
+class WageExtract():
+    def __init__(self, batch_size=2048):
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+            self.batch_size = batch_size
+        else:
+            self.device = "cpu"
+            self.batch_size = 64
+
+        self.keywords = [
+            '$', 'dollar', 'dollars',
+            'salary', 'salaries',
+            'wage', 'wages',
+            'compensation', 'compensations',
+            'annual', 'yearly', 'peryear', 'perannum',
+            'hourly', 'perhour'
+        ]
+
+        self.detok = nltk.treebank.TreebankWordDetokenizer()
+
+        model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/is_pay")
+        tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/is_pay",
+            use_fast=True,
+            max_length=64,
+            truncation=True
+        )
+        self.ispay_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+
+        model = model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/wage-ner-v2", max_length=128, id2label={0:'O', 1:'B-MIN', 2:'B-MAX'}, label2id={'O': 0, 'B-MIN': 1, 'B-MAX': 2})
+        tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/wage-ner-v2",
+            max_length=128,
+            model_max_length=128,
+            truncation=True
+        )
+        self.ner_pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="simple")
+
+        model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/pay-freq-v2")
+        tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/pay-freq-v2", 
+            max_length=128,
+            truncation=True
+        )
+        self.freq_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=128, device=self.device, truncation=True)
+
+    def preproc(self, text):
+        text = text.replace("401k", "")
+        text = re.sub(r"(\.[0-9])0{3,}", r"\g<1>0", text)
+        text = re.sub(r"([0-9])(to)([0-9])", r"\1 \2 \3", text)
+        text = re.sub(r"([0-9]{1,3})k", r"\g<1>000", text)
+        text = re.sub(r"((salary)|(range)|(pay)|(rate)|(up to))(:? )(\d)", r"\1\6$\7", text)
+        text = re.sub(r"((Salary)|(Range)|(Pay)|(Rate))(:? )(\d)", r"\1\6$\7", text)
+        text = re.sub(r"usd ?(\d+)", r"$\1", text)
+        text = re.sub(r"USD ?(\d+)", r"$\1", text)
+        text = re.sub(r"(\d+)(/)(hr)", r"\1 \2 \3", text)
+        text = re.sub(r"(\d+)([-/])(\w+)", r"\1 \2 \3", text).replace ("*", " ").replace("\\.",".")
+        text = " ".join(text.split())
+        return text
+
+    def get_largest_chunk(self, text, n=6):
+        text = text.replace("per hour", "perhour").replace("per year", "peryear").replace("per annum", "perannum")
+        tokens = nltk.word_tokenize(text)
+        idx = [i for i, x in enumerate(tokens) if any(y in x.lower() for y in self.keywords)]
+        if len(idx) == 0:
+            return None   
+        mi = min(idx)
+        ma = max(idx)
+        temp = tokens[max(mi-n, 0):min(ma+1+n, len(tokens)-1)]
+        ret = self.detok.detokenize(temp)
+        ret = ret.replace("perhour", "per hour").replace("peryear", "per year").replace("perannum", "per annum")
+        return ret
+    
+    def extract_wage(self, predict):
+        start = 0
+        MIN = ""
+        for p in predict:
+            if p["entity_group"] == "MIN":
+                if start == 0 or p["start"] == start:
+                    MIN += p["word"]
+                    start = p["end"]
+                else:
+                    break
+        start = 0
+        MAX = ""
+        for p in predict:
+            if p["entity_group"] == "MAX":
+                if start == 0 or p["start"] == start:
+                    MAX = MAX + p["word"]
+                    start = p["end"]
+                else:
+                    break
+        return {"min":MIN.replace("$",""), "max":MAX.replace("$","")}
+
+    def get_wage(self, text):
+        is_pay = self.ispay_pipe(text)[0]
+        if is_pay["label"] == "LABEL_0":
+            return "The provided text does not contain a wage statement."
+
+        text = self.get_largest_chunk(self.preproc(text))
+        pred = self.extract_wage(self.ner_pipe(text))
+        freq = self.freq_pipe(text)[0]["label"]
+        pred["frequency"] = freq
+        return pred
+
+    def get_wage_batch(self, texts):
+        batch = ListDataset(texts)
+        is_pay = []
+        print("Predicting is_pay...", flush=True)
+        for p in tqdm(self.ispay_pipe(batch), total=len(texts)):
+            is_pay.append(p["label"])
+        num_pay = sum([1 for x in is_pay if x == "LABEL_1"])
+        print("{} / {} contain wage statements.\n".format(num_pay, len(texts)), flush=True)
+
+        indices = [i for i, _ in enumerate(texts) if is_pay[i] == "LABEL_1"]
+        cands = [x for i, x in enumerate(texts) if is_pay[i] == "LABEL_1"]
+        new_batch = ListDataset(cands)
+
+        print("Extracting wage...", flush=True)
+        preds = []
+        for p in tqdm(self.ner_pipe(new_batch), total=len(new_batch)):
+            preds.append(self.extract_wage(p))
+        
+        print("\nPredicting pay frequency...", flush=True)
+        freqs = []
+        for p in tqdm(self.freq_pipe(new_batch), total=len(new_batch)):
+            freqs.append(p["label"])
+
+        final = []
+        for x, y in zip(preds, freqs):   
+            x["frequency"] = y
+            final.append(x)
+    
+        ret = []
+        count = 0
+        for i, x in enumerate(texts):
+            if i in indices:
+                ret.append(final[count])
+                count += 1
+            else:
+                ret.append(None)
+
+        assert len(ret) == len(texts)
+        return ret

@@ -142,6 +142,23 @@ This will return a tuple of the form `(class_name, 1/0)`. For larger batches of 
 
 This now will return a list of 1/0 predictions, in the same order as the input texts.
 
+## WageExtract
+`WageExtract` is used to extract wages (min and max) from a text, as well as the frequency associated with these values (i.e., hourly, weekly, monthly, or annually).
+
+To get started, create a new `WageExtract` object:
+
+`W = JAAT.WageExtract()`
+
+Then, you can classify any text by calling the following function:
+
+`prediction = W.get_wage(TEXT)`
+
+This will return either a dictionary of the extra min/max/frequency values, or the statement `The provided text does not contain a wage statement.`. For larger batches of texts, use the batch function:
+
+`predictions = W.get_wage_batch(LIST_OF_TEXTS)`
+
+This now will return a list predictions in the same order as the inputted texts, with each value either as a dictionary or `None`.
+
 ## Acknowledgements
 
 This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
