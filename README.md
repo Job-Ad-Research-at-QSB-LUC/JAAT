@@ -34,7 +34,7 @@ For batch processing, run:
 `tasks = TM.get_tasks_batch(LIST_OF_TEXTS)`
 
 ## TitleMatch
-The second module assists in matching input job ad titles to coded job titles from O*NET.
+The second module assists in matching input job ad titles to coded job titles from O*NET, along with providing useful information about the title.
 
 After importing the module, simply instantiate the `TitleMatch` object:
 
@@ -46,9 +46,9 @@ Then, run it on any given (job ad) text:
 
 Note that this function will work on either single texts or a list of input texts. The return type will be a list of tuples, each tuple of format:
 
-`(MATCHED_TITLE, MATCHED_TITLE_CODE, MATCH_SCORE)`
+`(MATCHED_TITLE, MATCHED_TITLE_CODE, MATCH_SCORE, TITLE_VALUE, TITLE_FEATURES)`
 
-Each tuple returned corresponds in order to the input text(s).
+Each tuple returned corresponds in order to the input text(s). Note that the returned features will be a semi-colon separated string of feature codes. 
 
 ## FirmExtract
 The third module is capable of extracting the firm (company) name from a text (not necessarily only job ad texts).

@@ -3,6 +3,7 @@ from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTok
 import nltk
 from tqdm.auto import tqdm
 import pandas as pd
+import numpy as np
 from sentence_transformers import SentenceTransformer, util
 import torch
 from torch.utils.data import Dataset
@@ -13,9 +14,9 @@ import string
 from operator import itemgetter
 from pathlib import Path
 import json
-import pickle
 from functools import partial
 import compress_pickle
+from collections import Counter
 
 tqdm.pandas()
 
@@ -199,11 +200,8 @@ class TitleMatch():
             self.batch_size = 64
 
         print("Loading data...", flush=True)
-        alt_titles = pd.read_csv(impresources.files("JAAT.data") / "alternate_titles.csv")[["Alternate Title", "O*NET-SOC Code"]].drop_duplicates(["Alternate Title"]).dropna()
-        titles = pd.read_csv(impresources.files("JAAT.data") / "alternate_titles.csv")[["Title", "O*NET-SOC Code"]].drop_duplicates(["Title"]).dropna()
-        alt_titles.columns = ["title", "code"]
+        titles = pd.read_csv(impresources.files("JAAT.data") / "titles_v2.csv")[["Reported Job Title", "O*NET-SOC Code"]].drop_duplicates(["Reported Job Title"]).dropna()
         titles.columns = ["title", "code"]
-        titles = pd.concat([titles, alt_titles])
         self.titles = titles.reset_index().drop("index", axis=1)
 
         print("Preparing embeddings...", flush=True)
@@ -211,6 +209,24 @@ class TitleMatch():
         self.title_embed = self.embedding_model.encode(self.titles.title.to_list(), convert_to_tensor=True, show_progress_bar=True)
         self.title_embed = self.title_embed.to(self.device)
 
+        print("Loading title models...", flush=True)
+        self.value_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_value", num_labels=1, problem_type="regression")
+        self.value_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_value")
+        self.value_pipe = pipeline("text-classification", model=self.value_model, tokenizer=self.value_tokenizer, device=self.device, function_to_apply="none")
+
+        self.feature_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_feature").to(self.device)
+        self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature")
+        self.feature_batch = 16
+
+        print("Finished.")
+
+    def batch(self, iterable, n=1):
+        l = len(iterable)
+        for ndx in range(0, l, n):
+            yield iterable[ndx:min(ndx + n, l)]
+
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
 
     def get_title(self, text):
         if isinstance(text, str):
@@ -221,14 +237,32 @@ class TitleMatch():
             print("Error: input must be string or a list of strings.")
             return
         
+        print("Extracting title values...", flush=True)
+        values = []
+        for res in tqdm(self.value_pipe(text), total=len(text)):
+            values.append(round(res["score"], 1))
+
+        print("Extracting title features...", flush=True)
+        features = []
+        batches = self.batch(text, n=self.feature_batch)
+        for b in tqdm(batches, total=int(len(text)/self.feature_batch)+1):
+            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
+            outputs = self.feature_model(inputs.input_ids)
+            logits = outputs.logits
+            with torch.no_grad():
+                for l in logits:
+                    res = (self.sigmoid(l.cpu()) > 0.98).numpy().astype(int).reshape(-1)
+                    features.append(";".join(sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])))
+  
+        print("Matching title to codes...", flush=True)
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
         q_embed = q_embed.to(self.device)
         
         search = util.semantic_search(corpus_embeddings=self.title_embed, query_embeddings=q_embed, top_k=1)
 
         results = []
-        for s in search:
-            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3)))
+        for s, v, f in zip(search, values, features):
+            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3, v, f)))
 
         return results
     
@@ -599,10 +633,11 @@ class WageExtract():
         return {"min":MIN.replace("$",""), "max":MAX.replace("$","")}
 
     def get_wage(self, text):
-        is_pay = self.ispay_pipe(text)[0]
-        if is_pay["label"] == "LABEL_0":
+        sentences = nltk.sent_tokenize(text)
+        is_pay = self.ispay_pipe(sentences)
+        if all(x["label"] == "LABEL_0" for x in is_pay):
             return "The provided text does not contain a wage statement."
-
+        
         text = self.get_largest_chunk(self.preproc(text))
         pred = self.extract_wage(self.ner_pipe(text))
         freq = self.freq_pipe(text)[0]["label"]
@@ -610,16 +645,35 @@ class WageExtract():
         return pred
 
     def get_wage_batch(self, texts):
-        batch = ListDataset(texts)
+        temp = []
+        for i, x in enumerate(texts):
+            temp.extend([(i, y) for y in nltk.sent_tokenize(x)])
+        all_indices = [x[0] for x in temp]
+        all_sentences = [x[1] for x in temp]
+
+        batch = ListDataset(all_sentences)
         is_pay = []
         print("Predicting is_pay...", flush=True)
-        for p in tqdm(self.ispay_pipe(batch), total=len(texts)):
-            is_pay.append(p["label"])
-        num_pay = sum([1 for x in is_pay if x == "LABEL_1"])
-        print("{} / {} contain wage statements.\n".format(num_pay, len(texts)), flush=True)
+        for p in tqdm(self.ispay_pipe(batch), total=len(all_sentences)):
+            if p["label"] == "LABEL_1":
+                is_pay.append(1)
+            else:
+                is_pay.append(0)
 
-        indices = [i for i, _ in enumerate(texts) if is_pay[i] == "LABEL_1"]
-        cands = [x for i, x in enumerate(texts) if is_pay[i] == "LABEL_1"]
+        res = list(zip(all_indices, is_pay))
+        counts = Counter()
+        for r in res:
+            counts[r[0]] += r[1]
+
+        indices = []
+        cands = []
+        for c in counts:
+            if counts[c] > 0:
+                indices.append(c)
+                cands.append(texts[c])
+
+        print("{} / {} contain wage statements.\n".format(len(indices), len(texts)), flush=True)
+
         new_batch = ListDataset(cands)
 
         print("Extracting wage...", flush=True)
