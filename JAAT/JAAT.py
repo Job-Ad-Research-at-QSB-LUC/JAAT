@@ -108,7 +108,7 @@ class TaskMatch():
 
     def get_candidates(self, text):
         text = ". ".join(text.split("\n"))
-        text = text.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ")
+        text = text.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
         s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 48]
 
@@ -130,7 +130,7 @@ class TaskMatch():
         all_data = []
         for i, t in enumerate(texts):
             t = ". ".join(t.split("\n"))
-            t = t.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ")
+            t = t.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
             s = sent_tokenize(t.strip())
             all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
 
