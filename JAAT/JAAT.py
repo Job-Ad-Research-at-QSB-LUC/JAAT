@@ -239,12 +239,14 @@ class TitleMatch():
         
         print("Extracting title values...", flush=True)
         values = []
-        for res in tqdm(self.value_pipe(text), total=len(text)):
+        temp = ListDataset(text)
+        for res in tqdm(self.value_pipe(temp, batch_size=self.feature_batch), total=len(text)):
             values.append(round(res["score"], 1))
 
         print("Extracting title features...", flush=True)
         features = []
         batches = self.batch(text, n=self.feature_batch)
+        batches = ListDataset(batches)
         for b in tqdm(batches, total=int(len(text)/self.feature_batch)+1):
             inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
             outputs = self.feature_model(inputs.input_ids)
