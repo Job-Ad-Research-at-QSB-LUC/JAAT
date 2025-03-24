@@ -190,7 +190,7 @@ class TaskMatch():
     
 class TitleMatch():
 
-    def __init__(self):
+    def __init__(self, batch_size=16):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -216,7 +216,7 @@ class TitleMatch():
 
         self.feature_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_feature").to(self.device)
         self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature")
-        self.feature_batch = 16
+        self.feature_batch = batch_size
 
         print("Finished.")
 
@@ -246,15 +246,18 @@ class TitleMatch():
         print("Extracting title features...", flush=True)
         features = []
         batches = self.batch(text, n=self.feature_batch)
-        batches = ListDataset(batches)
-        for b in tqdm(batches, total=int(len(text)/self.feature_batch)+1):
+        batches = ListDataset(list(batches))
+        for b in tqdm(batches, total=len(batches)):
             inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
             outputs = self.feature_model(inputs.input_ids)
             logits = outputs.logits
             with torch.no_grad():
                 for l in logits:
                     res = (self.sigmoid(l.cpu()) > 0.98).numpy().astype(int).reshape(-1)
-                    features.append(";".join(sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])))
+                    temp = sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])
+                    if "none" in temp and len(temp) > 1:
+                        temp = [x for x in temp if x != "none"]
+                    features.append(";".join(temp))
   
         print("Matching titles to codes...", flush=True)
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
