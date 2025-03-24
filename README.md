@@ -10,7 +10,7 @@ Then, import JAAT using the following command:
 
 `from JAAT import JAAT`
 
-## TaskMatch
+## TaskMatch (v2)
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
 
 After importing the module, simply instantiate the `TaskMatch` object:
@@ -33,7 +33,7 @@ For batch processing, run:
 
 `tasks = TM.get_tasks_batch(LIST_OF_TEXTS)`
 
-## TitleMatch
+## TitleMatch (v2)
 The second module assists in matching input job ad titles to coded job titles from O*NET, along with providing useful information about the title.
 
 After importing the module, simply instantiate the `TitleMatch` object:
