@@ -254,7 +254,7 @@ class TitleMatch():
                     res = (self.sigmoid(l.cpu()) > 0.98).numpy().astype(int).reshape(-1)
                     features.append(";".join(sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])))
   
-        print("Matching title to codes...", flush=True)
+        print("Matching titles to codes...", flush=True)
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
         q_embed = q_embed.to(self.device)
         
@@ -262,7 +262,7 @@ class TitleMatch():
 
         results = []
         for s, v, f in zip(search, values, features):
-            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3, v, f)))
+            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3), v, f))
 
         return results
     
