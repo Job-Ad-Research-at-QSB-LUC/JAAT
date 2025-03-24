@@ -191,7 +191,7 @@ class TaskMatch():
     
 class TitleMatch():
 
-    def __init__(self):
+    def __init__(self, batch_size=16):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -201,11 +201,8 @@ class TitleMatch():
             self.batch_size = 64
 
         print("Loading data...", flush=True)
-        alt_titles = pd.read_csv(impresources.files("data") / "alternate_titles.csv")[["Alternate Title", "O*NET-SOC Code"]].drop_duplicates(["Alternate Title"]).dropna()
-        titles = pd.read_csv(impresources.files("data") / "alternate_titles.csv")[["Title", "O*NET-SOC Code"]].drop_duplicates(["Title"]).dropna()
-        alt_titles.columns = ["title", "code"]
+        titles = pd.read_csv(impresources.files("JAAT.data") / "titles_v2.csv")[["Reported Job Title", "O*NET-SOC Code"]].drop_duplicates(["Reported Job Title"]).dropna()
         titles.columns = ["title", "code"]
-        titles = pd.concat([titles, alt_titles])
         self.titles = titles.reset_index().drop("index", axis=1)
 
         print("Preparing embeddings...", flush=True)
@@ -213,6 +210,24 @@ class TitleMatch():
         self.title_embed = self.embedding_model.encode(self.titles.title.to_list(), convert_to_tensor=True, show_progress_bar=True)
         self.title_embed = self.title_embed.to(self.device)
 
+        print("Loading title models...", flush=True)
+        self.value_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_value", num_labels=1, problem_type="regression")
+        self.value_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_value")
+        self.value_pipe = pipeline("text-classification", model=self.value_model, tokenizer=self.value_tokenizer, device=self.device, function_to_apply="none")
+
+        self.feature_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_feature").to(self.device)
+        self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature")
+        self.feature_batch = batch_size
+
+        print("Finished.")
+
+    def batch(self, iterable, n=1):
+        l = len(iterable)
+        for ndx in range(0, l, n):
+            yield iterable[ndx:min(ndx + n, l)]
+
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
 
     def get_title(self, text):
         if isinstance(text, str):
@@ -223,14 +238,37 @@ class TitleMatch():
             print("Error: input must be string or a list of strings.")
             return
         
+        print("Extracting title values...", flush=True)
+        values = []
+        temp = ListDataset(text)
+        for res in tqdm(self.value_pipe(temp, batch_size=self.feature_batch), total=len(text)):
+            values.append(round(res["score"], 1))
+
+        print("Extracting title features...", flush=True)
+        features = []
+        batches = self.batch(text, n=self.feature_batch)
+        batches = ListDataset(list(batches))
+        for b in tqdm(batches, total=len(batches)):
+            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
+            outputs = self.feature_model(inputs.input_ids)
+            logits = outputs.logits
+            with torch.no_grad():
+                for l in logits:
+                    res = (self.sigmoid(l.cpu()) > 0.98).numpy().astype(int).reshape(-1)
+                    temp = sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])
+                    if "none" in temp and len(temp) > 1:
+                        temp = [x for x in temp if x != "none"]
+                    features.append(";".join(temp))
+  
+        print("Matching titles to codes...", flush=True)
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
         q_embed = q_embed.to(self.device)
         
         search = util.semantic_search(corpus_embeddings=self.title_embed, query_embeddings=q_embed, top_k=1)
 
         results = []
-        for s in search:
-            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3)))
+        for s, v, f in zip(search, values, features):
+            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3), v, f))
 
         return results
     
