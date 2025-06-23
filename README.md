@@ -157,7 +157,7 @@ Then, run it on any given (job ad) text:
 
 `skills = SM.get_skills(TEXT)`
 
-The output will be a list of tuples, matching an ONET task ID and its title (description). In case no tasks are matched, an empty list will be returned. Example output:
+The output will be a list of tuples, matching an skills label to its EuropaCode. In case no skills are matched, an empty list will be returned. Example output:
 
 `[('designing systems and products', 'S1.11'), ('work conceptually', 'T2.4'), ('interact with users to gather requirements', 'S1.7')]`
 
