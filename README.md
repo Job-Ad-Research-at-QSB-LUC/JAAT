@@ -103,23 +103,6 @@ Specifically, the output will be a Pandas DataFrame will the following columns:
 - **inferred_label**: the label assigned based on the best matching rule, if any
 - **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
 
-## ActivityMatch
-In a similar way to `TaskMatch`, `ActivityMatch` will extract general activity statements from your texts, according to a set of predefined daily activities (see `data/lexiconwex2023.csv`).
-
-`AM = JAAT.ActivityMatch()`
-
-Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
-
-`AM = ActivityMatch(threshold=0.85)`
-
-Then, run it on any given text:
-
-`activities = AM.get_activities(TEXT)`
-
-For batch processing, run:
-
-`activities = AM.get_activities_batch(LIST_OF_TEXTS)`
-
 ## JobTag
 `JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
 
@@ -158,6 +141,29 @@ This will return either a dictionary of the extra min/max/frequency values, or t
 `predictions = W.get_wage_batch(LIST_OF_TEXTS)`
 
 This now will return a list predictions in the same order as the inputted texts, with each value either as a dictionary or `None`.
+
+## SkillMatch
+`SkillMatch` is a tool to identify and extract required skills from a job posting, very similar to `TaskMatch`. The output of this tool will be all identified skill labels in a provided text, mapped to their respective EuropaCode.
+
+After importing the module, simply instantiate the `SkillMatch` object:
+
+`SM = JAAT.SkillMatch()`
+
+Optionally, we can provide a threshold value (default = 0.87, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
+
+`SM = SkillMatch(threshold=0.8)`
+
+Then, run it on any given (job ad) text:
+
+`skills = SM.get_skills(TEXT)`
+
+The output will be a list of tuples, matching an ONET task ID and its title (description). In case no tasks are matched, an empty list will be returned. Example output:
+
+`[('designing systems and products', 'S1.11'), ('work conceptually', 'T2.4'), ('interact with users to gather requirements', 'S1.7')]`
+
+For batch processing, run:
+
+`skills = SM.get_skills_batch(LIST_OF_TEXTS)`
 
 ## Acknowledgements
 
