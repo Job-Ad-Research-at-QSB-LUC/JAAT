@@ -66,7 +66,10 @@ class StdName():
             self.sub_dict = json.load(f)
 
     def standardize(self, text):
-        text = " " + text + " "
+        if pd.isnull(text) == True:
+            return " "
+
+        text = " " + text.lower() + " "
 
         for k, v in self.sub_dict.items():
             if len(k) == 1 and (v == "" or v == " "):
@@ -74,7 +77,7 @@ class StdName():
             else:
                 text = text.replace(" "+k+" ", " "+v+" ")
 
-        return " ".join(text.split())
+        return " ".join(text.split()).upper()
 
 class TaskMatch():
     def __init__(self, threshold=0.9):
@@ -248,7 +251,7 @@ class TitleMatch():
         batches = self.batch(text, n=self.feature_batch)
         batches = ListDataset(list(batches))
         for b in tqdm(batches, total=len(batches)):
-            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
+            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to(self.device)
             outputs = self.feature_model(inputs.input_ids)
             logits = outputs.logits
             with torch.no_grad():
@@ -274,14 +277,14 @@ class TitleMatch():
 class FirmExtract():
     STD = None
 
-    def __init__(self, standardize=False):
+    def __init__(self, standardize=True):
         if torch.cuda.is_available() == True:
             self.device = "cuda"
         else:
             self.device = "cpu"
-        model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/firmNER-v2-small", id2label={0: 'O', 1: 'B-ORG', 2: 'I-ORG'}, label2id={'O': 0, 'B-ORG': 1, 'I-ORG': 2})
-        tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/firmNER-v2-small")
-        self.pipe = pipeline("token-classification", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="max")
+        model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/firmNER-v3", id2label={0: 'O', 1: 'B-ORG', 2: 'I-ORG'}, label2id={'O': 0, 'B-ORG': 1, 'I-ORG': 2})
+        tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/firmNER-v3", model_max_length=1024, max_length=1024, truncation=True)
+        self.pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="max")
 
         remove = string.punctuation
         remove = remove.replace(".", "").replace(",", "").replace("-", "").replace("&", "").replace("'","")
@@ -297,40 +300,66 @@ class FirmExtract():
         company = re.sub(r'\<.*$', '', company)
         company = re.sub(r'\'\w+', '', company)
         company = re.sub(self.pattern, "", company) 
-        company = company.replace("\'", "")
+        company = company.replace("\'", "").replace(" ’", "’")
 
         if len(company) > 0 and company[-1] == ',':
             company = company[:-1]
 
         company = " ".join(company.split())
         return company
+    
+    def split_words(self, text):
+        words = re.findall('[A-Z][a-z]{1,}', text)
+        for w in words:
+            text = text.replace(w, " {} ".format(w), 1)
+        text = text.replace("of ", " of ").replace(" . ", ". ").replace(" .", ".").replace(" , ", ", ").replace(" - ", "-").replace("- ", "-")
+        return text
 
-    def extract_firm(self, tagged):
+    def extract_firm(self, tagged, return_one, return_score):
         cands = []
         for r in tagged:
             if r["entity_group"] == "ORG":
-                cands.append((r["word"], r["score"]))
+                cands.append((self.split_words(r["word"]), r["score"]))
 
         if len(cands) > 0:
             company = sorted(cands, key=lambda x:x[1], reverse=True)
-            company = [self.clean_company(x[0]) for x in cands]
+            scores = [x[1] for x in company]
+            company = [self.clean_company(x[0]) for x in company]
         else:
-            return None
+            if return_score == True and return_one == True:
+                return None, 0
+            else:
+                return None
+
+        if all(len(x) == 0 for x in company) or company[0] in ["Inc", "Inc."]:
+            if return_score == True and return_one == True:
+                return None, 0
+            else:
+                return None
         
         if self.standardize == True:
             company = [self.STD.standardize(x) for x in company]
 
-        return set(company)
+        if return_one == True:
+            ret = company[0]
+            score = scores[0]
+        else:
+            ret = set(company)
+
+        if return_score == True and return_one == True:
+            return ret, score
+        else:
+            return ret
 
     def get_firm(self, text):
         tagged = self.pipe(text)
         return self.extract_firm(tagged)
     
-    def get_firm_batch(self, texts):
+    def get_firm_batch(self, texts, return_one=True, return_score=True):
         batch = ListDataset(texts)
         results = []
         for r in tqdm(self.pipe(batch), total=len(texts)):
-            results.append(self.extract_firm(r))
+            results.append(self.extract_firm(r, return_one, return_score))
         return results
 
 class CREAM():
@@ -674,8 +703,10 @@ class WageExtract():
         cands = []
         for c in counts:
             if counts[c] > 0:
-                indices.append(c)
-                cands.append(texts[c])
+                check = self.get_largest_chunk(self.preproc(texts[c]))
+                if check is not None:
+                    indices.append(c)
+                    cands.append(check)
 
         print("{} / {} contain wage statements.\n".format(len(indices), len(texts)), flush=True)
 
@@ -714,3 +745,118 @@ class WageExtract():
         print("\nSummary: found {} wage statements.".format(total), flush=True)
 
         return ret
+    
+
+class SkillMatch():
+    def __init__(self, threshold=0.87):
+        print("INIT", flush=True)
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+            self.batch_size = 2048
+        else:
+            self.device = "cpu"
+            self.batch_size = 64
+
+        self.threshold = threshold
+
+        print("Preparing embeddings...", flush=True)
+        self.embedding_model = SentenceTransformer("thenlper/gte-large", device=self.device)
+        self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
+        self.skills = list(set(self.skills_df["label"]))
+        self.skill_embed = self.embedding_model.encode(self.skills, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.skill_embed = self.skill_embed.to(self.device)
+
+        self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
+
+        print("Setting up pipeline...", flush=True)
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/skill-classifier-base")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/skill-classifier-base",
+            use_fast=True,
+            max_length=64,
+            truncation=True
+        )
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        print("Finished.", flush=True)
+
+    def get_candidates(self, text):
+        text = ". ".join(text.split("\n"))
+        text = text.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+        s = sent_tokenize(text.strip())
+        all_data = [ss for ss in s if len(ss.split()) <= 48]
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset(all_data)
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+    
+    def get_candidates_batch(self, texts):
+        all_data = []
+        for i, t in enumerate(texts):
+            t = ". ".join(t.split("\n"))
+            t = t.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+            s = sent_tokenize(t.strip())
+            all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset([x[1] for x in all_data])
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+
+    def get_skills(self, text):
+        positive = self.get_candidates(text)
+        if len(positive) == 0:
+            return []
+
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.skill_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_skills = []
+        for x in search:
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_skills.append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
+
+        return matched_skills
+    
+    def get_skills_batch(self, texts):
+        all_data = self.get_candidates_batch(texts)
+
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.skill_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_skills = []
+        for _ in range(len(texts)):
+            matched_skills.append([])
+        for x, y in zip(search, all_data):
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_skills[y[0]].append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
+
+        return matched_skills

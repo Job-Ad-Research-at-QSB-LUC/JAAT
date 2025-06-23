@@ -3,6 +3,7 @@ from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTok
 import nltk
 from tqdm.auto import tqdm
 import pandas as pd
+import numpy as np
 from sentence_transformers import SentenceTransformer, util
 import torch
 from torch.utils.data import Dataset
@@ -249,7 +250,7 @@ class TitleMatch():
         batches = self.batch(text, n=self.feature_batch)
         batches = ListDataset(list(batches))
         for b in tqdm(batches, total=len(batches)):
-            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to("cuda")
+            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to(self.device)
             outputs = self.feature_model(inputs.input_ids)
             logits = outputs.logits
             with torch.no_grad():
@@ -686,3 +687,118 @@ class WageExtract():
 
         assert len(ret) == len(texts)
         return ret
+    
+
+class SkillMatch():
+    def __init__(self, threshold=0.87):
+        print("INIT", flush=True)
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+            self.batch_size = 2048
+        else:
+            self.device = "cpu"
+            self.batch_size = 64
+
+        self.threshold = threshold
+
+        print("Preparing embeddings...", flush=True)
+        self.embedding_model = SentenceTransformer("thenlper/gte-large", device=self.device)
+        self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
+        self.skills = list(set(self.skills_df["label"]))
+        self.skill_embed = self.embedding_model.encode(self.skills, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.skill_embed = self.skill_embed.to(self.device)
+
+        self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
+
+        print("Setting up pipeline...", flush=True)
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/skill-classifier-base")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/skill-classifier-base",
+            use_fast=True,
+            max_length=64,
+            truncation=True
+        )
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        print("Finished.", flush=True)
+
+    def get_candidates(self, text):
+        text = ". ".join(text.split("\n"))
+        text = text.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+        s = sent_tokenize(text.strip())
+        all_data = [ss for ss in s if len(ss.split()) <= 48]
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset(all_data)
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+    
+    def get_candidates_batch(self, texts):
+        all_data = []
+        for i, t in enumerate(texts):
+            t = ". ".join(t.split("\n"))
+            t = t.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+            s = sent_tokenize(t.strip())
+            all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 48])
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset([x[1] for x in all_data])
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append(x)
+                count += 1
+        return positive
+
+    def get_skills(self, text):
+        positive = self.get_candidates(text)
+        if len(positive) == 0:
+            return []
+
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.skill_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_skills = []
+        for x in search:
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_skills.append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
+
+        return matched_skills
+    
+    def get_skills_batch(self, texts):
+        all_data = self.get_candidates_batch(texts)
+
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.skill_embed, query_embeddings=q_embed, top_k=1)
+
+        found = 0
+        matched_skills = []
+        for _ in range(len(texts)):
+            matched_skills.append([])
+        for x, y in zip(search, all_data):
+            if x[0]["score"] >= self.threshold:
+                found += 1
+                matched_skills[y[0]].append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
+
+        return matched_skills
