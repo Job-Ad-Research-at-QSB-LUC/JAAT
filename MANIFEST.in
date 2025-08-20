@@ -1,0 +1,2 @@
+include JAAT/data/*
+include JAAT/models/*

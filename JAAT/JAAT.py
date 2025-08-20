@@ -17,6 +17,7 @@ import json
 from functools import partial
 import compress_pickle
 from collections import Counter
+import pickle
 
 tqdm.pandas()
 
@@ -203,14 +204,14 @@ class TitleMatch():
             self.batch_size = 64
 
         print("Loading data...", flush=True)
-        titles = pd.read_csv(impresources.files("JAAT.data") / "titles_v2.csv")[["Reported Job Title", "O*NET-SOC Code"]].drop_duplicates(["Reported Job Title"]).dropna()
-        titles.columns = ["title", "code"]
-        self.titles = titles.reset_index().drop("index", axis=1)
+        with open(impresources.files("data") / "SOC_map.json", 'r') as f:
+            self.codes = json.load(f)
+        with open(impresources.files("data") / "title_embeddings.pickle", 'rb') as pkl:
+            embed = pickle.load(pkl)
+        self.title_embed = embed.to(self.device)
 
         print("Preparing embeddings...", flush=True)
         self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
-        self.title_embed = self.embedding_model.encode(self.titles.title.to_list(), convert_to_tensor=True, show_progress_bar=True)
-        self.title_embed = self.title_embed.to(self.device)
 
         print("Loading title models...", flush=True)
         self.value_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_value", num_labels=1, problem_type="regression")
@@ -270,7 +271,8 @@ class TitleMatch():
 
         results = []
         for s, v, f in zip(search, values, features):
-            results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3), v, f))
+            #results.append((self.titles.title[s[0]["corpus_id"]], self.titles.code[s[0]["corpus_id"]], round(s[0]["score"], 3), v, f))
+            results.append((self.codes[s[0]["corpus_id"]], round(s[0]["score"], 3), v, f))
 
         return results
     
