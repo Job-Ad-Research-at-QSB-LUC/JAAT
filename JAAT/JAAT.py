@@ -204,9 +204,9 @@ class TitleMatch():
             self.batch_size = 64
 
         print("Loading data...", flush=True)
-        with open(impresources.files("data") / "SOC_map.json", 'r') as f:
+        with open(impresources.files("JAAT.data") / "SOC_map.json", 'r') as f:
             self.codes = json.load(f)
-        with open(impresources.files("data") / "title_embeddings.pickle", 'rb') as pkl:
+        with open(impresources.files("JAAT.data") / "title_embeddings.pickle", 'rb') as pkl:
             embed = pickle.load(pkl)
         self.title_embed = embed.to(self.device)
 
@@ -817,10 +817,14 @@ class SkillMatch():
             predictions.append(r)
 
         count = 0
+        save_data = []
         for x, y in zip(all_data, predictions):
             if y['label'] == 'LABEL_1':
                 positive.append(x)
                 count += 1
+            save_data.append({"sentence": x, "label":y["label"]})
+        df = pd.DataFrame(save_data)
+        df.to_csv("~/validation/skill_classifier_cos.csv", index=False)
         return positive
 
     def get_skills(self, text):
@@ -854,11 +858,15 @@ class SkillMatch():
 
         found = 0
         matched_skills = []
+        save_data = []
         for _ in range(len(texts)):
             matched_skills.append([])
         for x, y in zip(search, all_data):
             if x[0]["score"] >= self.threshold:
                 found += 1
                 matched_skills[y[0]].append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
+            save_data.append({"sentence": y[1], "match_score": x[0]["score"], "matched_skill":self.skills[x[0]["corpus_id"]],})            
+        df = pd.DataFrame(save_data)
+        df.to_csv("~/validation/skill_match_cos.csv", index=False)
 
         return matched_skills
