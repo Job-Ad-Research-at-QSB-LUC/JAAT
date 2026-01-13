@@ -12,3 +12,4 @@ openpyxl
 transformers
 pure-predict
 compress_pickle
+syllables

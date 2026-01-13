@@ -16,6 +16,7 @@ from pathlib import Path
 import json
 import pickle
 from functools import partial
+import syllables
 
 tqdm.pandas()
 
@@ -802,3 +803,26 @@ class SkillMatch():
                 matched_skills[y[0]].append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
 
         return matched_skills
+    
+class Readability():
+    def __init__(self):
+        self.PUNCT = set(string.punctuation)
+
+    def fk(self, text):
+        if text == "":
+            return None
+
+        words = len(nltk.word_tokenize(text))
+        sentences = len(nltk.sent_tokenize(text))
+        syl = sum([syllables.estimate(x) for x in nltk.word_tokenize(text) if x not in self.PUNCT])
+        return round(206.835 - (1.015 * (words / sentences)) - (84.6 * (syl / words)), 2)
+    
+    def get_readability(self, text):
+        return self.fk(text)
+    
+    def get_readability_batch(self, texts):
+        scores = []
+        with mp.Pool(int(mp.cpu_count() / 2)) as pool:
+            for res in tqdm(pool.imap(self.fk, texts), total=len(texts)):
+                scores.append(res)
+        return scores

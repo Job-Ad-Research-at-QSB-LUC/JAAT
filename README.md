@@ -165,6 +165,19 @@ For batch processing, run:
 
 `skills = SM.get_skills_batch(LIST_OF_TEXTS)`
 
+## Readability
+This module provides a simple utility for calculating the Flesch-Kincaid readability score for a job posting text or texts. To start:
+
+`R = JAAT.Readability()`
+
+Then, simple run on a text or batch of texts:
+
+`score = R.get_readability(TEXT)`
+
+`scores = R.get_readability_batch(LIST_OF_TEXTS)`
+
+The returned scores are floats, rounded to two decimal places.
+
 ## Acknowledgements
 
 This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
