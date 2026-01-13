@@ -170,7 +170,7 @@ This module provides a simple utility for calculating the Flesch-Kincaid readabi
 
 `R = JAAT.Readability()`
 
-Then, simple run on a text or batch of texts:
+Then, simply run on a text or batch of texts:
 
 `score = R.get_readability(TEXT)`
 
