@@ -178,11 +178,54 @@ Then, simply run on a text or batch of texts:
 
 The returned scores are floats, rounded to two decimal places.
 
+## ConceptSearch
+This module is a simple and highly efficient tool to extract "concepts" from a corpus of texts. These concepts are defined by keywords, and they can be mapped to any arbitrary amount of rule values.
+
+In the `data/automatons` directory, we provide some pre-packaged concept maps, which can be used direct in `ConceptSearch`. Additionally, you can create your own, with the following structure:
+
+```
+CONCEPTS = {
+    "keyword1": ("value1", "value2", ...),
+    "keyword2": ("value1", "value2", ...),
+    "keyword3": ("value1", "value2", ...),
+    ...
+}
+```
+
+Using this structure, you can initialize `ConceptSearch` in one of the following two ways:
+
+`CS = JAAT.ConceptSearch(concept_map=CONCEPTS)`
+
+OR
+
+`CS = JAAT.ConceptSearch(concept_file=/path/to/concepts.pkl)`
+
+Following this, `ConceptSearch` can be used on single texts or in batch mode:
+
+`res = CS.get_concepts(TEXT)`
+
+or
+
+`res = CS.get_concepts_batch(LIST_OF_TEXTS)`
+
+The returned objects will be a list of tuples for each text, wherein the tuples represent the value tuples of the found (matched) keywords.
+
 ## Acknowledgements
 
 This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
 
-### Data Citation
+### Software and Data Citation
+If you find `JAAT` useful in your research, please consider citing our working paper that introduces many of the abovementioned modules:
+
+```
+@article{meisenbacher2025extracting,
+  title={Extracting O* NET Features from the NLx Corpus to Build Public Use Aggregate Labor Market Data},
+  author={Meisenbacher, Stephen and Nestorov, Svetlozar and Norlander, Peter},
+  journal={arXiv preprint arXiv:2510.01470},
+  year={2025}
+}
+```
+
 In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data made available by the following publication:
 
 ```
