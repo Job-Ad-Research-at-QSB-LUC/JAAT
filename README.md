@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="data/logo.png" alt="JAAT" width="200"/>
+</p>
+
 # Job Ad Analysis Toolkit (JAAT)
 In this repository, you will find the code for efficient and accurate analysis of job ads. Running the code is simple!
 
@@ -230,4 +234,5 @@ In the demo notebook `JAATDemo.ipynb` and the companion slides, we use the data 
 
 ```
 Zhou, Steven, John Aitken, Peter McEachern, and Renee McCauley. “Data from 990 Public Real-World Job Advertisements Organized by O*NET Categories.” Journal of Open Psychology Data 10 (November 21, 2022): 17. https://doi.org/10.5334/jopd.69.
+
 ```
