@@ -878,3 +878,134 @@ class ConceptSearch():
             all_codes.append(list(ret))
 
         return all_codes
+
+class AIMatch():
+    def __init__(self, threshold=0.9):
+        print("INIT", flush=True)
+        if torch.cuda.is_available() == True:
+            self.device = "cuda"
+            self.batch_size = 2048
+        else:
+            self.device = "cpu"
+            self.batch_size = 64
+
+        self.threshold = threshold
+
+        print("Preparing embeddings...", flush=True)
+        self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
+        self.ai_df = pd.read_csv(impresources.files("data") / "ai_A6_2.csv")
+        self.ai = self.ai_df["Statement"].to_list()
+        self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.ai_embed = self.ai_embed.to(self.device)
+
+        self.ai_map = dict(zip(self.ai_df["Statement"], self.ai_df["Code"]))
+        self.score_map = dict(zip(self.ai_df["Statement"], self.ai_df["Score"]))
+
+        print("Setting up pipeline...", flush=True)
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/ai-classifier-small-v3.1")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "loyoladatamining/ai-classifier-small-v3.1",
+            use_fast=True,
+            max_length=128,
+            truncation=True
+        )
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=128, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=8)
+        print("Finished.", flush=True)
+
+    def get_candidates(self, text):
+        text = ". ".join(text.split("\n"))
+        text = text.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+        s = sent_tokenize(text.strip())
+        all_data = [ss for ss in s if len(ss.split()) <= 64 and len(ss.split()) >= 4]
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset(all_data)
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append((x, y["score"]))
+                count += 1
+        return positive
+    
+    def get_candidates_batch(self, texts):
+        all_data = []
+        for i, t in enumerate(texts):
+            t = ". ".join(t.split("\n"))
+            t = t.replace(";", ".").replace(" + ", ". ").replace(" * ", ". ").replace(" - ", ". ").replace(" • ", ". ").replace(" · ", ". ").replace("--", ". ").replace("**", ". ")
+            s = sent_tokenize(t.strip())
+            all_data.extend([(i, ss) for ss in s if len(ss.split()) <= 64 and len(ss.split()) >= 4])
+
+        positive = []
+        predictions = []
+
+        temp = ListDataset([x[1] for x in all_data])
+        for r in self.pipe(temp):
+            predictions.append(r)
+
+        count = 0
+        for x, y in zip(all_data, predictions):
+            if y['label'] == 'LABEL_1':
+                positive.append((x, y["score"]))
+                count += 1
+        return positive
+
+    def get_ai(self, text):
+        positive = self.get_candidates(text)
+        if len(positive) == 0:
+            return []
+
+        q_embed = self.embedding_model.encode([x[0] for x in positive], convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.ai_embed, query_embeddings=q_embed, top_k=1)
+
+        matched_ai = []
+        score = 0
+        count = 0
+        binary_scores = []
+        match_scores = []
+        for i, x in enumerate(search):
+            if x[0]["score"] >= self.threshold:
+                matched_ai.append((self.ai[x[0]["corpus_id"]], self.ai_map[self.ai[x[0]["corpus_id"]]]))
+                match_scores.append(round(x[0]["score"], 3))
+                score += self.score_map[self.ai[x[0]["corpus_id"]]]
+                count += 1
+                binary_scores.append(round(positive[i][1], 3))
+
+        return matched_ai, count, round(score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
+    
+    def get_ai_batch(self, texts):
+        all_data = self.get_candidates_batch(texts)
+
+        q_embed = self.embedding_model.encode([x[0][1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        if self.device == "cuda":
+            q_embed = q_embed.to(self.device)
+
+        search = util.semantic_search(corpus_embeddings=self.ai_embed, query_embeddings=q_embed, top_k=1)
+
+        matched_ai = []
+        scores = []
+        counts = []
+        binary_scores = []
+        match_scores = []
+        for _ in range(len(texts)):
+            matched_ai.append([])
+            scores.append(0)
+            counts.append(0)
+            binary_scores.append([])
+            match_scores.append([])
+        for i, (x, y) in enumerate(zip(search, all_data)):
+            if x[0]["score"] >= self.threshold:
+                matched_ai[y[0][0]].append((self.ai[x[0]["corpus_id"]], self.ai_map[self.ai[x[0]["corpus_id"]]]))
+                match_scores[y[0][0]].append(round(x[0]["score"], 3))
+                scores[y[0][0]] += self.score_map[self.ai[x[0]["corpus_id"]]]
+                counts[y[0][0]] += 1
+                binary_scores[y[0][0]].append(round(all_data[i][1], 3))
+
+        return matched_ai, counts, [round(s / len(x), 3) if len(x) > 0 else 0 for s, x in zip(scores, matched_ai)], binary_scores, match_scores

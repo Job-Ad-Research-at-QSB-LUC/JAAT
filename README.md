@@ -210,6 +210,27 @@ or
 
 The returned objects will be a list of tuples for each text, wherein the tuples represent the value tuples of the found (matched) keywords.
 
+## AIMatch (new in JAAT v0.7.0)
+This module extracts and codifies all AI-related tasks, skills, expertise, and requirements that are stated in job ad texts.
+
+As per usual, load in the module:
+
+`AI = JAAT.AIMatch()`
+
+Following this, `AIMatch` can be used on single texts or in batch mode:
+
+`res = AI.get_ai(TEXT)`
+
+or
+
+`res = CS.get_ai_batch(LIST_OF_TEXTS)`
+
+The return value for `get_ai` is a 5-tuple, with the following structure:
+
+`(LIST OF MATECHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)`
+
+The matched concept/codes are presented in tuples. The "average AI score" is a high-level indicator of the "AI-ness" of the matches, averaged by the number of matches. Both confidence scores are semicolon-delimiter, and they correspond directly to the list of matched concepts. In the case of batch mode, all of these returned values are placed in lists, corresponding to each text input.
+
 ## Acknowledgements
 
 This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
