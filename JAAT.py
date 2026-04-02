@@ -98,9 +98,9 @@ class TaskMatch():
         self.task_embed = self.task_embed.to(self.device)
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained(impresources.files("models") / "task-classifier-mini-improved2")
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/task-classifier-mini-v3")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            impresources.files("models") / "task-classifier-mini-improved2",
+            "loyoladatamining/task-classifier-mini-v3",
             use_fast=True,
             max_length=64,
             truncation=True
@@ -713,9 +713,9 @@ class SkillMatch():
         self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/skill-classifier-base")
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/skill-classifier-base-v2")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "loyoladatamining/skill-classifier-base",
+            "loyoladatamining/skill-classifier-base-v2",
             use_fast=True,
             max_length=64,
             truncation=True
@@ -893,7 +893,7 @@ class AIMatch():
 
         print("Preparing embeddings...", flush=True)
         self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
-        self.ai_df = pd.read_csv(impresources.files("data") / "ai_A6_2.csv")
+        self.ai_df = pd.read_csv(impresources.files("data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
         self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
         self.ai_embed = self.ai_embed.to(self.device)
@@ -902,9 +902,9 @@ class AIMatch():
         self.score_map = dict(zip(self.ai_df["Statement"], self.ai_df["Score"]))
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/ai-classifier-small-v3.1")
+        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/ai-classifier-small-v4")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "loyoladatamining/ai-classifier-small-v3.1",
+            "loyoladatamining/ai-classifier-small-v4",
             use_fast=True,
             max_length=128,
             truncation=True
