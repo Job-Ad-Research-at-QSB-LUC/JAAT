@@ -1,3 +1,10 @@
+
+## [0.8.1] - 2026-04-09
+### Fixed
+Minor bug fix in `SkillMatch`.
+
+---
+
 ## [0.8.0] - 2026-04-02
 ### Added
 `AIMatch` is now fully functional! We have cleaned up the underlying data files for more accurate coding.

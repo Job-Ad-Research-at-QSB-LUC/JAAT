@@ -819,14 +819,10 @@ class SkillMatch():
             predictions.append(r)
 
         count = 0
-        save_data = []
         for x, y in zip(all_data, predictions):
             if y['label'] == 'LABEL_1':
                 positive.append(x)
                 count += 1
-            save_data.append({"sentence": x, "label":y["label"]})
-        df = pd.DataFrame(save_data)
-        df.to_csv("~/validation/skill_classifier_cos.csv", index=False)
         return positive
 
     def get_skills(self, text):
