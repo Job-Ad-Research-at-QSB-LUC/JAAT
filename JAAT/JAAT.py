@@ -856,15 +856,12 @@ class SkillMatch():
 
         found = 0
         matched_skills = []
-        save_data = []
         for _ in range(len(texts)):
             matched_skills.append([])
         for x, y in zip(search, all_data):
             if x[0]["score"] >= self.threshold:
                 found += 1
                 matched_skills[y[0]].append((self.skills[x[0]["corpus_id"]], self.skill_map[self.skills[x[0]["corpus_id"]]]))
-            save_data.append({"sentence": y[1], "match_score": x[0]["score"], "matched_skill":self.skills[x[0]["corpus_id"]],})            
-        df = pd.DataFrame(save_data)
         return matched_skills
 
 class Readability():
