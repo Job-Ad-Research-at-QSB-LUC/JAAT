@@ -3,9 +3,9 @@
 
   # Job Ad Analysis Toolkit (JAAT)
 
-  [![PyPI version](https://img.shields.io/pypi/v/my-package.svg)](https://pypi.org/project/jaat/)
-  [![GitHub stars](https://img.shields.io/github/stars/user/repo.svg?style=social)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/stargazers)
-  [![License](https://img.shields.io/github/license/user/repo.svg)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/blob/main/LICENSE)
+  [![PyPI version](https://img.shields.io/pypi/v/jaat.svg)](https://pypi.org/project/jaat/)
+  [![GitHub stars](https://img.shields.io/github/stars/Job-Ad-Research-at-QSB-LUC/JAAT.svg?style=social)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/stargazers)
+  [![License](https://img.shields.io/github/license/Job-Ad-Research-at-QSB-LUC/JAAT.svg)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/blob/main/LICENSE)
 
 </div>
 
