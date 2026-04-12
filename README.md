@@ -1,9 +1,17 @@
-<p align="center">
+<div align="center">
   <img src="data/logo.png" alt="JAAT" width="200"/>
-</p>
 
-# Job Ad Analysis Toolkit (JAAT)
+  # Job Ad Analysis Toolkit (JAAT)
+
+  [![PyPI version](https://img.shields.io/pypi/v/my-package.svg)](https://pypi.org/project/jaat/)
+  [![GitHub stars](https://img.shields.io/github/stars/user/repo.svg?style=social)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/stargazers)
+  [![License](https://img.shields.io/github/license/user/repo.svg)](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/blob/main/LICENSE)
+
+</div>
+
 In this repository, you will find the code for efficient and accurate analysis of job ads. Running the code is simple!
+
+---
 
 ## Installation
 To install JAAT, simply run the following:
