@@ -20,6 +20,9 @@ from collections import Counter
 import pickle
 import syllables
 import ahocorasick
+from huggingface_hub import hf_hub_download
+from huggingface_hub.utils import LocalEntryNotFoundError
+import requests
 
 tqdm.pandas()
 
@@ -552,8 +555,23 @@ class JobTag():
             return
         
         self.class_name = class_name
-        filename = "{}.lzma".format(self.class_name)
-        with open(impresources.files("JAAT.models") / filename, 'rb') as f:
+        try:
+            local_path = hf_hub_download(
+                repo_id="loyoladatamining/JobTag",
+                filename="v1/{}.lzma".format(self.class_name)
+            )
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+            print("No internet connection detected. Attempting to load from cache...")
+            try:
+                return hf_hub_download(
+                    repo_id="loyoladatamining/JobTag", 
+                    filename="v1/{}.lzma".format(self.class_name), 
+                    local_files_only=True
+                )
+            except LocalEntryNotFoundError:
+                raise RuntimeError("{} is not cached and no internet connection is available.".format(self.class_name))
+            
+        with open(local_path, 'rb') as f:
             self.clf = compress_pickle.load(f, compression="lzma", set_default_extension=False)
         self.n = n
 
