@@ -86,7 +86,7 @@ class StdName():
         return " ".join(text.split()).upper()
 
 class TaskMatch():
-    def __init__(self, threshold=0.9):
+    def __init__(self, threshold=0.9, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/task-classifier-mini-v3"):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -98,16 +98,16 @@ class TaskMatch():
         self.threshold = threshold
 
         print("Preparing embeddings...", flush=True)
-        self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
+        self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         tasks = pd.read_csv(impresources.files("JAAT.data") / "Task_DWA.csv")[["Task ID", "Task"]].drop_duplicates()
         self.tasks = tasks.reset_index().drop("index", axis=1)
         self.task_embed = self.embedding_model.encode(tasks.Task.to_list(), convert_to_tensor=True, batch_size=64, show_progress_bar=True)
         self.task_embed = self.task_embed.to(self.device)
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/task-classifier-mini-v3")
+        self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "loyoladatamining/task-classifier-mini-v3",
+            classification_model,
             use_fast=True,
             max_length=64,
             truncation=True
@@ -770,7 +770,7 @@ class WageExtract():
     
 
 class SkillMatch():
-    def __init__(self, threshold=0.87):
+    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-large", classification_model="loyoladatamining/skill-classifier-base-v2"):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -782,7 +782,7 @@ class SkillMatch():
         self.threshold = threshold
 
         print("Preparing embeddings...", flush=True)
-        self.embedding_model = SentenceTransformer("thenlper/gte-large", device=self.device)
+        self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
         self.skills = list(set(self.skills_df["label"]))
         self.skill_embed = self.embedding_model.encode(self.skills, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
@@ -791,9 +791,9 @@ class SkillMatch():
         self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/skill-classifier-base-v2")
+        self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "loyoladatamining/skill-classifier-base-v2",
+            classification_model,
             use_fast=True,
             max_length=64,
             truncation=True
@@ -957,7 +957,7 @@ class ConceptSearch():
         return all_codes
     
 class AIMatch():
-    def __init__(self, threshold=0.9):
+    def __init__(self, threshold=0.9, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/ai-classifier-small-v4"):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
@@ -969,7 +969,7 @@ class AIMatch():
         self.threshold = threshold
 
         print("Preparing embeddings...", flush=True)
-        self.embedding_model = SentenceTransformer("thenlper/gte-small", device=self.device)
+        self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         self.ai_df = pd.read_csv(impresources.files("JAAT.data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
         self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
@@ -979,9 +979,9 @@ class AIMatch():
         self.score_map = dict(zip(self.ai_df["Statement"], self.ai_df["Score"]))
 
         print("Setting up pipeline...", flush=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/ai-classifier-small-v4")
+        self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "loyoladatamining/ai-classifier-small-v4",
+            classification_model,
             use_fast=True,
             max_length=128,
             truncation=True
