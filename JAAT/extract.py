@@ -76,7 +76,7 @@ class FirmExtract():
     def split_words(self, text):
         return self.CAMEL_RE.sub(r'\1 \2', text)
 
-    def extract_firm(self, tagged, return_one, return_score):
+    def extract_firm(self, tagged, return_one=False, return_score=False):
         cands = []
         for r in tagged:
             if r["entity_group"] == "ORG":
