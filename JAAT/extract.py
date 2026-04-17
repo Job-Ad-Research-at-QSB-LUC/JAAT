@@ -64,7 +64,7 @@ class FirmExtract():
 
         company = self.CLEAN_RE_1.sub('', company)
         company = self.CLEAN_RE_2.sub('', company)
-        company = self.punct_pattern.sub("", company)
+        company = self.pattern.sub("", company)
         company = company.replace("\'", "").replace(" ’", "’")
 
         if len(company) > 0 and company[-1] == ',':
