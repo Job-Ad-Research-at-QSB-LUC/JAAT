@@ -100,8 +100,7 @@ class TaskMatch():
             sim_scores = torch.mm(q_embed, self.task_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
@@ -123,8 +122,7 @@ class TaskMatch():
             sim_scores = torch.mm(q_embed, self.task_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
@@ -216,8 +214,7 @@ class TitleMatch():
             sim_scores = torch.mm(q_embed, self.title_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         results = []
@@ -248,7 +245,7 @@ class ActivityMatch(TaskMatch):
             sim_scores = torch.mm(q_embed, self.act_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_scores = max_scores.cpu().tolist()
         max_indices = max_indices.cpu().tolist()
 
@@ -271,8 +268,7 @@ class ActivityMatch(TaskMatch):
             sim_scores = torch.mm(q_embed, self.act_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_acts = []
@@ -366,8 +362,7 @@ class SkillMatch():
             sim_scores = torch.mm(q_embed, self.skill_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_skills = []
@@ -389,8 +384,7 @@ class SkillMatch():
             sim_scores = torch.mm(q_embed, self.skill_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_skills = []
@@ -489,8 +483,7 @@ class AIMatch():
             sim_scores = torch.mm(q_embed, self.ai_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_ai = []
@@ -520,8 +513,7 @@ class AIMatch():
             sim_scores = torch.mm(q_embed, self.ai_embed.T)
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
-        max_scores = (max_scores * 1000).round() / 1000
-        max_scores = max_scores.cpu().tolist()
+        max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
         max_indices = max_indices.cpu().tolist()
 
         matched_ai = []
