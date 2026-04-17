@@ -18,8 +18,8 @@ MODEL_CACHE = {}
 def get_shared_model(model_name, device):
     if model_name not in MODEL_CACHE:
         model = SentenceTransformer(model_name, device=device)
-        if device == "cuda":
-            model = model.half()
+        # if device == "cuda":
+        #     model = model.half()
         MODEL_CACHE[model_name] = model
     return MODEL_CACHE[model_name]
 
