@@ -24,7 +24,7 @@ def get_shared_model(model_name, device):
     return MODEL_CACHE[model_name]
 
 class TaskMatch():
-    def __init__(self, threshold=0.9, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/task-classifier-mini-v3"):
+    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/task-classifier-mini-v3"):
         print("INIT", flush=True)
         self.device, self.batch_size = get_device_settings()
 
@@ -101,7 +101,6 @@ class TaskMatch():
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
         max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
-        print(max_scores)
         max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
@@ -400,7 +399,7 @@ class SkillMatch():
         return matched_skills
     
 class AIMatch():
-    def __init__(self, threshold=0.9, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/ai-classifier-small-v4"):
+    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/ai-classifier-small-v4"):
         print("INIT", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
