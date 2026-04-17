@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="data/logo.png" alt="JAAT" width="200"/>
+  <img src="public/logo.png" alt="JAAT" width="200"/>
 
   # Job Ad Analysis Toolkit (JAAT)
 
