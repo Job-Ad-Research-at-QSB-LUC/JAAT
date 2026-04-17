@@ -101,6 +101,7 @@ class TaskMatch():
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
         max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]
+        print(max_scores)
         max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
@@ -530,7 +531,7 @@ class AIMatch():
 
         for i, (score, idx) in enumerate(zip(max_scores, max_indices)):
             if score >= self.threshold:
-                text_idx = all_data[i][0]
+                text_idx = all_data[i][0][0]
                 ai_row = self.ai[idx]
                 matched_ai[text_idx].append((ai_row, self.ai_map[ai_row]))
                 match_scores[text_idx].append(score)
