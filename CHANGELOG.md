@@ -1,5 +1,5 @@
-## [0.9.0] - 2026-04-17
-Our biggest update yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
+## [0.9.x] - 2026-04-17
+Our biggest updates yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
 
 ### Changed
  - All `JAAT` modules can now be imported individually, allowing for faster load times. Simply call `from JAAT import XYZ` with your module of choice.
