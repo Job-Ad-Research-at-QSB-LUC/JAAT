@@ -102,6 +102,7 @@ class TaskMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
         for score, idx in zip(max_scores, max_indices):
@@ -124,6 +125,7 @@ class TaskMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_tasks = []
         for _ in range(len(texts)):
@@ -216,10 +218,11 @@ class TitleMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         results = []
         for i, (score, idx) in enumerate(zip(max_scores, max_indices)):
-            results.append((self.codes[idx], round(score, 3), values[i], features[i]))
+            results.append((self.codes[idx], score, values[i], features[i]))
 
         return results
     
@@ -247,6 +250,7 @@ class ActivityMatch(TaskMatch):
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_acts = []
         for score, idx in zip(max_scores, max_indices):
@@ -269,6 +273,7 @@ class ActivityMatch(TaskMatch):
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_acts = []
         for _ in range(len(texts)):
@@ -363,6 +368,7 @@ class SkillMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_skills = []
         for score, idx in zip(max_scores, max_indices):
@@ -385,6 +391,7 @@ class SkillMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_skills = []
         for _ in range(len(texts)):
@@ -484,9 +491,10 @@ class AIMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_ai = []
-        score = 0
+        total_score = 0
         count = 0
         binary_scores = []
         match_scores = []
@@ -494,12 +502,12 @@ class AIMatch():
             if score >= self.threshold:
                 ai_row = self.ai[idx]
                 matched_ai.append((ai_row, self.ai_map[ai_row]))
-                match_scores.append(round(score, 3))
-                score += self.score_map[ai_row]
+                match_scores.append(score)
+                total_score += self.score_map[ai_row]
                 count += 1
                 binary_scores.append(round(positive[i][1], 3))
 
-        return matched_ai, count, round(score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
+        return matched_ai, count, round(total_score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
     
     def get_ai_batch(self, texts):
         all_data = self.get_candidates_batch(texts)
@@ -514,6 +522,7 @@ class AIMatch():
 
         max_scores = (max_scores * 1000).round() / 1000
         max_scores = max_scores.cpu().tolist()
+        max_indices = max_indices.cpu().tolist()
 
         matched_ai = []
         scores = []
@@ -532,7 +541,7 @@ class AIMatch():
                 text_idx = all_data[i][0]
                 ai_row = self.ai[idx]
                 matched_ai[text_idx].append((ai_row, self.ai_map[ai_row]))
-                match_scores[text_idx].append(round(score, 3))
+                match_scores[text_idx].append(score)
                 scores[text_idx] += self.score_map[ai_row]
                 counts[text_idx] += 1
                 binary_scores[text_idx].append(round(all_data[i][1], 3))
