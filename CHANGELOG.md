@@ -1,3 +1,15 @@
+## [0.9.0] - 2026-04-17
+Our biggest update yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
+
+### Changed
+ - All `JAAT` modules can now be imported individually, allowing for faster load times. Simply call `from JAAT import XYZ` with your module of choice.
+ - Match-based modules have been optimized for speed.
+ - Other minor optimizations and improvements to allow for faster compuation and less RAM load.
+
+### Removed
+ - Old data files and demos have been archived.
+
+
 ## [0.8.3] - 2026-04-12
 ### Changed
  - `JobTag` is now more lightweight. Pre-trained classifiers are lazily downloaded and cached as needed, making the installation experience much faster.

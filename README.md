@@ -21,7 +21,11 @@ To install JAAT, simply run the following:
 
 Then, import JAAT using the following command:
 
-`from JAAT import JAAT`
+`import JAAT`
+
+or alternatively...
+
+`from JAAT import [MODULE]`
 
 ## TaskMatch (v2)
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
@@ -84,60 +88,6 @@ This will return a firm name if found, otherwise `None`.
 
 This will return a list of firm names (or `None` where no name is found).
 
-## CREAM
-`CREAM` is a tool that allows you to extract concepts that are hidden within texts. These concepts, called *classes*, can be defined arbitrarily by you - anything goes! All you need to do is two things:
-
-- **keywords**: each class should contain a list of relevant keywords, or words/phrases that would "trigger" a potential class candidate
-- **rules**: *rules* define archetypical text chunks that either support or refute an instance of a defined class given a found keyword. Rules should be manually define using domain expertise, and an arbitrary number of rules may be used.
-
-Keywords should be presented as a list of strings, e.g., `[k1, k2, ..., kn]`.
-
-Rules should be presented as list of tuples, in the form: `[(rule_1, label), (rule_2, label), ..., (rule_n, label)]`.
-In the most basic form, the *labels* are binary: 1 denotes the presence of a class, 0 not.
-
-Given these two inputs, one can instantiate the `CREAM` object.
-
-`C = JAAT.CREAM(keywords=KEYWORDS, rules=RULES)`
-
-There are also three optional parameters:
-
-- `class_name`: the name of the class (i.e., labels)
-- `n`: useful for CREAM internals, essentially how any context words should be considered on either side of identified keywords
-- `threshold`: useful for embedding functions - the minimum similarity threshold a candidate text chunk should meet in order to be matched with a label. The higher the threshold, the stricter the matching criterion.
-
-With this set up, all you need to do is run `CREAM` on a list of texts, and the output will be a DataFrame will the relevant results.
-
-`res = C.run(LIST_OF_TEXTS)`
-
-Specifically, the output will be a Pandas DataFrame will the following columns:
-
-- **text**: the input texts
-- **inferred_rule**: the best matching rule, if any
-- **inferred_label**: the label assigned based on the best matching rule, if any
-- **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
-
-## JobTag
-`JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
-
-As of now the following classes are supported:
-`['CitizenshipReq', 'GovContract', 'VisaExclude', 'VisaInclude', 'WorkAuthReq', 'driverslicense', 'ind_contractor', 'proflicenses', 'wfh', 'yesunion']`
-
-To get started, create a new `JobTag` object by doing the following:
-
-`J = JAAT.JobTag(class_name=CLASS)`
-
-where `CLASS` is replaced by one of the supported classes. Optionally, you can also specify an `n` parameter (default: 4), which defines how large of a context window around keywords to consider.
-
-Then, you can classify any text (binary classification, 1 == positive) by calling the following function:
-
-`prediction = J.get_tag(TEXT)`
-
-This will return a tuple of the form `(class_name, 1/0)`. For larger batches of texts, use the batch function:
-
-`predictions = J.get_tag_batch(LIST_OF_TEXTS)`
-
-This now will return a list of 1/0 predictions, in the same order as the input texts.
-
 ## WageExtract
 `WageExtract` is used to extract wages (min and max) from a text, as well as the frequency associated with these values (i.e., hourly, weekly, monthly, or annually).
 
@@ -178,7 +128,84 @@ For batch processing, run:
 
 `skills = SM.get_skills_batch(LIST_OF_TEXTS)`
 
-## Readability
+## AIMatch (beta!)
+This module extracts and codifies all AI-related tasks, skills, expertise, and requirements that are stated in job ad texts.
+
+As per usual, load in the module:
+
+`AI = JAAT.AIMatch()`
+
+Following this, `AIMatch` can be used on single texts or in batch mode:
+
+`res = AI.get_ai(TEXT)`
+
+or
+
+`res = CS.get_ai_batch(LIST_OF_TEXTS)`
+
+The return value for `get_ai` is a 5-tuple, with the following structure:
+
+`(LIST OF MATECHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)`
+
+The matched concept/codes are presented in tuples. The "average AI score" is a high-level indicator of the "AI-ness" of the matches, averaged by the number of matches. Both confidence scores are semicolon-delimiter, and they correspond directly to the list of matched concepts. In the case of batch mode, all of these returned values are placed in lists, corresponding to each text input.
+
+## Other Tools
+
+### CREAM (experimental)
+`CREAM` is a tool that allows you to extract concepts that are hidden within texts. These concepts, called *classes*, can be defined arbitrarily by you - anything goes! All you need to do is two things:
+
+- **keywords**: each class should contain a list of relevant keywords, or words/phrases that would "trigger" a potential class candidate
+- **rules**: *rules* define archetypical text chunks that either support or refute an instance of a defined class given a found keyword. Rules should be manually define using domain expertise, and an arbitrary number of rules may be used.
+
+Keywords should be presented as a list of strings, e.g., `[k1, k2, ..., kn]`.
+
+Rules should be presented as list of tuples, in the form: `[(rule_1, label), (rule_2, label), ..., (rule_n, label)]`.
+In the most basic form, the *labels* are binary: 1 denotes the presence of a class, 0 not.
+
+Given these two inputs, one can instantiate the `CREAM` object.
+
+`C = JAAT.CREAM(keywords=KEYWORDS, rules=RULES)`
+
+There are also three optional parameters:
+
+- `class_name`: the name of the class (i.e., labels)
+- `n`: useful for CREAM internals, essentially how any context words should be considered on either side of identified keywords
+- `threshold`: useful for embedding functions - the minimum similarity threshold a candidate text chunk should meet in order to be matched with a label. The higher the threshold, the stricter the matching criterion.
+
+With this set up, all you need to do is run `CREAM` on a list of texts, and the output will be a DataFrame will the relevant results.
+
+`res = C.run(LIST_OF_TEXTS)`
+
+Specifically, the output will be a Pandas DataFrame will the following columns:
+
+- **text**: the input texts
+- **inferred_rule**: the best matching rule, if any
+- **inferred_label**: the label assigned based on the best matching rule, if any
+- **inferred_confidence**: the "confidence score" of the matching, if a match was made. Note that this is embedding model specific and should be interpreted relatively.
+
+### JobTag
+`JobTag` is used to classify pieces of texts (such as job ads) according to expert defined classification schemes. This is done using niche classifiers which we also release publicly here.
+
+As of now the following classes are supported:
+`['CitizenshipReq', 'GovContract', 'VisaExclude', 'VisaInclude', 'WorkAuthReq', 'driverslicense', 'ind_contractor', 'proflicenses', 'wfh', 'yesunion']`
+
+To get started, create a new `JobTag` object by doing the following:
+
+`J = JAAT.JobTag(class_name=CLASS)`
+
+where `CLASS` is replaced by one of the supported classes. Optionally, you can also specify an `n` parameter (default: 4), which defines how large of a context window around keywords to consider.
+
+Then, you can classify any text (binary classification, 1 == positive) by calling the following function:
+
+`prediction = J.get_tag(TEXT)`
+
+This will return a tuple of the form `(class_name, 1/0)`. For larger batches of texts, use the batch function:
+
+`predictions = J.get_tag_batch(LIST_OF_TEXTS)`
+
+This now will return a list of 1/0 predictions, in the same order as the input texts.
+
+### Readability
 This module provides a simple utility for calculating the Flesch-Kincaid readability score for a job posting text or texts. To start:
 
 `R = JAAT.Readability()`
@@ -191,7 +218,7 @@ Then, simply run on a text or batch of texts:
 
 The returned scores are floats, rounded to two decimal places.
 
-## ConceptSearch
+### ConceptSearch
 This module is a simple and highly efficient tool to extract "concepts" from a corpus of texts. These concepts are defined by keywords, and they can be mapped to any arbitrary amount of rule values.
 
 In the `data/automatons` directory, we provide some pre-packaged concept maps, which can be used direct in `ConceptSearch`. Additionally, you can create your own, with the following structure:
@@ -222,27 +249,6 @@ or
 `res = CS.get_concepts_batch(LIST_OF_TEXTS)`
 
 The returned objects will be a list of tuples for each text, wherein the tuples represent the value tuples of the found (matched) keywords.
-
-## AIMatch (new in JAAT v0.7.0)
-This module extracts and codifies all AI-related tasks, skills, expertise, and requirements that are stated in job ad texts.
-
-As per usual, load in the module:
-
-`AI = JAAT.AIMatch()`
-
-Following this, `AIMatch` can be used on single texts or in batch mode:
-
-`res = AI.get_ai(TEXT)`
-
-or
-
-`res = CS.get_ai_batch(LIST_OF_TEXTS)`
-
-The return value for `get_ai` is a 5-tuple, with the following structure:
-
-`(LIST OF MATECHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)`
-
-The matched concept/codes are presented in tuples. The "average AI score" is a high-level indicator of the "AI-ness" of the matches, averaged by the number of matches. Both confidence scores are semicolon-delimiter, and they correspond directly to the list of matched concepts. In the case of batch mode, all of these returned values are placed in lists, corresponding to each text input.
 
 ## Acknowledgements
 
