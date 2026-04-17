@@ -112,9 +112,9 @@ class FirmExtract():
         else:
             return ret
 
-    def get_firm(self, text):
+    def get_firm(self, text, return_one=True, return_score=True):
         tagged = self.pipe(text)
-        return self.extract_firm(tagged)
+        return self.extract_firm(tagged, return_one, return_score)
     
     def get_firm_batch(self, texts, return_one=True, return_score=True):
         batch = ListDataset(texts)
