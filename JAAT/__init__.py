@@ -9,7 +9,7 @@ class Loader:
         self.desc = desc
         self.done = False
         self.thread = None
-        self.width = 60
+        self.width = 64
 
     def _animate(self):
         chars = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
@@ -22,14 +22,23 @@ class Loader:
 
     def __enter__(self):
         if SHOW_ART:
-            border = f"{DIM}" + "-" * self.width + f"{RESET}"
-            welcome_msg = f" Welcome to JAAT v{VERSION} ".center(self.width, " ")
+            top_bottom = "+" + "-" * (self.width - 2) + "+"
+            side = f"{DIM}|{RESET}"
             
-            print(f"\n{border}")
-            print(f"{CYAN}{JAAT_ART}{RESET}")
-            print(f"\n{BOLD}{welcome_msg}{RESET}")
-            print(f"{DIM}{DESCRIPTION.center(self.width)}{RESET}")
-            print(f"{border}\n")
+            print(f"\n{DIM}{top_bottom}{RESET}")
+            
+            for line in JAAT_ART.strip("\n").split("\n"):
+                content = line.ljust(self.width - 4)
+                print(f"{side}  {CYAN}{content}{RESET} {side}")
+            
+            print(f"{side}" + " " * (self.width - 2) + f"{side}")
+            
+            welcome_msg = f"Welcome to JAAT v{VERSION}".center(self.width - 4)
+            desc_msg = DESCRIPTION.center(self.width - 4)
+            
+            print(f"{side}  {BOLD}{welcome_msg}{RESET} {side}")
+            print(f"{side}  {DIM}{desc_msg}{RESET} {side}")
+            print(f"{DIM}{top_bottom}{RESET}\n")
             
             self.thread = threading.Thread(target=self._animate, daemon=True)
             self.thread.start()

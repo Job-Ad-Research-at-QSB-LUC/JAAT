@@ -17,7 +17,7 @@ GLOBAL_SETTINGS = {
 MODEL_CACHE = {}
 
 VERSION = "0.9.12 (beta)"
-DESCRIPTION = "An NLP-powered engine for the efficient and accurate analysis of job advertisement texts."
+DESCRIPTION = "An NLP-powered toolkit for job ad text analysis."
 
 CYAN = "\033[96m"
 GREEN = "\033[92m"
