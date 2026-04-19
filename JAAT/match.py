@@ -1,3 +1,4 @@
+from typing import List, Tuple, Union, Generator, Any
 import torch
 import numpy as np
 import pandas as pd
@@ -5,17 +6,15 @@ import multiprocessing as mp
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 from sentence_transformers import SentenceTransformer, util
 import importlib_resources as impresources
-from tqdm.auto import tqdm
 import pickle
 import json
 
 from .base import ListDataset, get_device_settings, sent_tokenize, logger
-
-tqdm.pandas()
+from .utils import progress_bar
 
 MODEL_CACHE = {}
 
-def get_shared_model(model_name, device):
+def get_shared_model(model_name: str, device: str) -> SentenceTransformer:
     if model_name not in MODEL_CACHE:
         model = SentenceTransformer(model_name, device=device)
         # if device == "cuda":
@@ -24,13 +23,13 @@ def get_shared_model(model_name, device):
     return MODEL_CACHE[model_name]
 
 class TaskMatch():
-    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/task-classifier-mini-v3"):
-        logger.info("Initalizing TaskMatch...", flush=True)
+    def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-small", classification_model: str = "loyoladatamining/task-classifier-mini-v3") -> None:
+        logger.info("Initalizing TaskMatch...")
         self.device, self.batch_size = get_device_settings()
 
         self.threshold = threshold
 
-        logger.info("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...")
         self.embedding_model = get_shared_model(embedding_model, self.device)
         tasks = pd.read_csv(impresources.files("JAAT.data") / "Task_DWA.csv")[["Task ID", "Task"]].drop_duplicates()
         self.tasks = tasks.reset_index().drop("index", axis=1)
@@ -38,7 +37,7 @@ class TaskMatch():
         self.task_embed = self.task_embed.to(self.device)
         self.task_embed = torch.nn.functional.normalize(self.task_embed, p=2, dim=1)
 
-        logger.info("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...")
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -47,9 +46,9 @@ class TaskMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
-        logger.info("Finished.", flush=True)
+        logger.info("Finished.")
 
-    def get_candidates(self, text):
+    def get_candidates(self, text: str) -> List[str]:
         s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 48 and len(ss.split()) > 4]
 
@@ -67,7 +66,7 @@ class TaskMatch():
                 count += 1
         return positive
     
-    def get_candidates_batch(self, texts):
+    def get_candidates_batch(self, texts: List[str]) -> List[Tuple[int, str]]:
         all_data = []
         for i, t in enumerate(texts):
             s = sent_tokenize(t.strip())
@@ -87,7 +86,7 @@ class TaskMatch():
                 count += 1
         return positive
 
-    def get_tasks(self, text):
+    def get_tasks(self, text: str) -> List[Tuple[str, str]]:
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
@@ -111,8 +110,10 @@ class TaskMatch():
 
         return matched_tasks
     
-    def get_tasks_batch(self, texts):
+    def get_tasks_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
         all_data = self.get_candidates_batch(texts)
+        if len(all_data) == 0:
+            return [[] for _ in range(len(texts))]
 
         q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
         q_embed = q_embed.to(self.device)
@@ -139,11 +140,11 @@ class TaskMatch():
     
 class TitleMatch():
     ## Note: since the title embeddings are pre-computed here, using the non-default embedding model will not work as intended!
-    def __init__(self, batch_size=16, embedding_model="thenlper/gte-small"):
-        logger.info("Initializing TitleMatch...", flush=True)
+    def __init__(self, batch_size: int = 16, embedding_model: str = "thenlper/gte-small") -> None:
+        logger.info("Initializing TitleMatch...")
         self.device, _ = get_device_settings()
 
-        logger.info("Loading data...", flush=True)
+        logger.info("Loading data...")
         with open(impresources.files("JAAT.data") / "SOC_map.json", 'r') as f:
             self.codes = json.load(f)
         with open(impresources.files("JAAT.data") / "title_embeddings.pickle", 'rb') as pkl:
@@ -151,10 +152,10 @@ class TitleMatch():
         self.title_embed = embed.to(self.device)
         self.title_embed = torch.nn.functional.normalize(self.title_embed, p=2, dim=1)
 
-        logger.info("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...")
         self.embedding_model = get_shared_model(embedding_model, self.device)
 
-        logger.info("Loading title models...", flush=True)
+        logger.info("Loading title models...")
         self.value_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_value", num_labels=1, problem_type="regression")
         self.value_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_value")
         self.value_pipe = pipeline("text-classification", model=self.value_model, tokenizer=self.value_tokenizer, device=self.device, function_to_apply="none")
@@ -165,16 +166,16 @@ class TitleMatch():
 
         logger.info("Finished.")
 
-    def batch(self, iterable, n=1):
+    def batch(self, iterable: List[Any], n: int = 1) -> Generator[List[Any], None, None]:
         l = len(iterable)
         for ndx in range(0, l, n):
             yield iterable[ndx:min(ndx + n, l)]
 
-    def sigmoid(self, x):
+    def sigmoid(self, x: Union[float, np.ndarray, torch.Tensor]) -> Union[float, np.ndarray]:
         return 1 / (1 + np.exp(-x))
 
     @torch.no_grad()
-    def get_title(self, text):
+    def get_title(self, text: Union[str, List[str]]) -> List[Tuple[str, float, float, str]]:
         if isinstance(text, str):
             text = [text]
         elif isinstance(text, list):
@@ -183,17 +184,17 @@ class TitleMatch():
             logger.error("Error: input must be string or a list of strings.")
             return
         
-        logger.info("Extracting title values...", flush=True)
+        logger.info("Extracting title values...")
         values = []
         temp = ListDataset(text)
-        for res in tqdm(self.value_pipe(temp, batch_size=self.feature_batch), total=len(text)):
+        for res in progress_bar(self.value_pipe(temp, batch_size=self.feature_batch), total=len(text)):
             values.append(round(res["score"], 1))
 
-        logger.info("Extracting title features...", flush=True)
+        logger.info("Extracting title features...")
         features = []
         batches = self.batch(text, n=self.feature_batch)
         batches = ListDataset(list(batches))
-        for b in tqdm(batches, total=len(batches)):
+        for b in progress_bar(batches, total=len(batches)):
             inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to(self.device)
             outputs = self.feature_model(inputs.input_ids)
             logits = outputs.logits
@@ -205,7 +206,7 @@ class TitleMatch():
                         temp = [x for x in temp if x != "none"]
                     features.append(";".join(temp))
   
-        logger.info("Matching titles to codes...", flush=True)
+        logger.info("Matching titles to codes...")
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
@@ -224,7 +225,7 @@ class TitleMatch():
         return results
     
 class ActivityMatch(TaskMatch):
-    def __init__(self, threshold=0.9, embedding_model="thenlper/gte-small"):
+    def __init__(self, threshold: float = 0.9, embedding_model: str = "thenlper/gte-small") -> None:
         super().__init__(threshold=threshold, embedding_model=embedding_model)
         
         self.activities = pd.read_csv(impresources.files("JAAT.data") / "lexiconwex2023.csv").drop_duplicates().reset_index(drop=True)
@@ -232,7 +233,7 @@ class ActivityMatch(TaskMatch):
         self.act_embed = self.act_embed.to(self.device)
         self.act_embed = torch.nn.functional.normalize(self.act_embed, p=2, dim=1)
 
-    def get_activities(self, text):
+    def get_activities(self, text: str) -> List[Tuple[str, str, str]]:
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
@@ -257,8 +258,10 @@ class ActivityMatch(TaskMatch):
 
         return matched_acts
     
-    def get_activities_batch(self, texts):
+    def get_activities_batch(self, texts: List[str]) -> List[List[Tuple[str, str, str]]]:
         all_data = self.get_candidates_batch(texts)
+        if len(all_data) == 0:
+            return [[] for _ in range(len(texts))]
 
         q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
         q_embed = q_embed.to(self.device)
@@ -284,13 +287,13 @@ class ActivityMatch(TaskMatch):
         return matched_acts
     
 class SkillMatch():
-    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-large", classification_model="loyoladatamining/skill-classifier-base-v2"):
-        logger.info("Initializing SkillMatch...", flush=True)
+    def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-large", classification_model: str = "loyoladatamining/skill-classifier-base-v2") -> None:
+        logger.info("Initializing SkillMatch...")
         self.device, self.batch_size = get_device_settings()
 
         self.threshold = threshold
 
-        logger.info("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...")
         self.embedding_model = get_shared_model(embedding_model, self.device)
         self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
         self.skills = list(set(self.skills_df["label"]))
@@ -300,7 +303,7 @@ class SkillMatch():
 
         self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
 
-        logger.info("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...")
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -309,9 +312,9 @@ class SkillMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
-        logger.info("Finished.", flush=True)
+        logger.info("Finished.")
 
-    def get_candidates(self, text):
+    def get_candidates(self, text: str) -> List[str]:
         s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 48 and len(ss.split()) > 4]
 
@@ -329,7 +332,7 @@ class SkillMatch():
                 count += 1
         return positive
     
-    def get_candidates_batch(self, texts):
+    def get_candidates_batch(self, texts: List[str]) -> List[Tuple[int, str]]:
         all_data = []
         for i, t in enumerate(texts):
             s = sent_tokenize(t.strip())
@@ -349,7 +352,7 @@ class SkillMatch():
                 count += 1
         return positive
 
-    def get_skills(self, text):
+    def get_skills(self, text: str) -> List[Tuple[str, str]]:
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
@@ -373,8 +376,10 @@ class SkillMatch():
 
         return matched_skills
     
-    def get_skills_batch(self, texts):
+    def get_skills_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
         all_data = self.get_candidates_batch(texts)
+        if not all_data:
+            return [[] for _ in range(len(texts))]
 
         q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
         q_embed = q_embed.to(self.device)
@@ -399,8 +404,8 @@ class SkillMatch():
         return matched_skills
     
 class AIMatch():
-    def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/ai-classifier-small-v4"):
-        logger.info("Initializing AIMatch...", flush=True)
+    def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-small", classification_model: str = "loyoladatamining/ai-classifier-small-v4") -> None:
+        logger.info("Initializing AIMatch...")
         if torch.cuda.is_available() == True:
             self.device = "cuda"
             self.batch_size = 2048
@@ -410,7 +415,7 @@ class AIMatch():
 
         self.threshold = threshold
 
-        logger.info("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...")
         self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         self.ai_df = pd.read_csv(impresources.files("JAAT.data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
@@ -421,7 +426,7 @@ class AIMatch():
         self.ai_map = dict(zip(self.ai_df["Statement"], self.ai_df["Code"]))
         self.score_map = dict(zip(self.ai_df["Statement"], self.ai_df["Score"]))
 
-        logger.info("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...")
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -430,9 +435,9 @@ class AIMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=128, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=8)
-        logger.info("Finished.", flush=True)
+        logger.info("Finished.")
 
-    def get_candidates(self, text):
+    def get_candidates(self, text: str) -> List[str]:
         s = sent_tokenize(text.strip())
         all_data = [ss for ss in s if len(ss.split()) <= 64 and len(ss.split()) >= 4]
 
@@ -450,7 +455,7 @@ class AIMatch():
                 count += 1
         return positive
     
-    def get_candidates_batch(self, texts):
+    def get_candidates_batch(self, texts: List[str]) -> List[Tuple[int, str]]:
         all_data = []
         for i, t in enumerate(texts):
             s = sent_tokenize(t.strip())
@@ -470,10 +475,10 @@ class AIMatch():
                 count += 1
         return positive
 
-    def get_ai(self, text):
+    def get_ai(self, text: str) -> Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]:
         positive = self.get_candidates(text)
         if len(positive) == 0:
-            return []
+            return [], 0, 0.0, [], []
 
         q_embed = self.embedding_model.encode([x[0] for x in positive], convert_to_tensor=True, batch_size=64)
         q_embed = q_embed.to(self.device)
@@ -502,8 +507,10 @@ class AIMatch():
 
         return matched_ai, count, round(total_score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
     
-    def get_ai_batch(self, texts):
+    def get_ai_batch(self, texts: List[str]) -> List[Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]]:
         all_data = self.get_candidates_batch(texts)
+        if len(all_data) == 0: 
+            return [[] for _ in range(len(texts))], [0]*len(texts), [0.0]*len(texts), [[] for _ in range(len(texts))], [[] for _ in range(len(texts))]
 
         q_embed = self.embedding_model.encode([x[0][1] for x in all_data], convert_to_tensor=True, batch_size=64)
         q_embed = q_embed.to(self.device)

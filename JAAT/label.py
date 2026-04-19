@@ -4,7 +4,6 @@ import torch
 import multiprocessing as mp
 from sentence_transformers import SentenceTransformer, util
 import importlib_resources as impresources
-from tqdm.auto import tqdm
 import json
 import re
 import compress_pickle
@@ -16,8 +15,7 @@ from huggingface_hub.utils import LocalEntryNotFoundError
 import requests
 
 from .base import get_device_settings, logger
-
-tqdm.pandas()
+from .utils import progress_bar
 
 CLEAN_RE = re.compile(r'[^a-z0-9]+')
     
@@ -154,14 +152,11 @@ class JobTag():
         res = self.clf.predict(contexts)
         return (self.class_name, 1 if sum(res) > 0 else 0)
     
-    def get_tag_batch(self, texts: List[str], progress_bar: bool = False) -> List[int]:
+    def get_tag_batch(self, texts: List[str]) -> List[int]:
         with mp.Pool(mp.cpu_count(), initializer=init_pool, initargs=(self.clf,)) as pool:
             c = pool.imap(partial(get_context, keywords=self.keywords[self.class_name], n=self.n), texts)
             all_contexts = list(c)
-            if progress_bar == True:
-                p = tqdm(pool.imap(classify, all_contexts), total=len(all_contexts))
-            else:
-                p = pool.imap(classify, all_contexts)
+            p = progress_bar(pool.imap(classify, all_contexts), total=len(all_contexts))
             res = list(p)
             pool.close()
         return res

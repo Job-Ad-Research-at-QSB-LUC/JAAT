@@ -1,15 +1,13 @@
+from typing import List, Optional, Any
 from pathlib import Path
 import ahocorasick
 import pickle
-from tqdm.auto import tqdm
 
 from .base import logger
-
-tqdm.pandas()
-
+from .utils import progress_bar
 
 class ConceptSearch():
-    def __init__(self, concept_map=None, concept_file=None):
+    def __init__(self, concept_map: Optional[dict] = None, concept_file: Optional[str] = None) -> None:
         if concept_file == None:
             if concept_map is None:
                 logger.error("Error: concept_map cannot be None!")
@@ -30,7 +28,7 @@ class ConceptSearch():
             with open(concept_file, 'rb') as f:
                 self.auto = pickle.load(f)
 
-    def get_concepts(self, text):
+    def get_concepts(self, text: str) -> List[Any]:
         codes = []
         text = text.lower()
         for idx, found in self.auto.iter(text):
@@ -49,9 +47,9 @@ class ConceptSearch():
                 codes.append(found[1])
         return codes
 
-    def get_concepts_batch(self, texts):
+    def get_concepts_batch(self, texts: List[str]) -> List[List[Any]]:
         all_codes = []
-        for text in tqdm(texts, total=len(texts)):
+        for text in progress_bar(texts, total=len(texts)):
             ret = set()
             for x in self.get_concepts(text):
                 ret.add(x)

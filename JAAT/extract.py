@@ -1,8 +1,8 @@
+from typing import List, Optional
 import pandas as pd
 import multiprocessing as mp
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification, AutoModelForTokenClassification
 import importlib_resources as impresources
-from tqdm.auto import tqdm
 import json
 import string
 import re
@@ -12,13 +12,12 @@ import syllables
 import ahocorasick
 
 from .base import ListDataset, sent_tokenize, get_device_settings, logger
-
-tqdm.pandas()
+from .utils import progress_bar
 
 class StdName():
     sub_dict = None
    
-    def __init__(self):
+    def __init__(self) -> None:
         with open(impresources.files("JAAT.data") / "sub_dict.json", 'r') as f:
             self.sub_dict = json.load(f)
 
@@ -27,7 +26,7 @@ class StdName():
             self.automaton.add_word(k, (k, v))
         self.automaton.make_automaton()
 
-    def standardize(self, text):
+    def standardize(self, text: str) -> str:
         if pd.isnull(text) == True:
             return " "
 
@@ -44,7 +43,7 @@ class FirmExtract():
     CLEAN_RE_1 = re.compile(r'\<.*$')
     CLEAN_RE_2 = re.compile(r'\'\w+')
 
-    def __init__(self, standardize=True):
+    def __init__(self, standardize: bool = True) -> None:
         self.device, _ = get_device_settings()
 
         model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/firmNER-v3", id2label={0: 'O', 1: 'B-ORG', 2: 'I-ORG'}, label2id={'O': 0, 'B-ORG': 1, 'I-ORG': 2})
@@ -59,7 +58,7 @@ class FirmExtract():
         if self.standardize == True:
             self.STD = StdName()
 
-    def clean_company(self, company):
+    def clean_company(self, company: str) -> str:
         company = company.replace('\\', '')
 
         company = self.CLEAN_RE_1.sub('', company)
@@ -73,10 +72,10 @@ class FirmExtract():
         company = " ".join(company.split())
         return company
     
-    def split_words(self, text):
+    def split_words(self, text: str) -> str:
         return self.CAMEL_RE.sub(r'\1 \2', text)
 
-    def extract_firm(self, tagged, return_one=False, return_score=False):
+    def extract_firm(self, tagged: List[dict], return_one: bool = False, return_score: bool = False):
         cands = []
         for r in tagged:
             if r["entity_group"] == "ORG":
@@ -119,12 +118,12 @@ class FirmExtract():
     def get_firm_batch(self, texts, return_one=True, return_score=True):
         batch = ListDataset(texts)
         results = []
-        for r in tqdm(self.pipe(batch), total=len(texts)):
+        for r in progress_bar(self.pipe(batch), total=len(texts)):
             results.append(self.extract_firm(r, return_one, return_score))
         return results
     
 class WageExtract():
-    def __init__(self):
+    def __init__(self) -> None:
         self.device, self.batch_size = get_device_settings()
 
         self.keywords = [
@@ -164,7 +163,7 @@ class WageExtract():
         )
         self.freq_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=128, device=self.device, truncation=True)
 
-    def preproc(self, text):
+    def preproc(self, text: str) -> str:
         text = text.replace("401k", "")
         text = re.sub(r"(\.[0-9])0{3,}", r"\g<1>0", text)
         text = re.sub(r"([0-9])(to)([0-9])", r"\1 \2 \3", text)
@@ -178,7 +177,7 @@ class WageExtract():
         text = " ".join(text.split())
         return text
 
-    def get_largest_chunk(self, text, n=6):
+    def get_largest_chunk(self, text: str , n: int = 6) -> str:
         text = text.replace("per hour", "perhour").replace("per year", "peryear").replace("per annum", "perannum")
         tokens = nltk.word_tokenize(text)
         idx = [i for i, x in enumerate(tokens) if any(y in x.lower() for y in self.keywords)]
@@ -191,7 +190,7 @@ class WageExtract():
         ret = ret.replace("perhour", "per hour").replace("peryear", "per year").replace("perannum", "per annum")
         return ret
     
-    def extract_wage(self, predict):
+    def extract_wage(self, predict: List[dict]) -> dict:
         start = 0
         MIN = ""
         for p in predict:
@@ -212,7 +211,7 @@ class WageExtract():
                     break
         return {"min":MIN.replace("$",""), "max":MAX.replace("$","")}
 
-    def get_wage(self, text):
+    def get_wage(self, text: str) -> dict:
         sentences = sent_tokenize(text)
         is_pay = self.ispay_pipe(sentences)
         if all(x["label"] == "LABEL_0" for x in is_pay):
@@ -224,7 +223,7 @@ class WageExtract():
         pred["frequency"] = freq
         return pred
 
-    def get_wage_batch(self, texts):
+    def get_wage_batch(self, texts: List[str]) -> List[dict]:
         temp = []
         for i, x in enumerate(texts):
             temp.extend([(i, y) for y in sent_tokenize(x)])
@@ -233,8 +232,8 @@ class WageExtract():
 
         batch = ListDataset(all_sentences)
         is_pay = []
-        logger.info("Predicting is_pay...", flush=True)
-        for p in tqdm(self.ispay_pipe(batch), total=len(all_sentences)):
+        logger.info("Predicting is_pay...")
+        for p in progress_bar(self.ispay_pipe(batch), total=len(all_sentences)):
             if p["label"] == "LABEL_1":
                 is_pay.append(1)
             else:
@@ -254,18 +253,18 @@ class WageExtract():
                     indices.append(c)
                     cands.append(check)
 
-        logger.info("{} / {} contain wage statements.\n".format(len(indices), len(texts)), flush=True)
+        logger.info("{} / {} contain wage statements.\n".format(len(indices), len(texts)))
 
         new_batch = ListDataset(cands)
 
-        logger.info("Extracting wage...", flush=True)
+        logger.info("Extracting wage...")
         preds = []
-        for p in tqdm(self.ner_pipe(new_batch), total=len(new_batch)):
+        for p in progress_bar(self.ner_pipe(new_batch), total=len(new_batch)):
             preds.append(self.extract_wage(p))
         
-        logger.info("\nPredicting pay frequency...", flush=True)
+        logger.info("\nPredicting pay frequency...")
         freqs = []
-        for p in tqdm(self.freq_pipe(new_batch), total=len(new_batch)):
+        for p in progress_bar(self.freq_pipe(new_batch), total=len(new_batch)):
             freqs.append(p["label"])
 
         final = []
@@ -288,15 +287,15 @@ class WageExtract():
         assert len(ret) == len(texts)
 
         total = sum([1 for x in ret if x is not None])
-        logger.info("\nSummary: found {} wage statements.".format(total), flush=True)
+        logger.info("\nSummary: found {} wage statements.".format(total))
 
         return ret
     
 class Readability():
-    def __init__(self):
+    def __init__(self) -> None:
         self.PUNCT = set(string.punctuation)
 
-    def fk(self, text):
+    def fk(self, text: str) -> Optional[float]:
         if text == "":
             return None
 
@@ -306,12 +305,12 @@ class Readability():
         syl = sum([syllables.estimate(x) for x in tokens if x not in self.PUNCT])
         return round(206.835 - (1.015 * (words / sentences)) - (84.6 * (syl / words)), 2)
     
-    def get_readability(self, text):
+    def get_readability(self, text: str) -> Optional[float]:
         return self.fk(text)
     
-    def get_readability_batch(self, texts):
+    def get_readability_batch(self, texts: List[str]) -> List[Optional[float]]:
         scores = []
         with mp.Pool(int(mp.cpu_count() / 2)) as pool:
-            for res in tqdm(pool.imap(self.fk, texts), total=len(texts)):
+            for res in progress_bar(pool.imap(self.fk, texts), total=len(texts)):
                 scores.append(res)
         return scores
