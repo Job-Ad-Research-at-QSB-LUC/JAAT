@@ -1,14 +1,22 @@
+from typing import Iterable, Generator, Any, List
 import nltk
 import torch
 import importlib_resources as impresources
 import sys
 import platform
 import gc
+from tqdm.auto import tqdm
+
+tqdm.pandas()
 
 from .base import logger
 from .matching import MODEL_CACHE
 
-def setup():
+GLOBAL_SETTINGS = {
+    "show_progress": True
+}
+
+def setup() -> None:
     logger.info("--- JAAT Setup ---")
 
     # NLTK setup (one-time)
@@ -57,14 +65,14 @@ def setup():
 
     logger.info("\n--- Setup Complete ---")
 
-def chunker(iterable, size):
+def chunker(iterable: Iterable[Any], size: int) -> Generator[List[Any], None, None]:
     """
     Simple generator to break large datasets (lists of texts) into manageable chunks.
     """
     for i in range(0, len(iterable), size):
         yield iterable[i:i + size]
 
-def validate_inputs(texts):
+def validate_inputs(texts: List[Any]) -> List[str]:
     """
     Validator util to check batch texts before feeding into a JAAT function.
     """
@@ -72,7 +80,7 @@ def validate_inputs(texts):
         raise ValueError("Input must be a list of strings.")
     return [str(t) if t is not None else "" for t in texts]
 
-def diagnostic():
+def diagnostic() -> None:
     print("--- JAAT Diagnostic Report ---")
     print(f"OS: {platform.system()} {platform.release()}")
     print(f"Python Version: {sys.version}")
@@ -92,7 +100,7 @@ def diagnostic():
         
     print("------------------------------")
 
-def clear_cache():
+def clear_cache() -> None:
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
@@ -100,10 +108,26 @@ def clear_cache():
     gc.collect()
     logger.info("VRAM and Memory cleared.")
 
-def shutdown(clear_models=True):
+def shutdown(clear_models: bool = True) -> None:
     if clear_models:
         MODEL_CACHE.clear()
         logger.info("Global model cache cleared.")
 
     clear_cache()
     logger.info("JAAT resources fully released. Shutdown complete.")
+
+def toggle_progress(show: bool) -> None:
+    """Globally enable or disable JAAT progress bars."""
+    GLOBAL_SETTINGS["show_progress"] = show
+    status = "enabled" if show else "disabled"
+    logger.info("JAAT progress bars are now {}.".format(status))
+
+def progress_bar(iterable: Iterable[Any], desc: str = "Processing", **kwargs) -> Iterable[Any]:
+    """
+    Wraps an iterable with a progress bar, if enabled globally.
+    Individual function calls can still override this by passing 'leave=False'.
+    """
+    if not GLOBAL_SETTINGS["show_progress"]:
+        return iterable
+    
+    return tqdm(iterable, desc=desc, **kwargs)

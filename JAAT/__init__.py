@@ -8,11 +8,11 @@ from .match import TaskMatch, SkillMatch, ActivityMatch, AIMatch
 from .extract import FirmExtract, WageExtract, Readability
 from .label import CREAM, JobTag
 from .search import ConceptSearch
-from .utils import setup, chunker, validate_inputs, diagnostic, clear_cache, shutdown
+from .utils import setup, chunker, validate_inputs, diagnostic, clear_cache, shutdown, toggle_progress
 
 
 __all__ = [
-    "setup", "chunker", "validate_inputs", "diagnostic", "clear_cache", "shutdown",
+    "setup", "chunker", "validate_inputs", "diagnostic", "clear_cache", "shutdown", "toggle_progress",
     "TaskMatch", "SkillMatch", "ActivityMatch", "AIMatch",
     "FirmExtract", "WageExtract", "Readability",
     "CREAM", "JobTag", "ConceptSearch"
