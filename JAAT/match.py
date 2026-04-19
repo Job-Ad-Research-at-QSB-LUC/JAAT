@@ -9,7 +9,7 @@ from tqdm.auto import tqdm
 import pickle
 import json
 
-from .base import ListDataset, get_device_settings, sent_tokenize
+from .base import ListDataset, get_device_settings, sent_tokenize, logger
 
 tqdm.pandas()
 
@@ -25,12 +25,12 @@ def get_shared_model(model_name, device):
 
 class TaskMatch():
     def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/task-classifier-mini-v3"):
-        print("INIT", flush=True)
+        logger.info("Initalizing TaskMatch...", flush=True)
         self.device, self.batch_size = get_device_settings()
 
         self.threshold = threshold
 
-        print("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...", flush=True)
         self.embedding_model = get_shared_model(embedding_model, self.device)
         tasks = pd.read_csv(impresources.files("JAAT.data") / "Task_DWA.csv")[["Task ID", "Task"]].drop_duplicates()
         self.tasks = tasks.reset_index().drop("index", axis=1)
@@ -38,7 +38,7 @@ class TaskMatch():
         self.task_embed = self.task_embed.to(self.device)
         self.task_embed = torch.nn.functional.normalize(self.task_embed, p=2, dim=1)
 
-        print("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...", flush=True)
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -47,7 +47,7 @@ class TaskMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
-        print("Finished.", flush=True)
+        logger.info("Finished.", flush=True)
 
     def get_candidates(self, text):
         s = sent_tokenize(text.strip())
@@ -140,10 +140,10 @@ class TaskMatch():
 class TitleMatch():
     ## Note: since the title embeddings are pre-computed here, using the non-default embedding model will not work as intended!
     def __init__(self, batch_size=16, embedding_model="thenlper/gte-small"):
-        print("INIT", flush=True)
+        logger.info("Initializing TitleMatch...", flush=True)
         self.device, _ = get_device_settings()
 
-        print("Loading data...", flush=True)
+        logger.info("Loading data...", flush=True)
         with open(impresources.files("JAAT.data") / "SOC_map.json", 'r') as f:
             self.codes = json.load(f)
         with open(impresources.files("JAAT.data") / "title_embeddings.pickle", 'rb') as pkl:
@@ -151,10 +151,10 @@ class TitleMatch():
         self.title_embed = embed.to(self.device)
         self.title_embed = torch.nn.functional.normalize(self.title_embed, p=2, dim=1)
 
-        print("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...", flush=True)
         self.embedding_model = get_shared_model(embedding_model, self.device)
 
-        print("Loading title models...", flush=True)
+        logger.info("Loading title models...", flush=True)
         self.value_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_value", num_labels=1, problem_type="regression")
         self.value_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_value")
         self.value_pipe = pipeline("text-classification", model=self.value_model, tokenizer=self.value_tokenizer, device=self.device, function_to_apply="none")
@@ -163,7 +163,7 @@ class TitleMatch():
         self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature")
         self.feature_batch = batch_size
 
-        print("Finished.")
+        logger.info("Finished.")
 
     def batch(self, iterable, n=1):
         l = len(iterable)
@@ -180,16 +180,16 @@ class TitleMatch():
         elif isinstance(text, list):
             pass
         else:
-            print("Error: input must be string or a list of strings.")
+            logger.error("Error: input must be string or a list of strings.")
             return
         
-        print("Extracting title values...", flush=True)
+        logger.info("Extracting title values...", flush=True)
         values = []
         temp = ListDataset(text)
         for res in tqdm(self.value_pipe(temp, batch_size=self.feature_batch), total=len(text)):
             values.append(round(res["score"], 1))
 
-        print("Extracting title features...", flush=True)
+        logger.info("Extracting title features...", flush=True)
         features = []
         batches = self.batch(text, n=self.feature_batch)
         batches = ListDataset(list(batches))
@@ -205,7 +205,7 @@ class TitleMatch():
                         temp = [x for x in temp if x != "none"]
                     features.append(";".join(temp))
   
-        print("Matching titles to codes...", flush=True)
+        logger.info("Matching titles to codes...", flush=True)
         q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
@@ -285,12 +285,12 @@ class ActivityMatch(TaskMatch):
     
 class SkillMatch():
     def __init__(self, threshold=0.87, embedding_model="thenlper/gte-large", classification_model="loyoladatamining/skill-classifier-base-v2"):
-        print("INIT", flush=True)
+        logger.info("Initializing SkillMatch...", flush=True)
         self.device, self.batch_size = get_device_settings()
 
         self.threshold = threshold
 
-        print("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...", flush=True)
         self.embedding_model = get_shared_model(embedding_model, self.device)
         self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
         self.skills = list(set(self.skills_df["label"]))
@@ -300,7 +300,7 @@ class SkillMatch():
 
         self.skill_map = dict(zip(self.skills_df.label, self.skills_df["EuropaCode"]))
 
-        print("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...", flush=True)
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -309,7 +309,7 @@ class SkillMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
-        print("Finished.", flush=True)
+        logger.info("Finished.", flush=True)
 
     def get_candidates(self, text):
         s = sent_tokenize(text.strip())
@@ -400,7 +400,7 @@ class SkillMatch():
     
 class AIMatch():
     def __init__(self, threshold=0.87, embedding_model="thenlper/gte-small", classification_model="loyoladatamining/ai-classifier-small-v4"):
-        print("INIT", flush=True)
+        logger.info("Initializing AIMatch...", flush=True)
         if torch.cuda.is_available() == True:
             self.device = "cuda"
             self.batch_size = 2048
@@ -410,7 +410,7 @@ class AIMatch():
 
         self.threshold = threshold
 
-        print("Preparing embeddings...", flush=True)
+        logger.info("Preparing embeddings...", flush=True)
         self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         self.ai_df = pd.read_csv(impresources.files("JAAT.data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
@@ -421,7 +421,7 @@ class AIMatch():
         self.ai_map = dict(zip(self.ai_df["Statement"], self.ai_df["Code"]))
         self.score_map = dict(zip(self.ai_df["Statement"], self.ai_df["Score"]))
 
-        print("Setting up pipeline...", flush=True)
+        logger.info("Setting up pipeline...", flush=True)
         self.model = AutoModelForSequenceClassification.from_pretrained(classification_model)
         self.tokenizer = AutoTokenizer.from_pretrained(
             classification_model,
@@ -430,7 +430,7 @@ class AIMatch():
             truncation=True
         )
         self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=128, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=8)
-        print("Finished.", flush=True)
+        logger.info("Finished.", flush=True)
 
     def get_candidates(self, text):
         s = sent_tokenize(text.strip())

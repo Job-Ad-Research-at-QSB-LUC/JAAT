@@ -11,7 +11,7 @@ import nltk
 import syllables
 import ahocorasick
 
-from .base import ListDataset, sent_tokenize, get_device_settings
+from .base import ListDataset, sent_tokenize, get_device_settings, logger
 
 tqdm.pandas()
 
@@ -233,7 +233,7 @@ class WageExtract():
 
         batch = ListDataset(all_sentences)
         is_pay = []
-        print("Predicting is_pay...", flush=True)
+        logger.info("Predicting is_pay...", flush=True)
         for p in tqdm(self.ispay_pipe(batch), total=len(all_sentences)):
             if p["label"] == "LABEL_1":
                 is_pay.append(1)
@@ -254,16 +254,16 @@ class WageExtract():
                     indices.append(c)
                     cands.append(check)
 
-        print("{} / {} contain wage statements.\n".format(len(indices), len(texts)), flush=True)
+        logger.info("{} / {} contain wage statements.\n".format(len(indices), len(texts)), flush=True)
 
         new_batch = ListDataset(cands)
 
-        print("Extracting wage...", flush=True)
+        logger.info("Extracting wage...", flush=True)
         preds = []
         for p in tqdm(self.ner_pipe(new_batch), total=len(new_batch)):
             preds.append(self.extract_wage(p))
         
-        print("\nPredicting pay frequency...", flush=True)
+        logger.info("\nPredicting pay frequency...", flush=True)
         freqs = []
         for p in tqdm(self.freq_pipe(new_batch), total=len(new_batch)):
             freqs.append(p["label"])
@@ -288,7 +288,7 @@ class WageExtract():
         assert len(ret) == len(texts)
 
         total = sum([1 for x in ret if x is not None])
-        print("\nSummary: found {} wage statements.".format(total), flush=True)
+        logger.info("\nSummary: found {} wage statements.".format(total), flush=True)
 
         return ret
     

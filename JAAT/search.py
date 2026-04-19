@@ -3,13 +3,16 @@ import ahocorasick
 import pickle
 from tqdm.auto import tqdm
 
+from .base import logger
+
 tqdm.pandas()
+
 
 class ConceptSearch():
     def __init__(self, concept_map=None, concept_file=None):
         if concept_file == None:
             if concept_map is None:
-                print("Error: concept_map cannot be None!")
+                logger.error("Error: concept_map cannot be None!")
                 return
 
             # map of {concept: code}
@@ -21,7 +24,7 @@ class ConceptSearch():
             self.auto.make_automaton()
         else:
             if Path(concept_file).is_file() == False:
-                print("Error: concept_file does not exist.")
+                logger.error("Error: concept_file does not exist.")
                 return
             
             with open(concept_file, 'rb') as f:

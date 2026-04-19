@@ -2,8 +2,17 @@ import torch
 import nltk
 import re
 from torch.utils.data import Dataset
+import logging
 
 CLEAN_PATTERN = re.compile(r"(;|\s\+\s|\s\*\s|\s\-\s|\s•\s|\s·\s|--|\*\*)")
+
+logger = logging.getLogger("JAAT")
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
 
 def get_device_settings():
     if torch.cuda.is_available():

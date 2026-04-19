@@ -14,7 +14,7 @@ from huggingface_hub import hf_hub_download
 from huggingface_hub.utils import LocalEntryNotFoundError
 import requests
 
-from .base import get_device_settings
+from .base import get_device_settings, logger
 
 tqdm.pandas()
 
@@ -47,10 +47,10 @@ def classify(contexts):
 class CREAM():
     def __init__(self, keywords, rules, class_name="label", n=4, threshold=0.9):
         if not isinstance(keywords, list) or not isinstance(rules, list):
-            print("ERROR: keywords and rules must be given as a list of values. \n KEYWORDS: [k1, k2, ..., kn] \n RULES: [(rule_1, label), (rule_2, label), ..., (rule_n, label)]")
+            logger.error("ERROR: keywords and rules must be given as a list of values. \n KEYWORDS: [k1, k2, ..., kn] \n RULES: [(rule_1, label), (rule_2, label), ..., (rule_n, label)]")
             return
         
-        print("INIT", flush=True)
+        logger.info("Initalizing CREAM...", flush=True)
         self.device, _ = get_device_settings()
 
         self.class_name = class_name
@@ -67,7 +67,7 @@ class CREAM():
         self.encoded_rules = torch.nn.functional.normalize(self.encoded_rules, p=2, dim=1)
         self.rule_map = dict(zip(self.rule_texts, self.rules[self.class_name].tolist()))
 
-        print("Finished.", flush=True)
+        logger.info("Finished.", flush=True)
 
     def get_sim(self, q):
         sim_scores = util.cos_sim(self.model.encode([q]), self.encoded_rules)
@@ -129,7 +129,7 @@ class JobTag():
         self.classes = sorted([x for x in self.keywords])
 
         if class_name not in self.classes:
-            print("Usage Error: please select one of the available classes:\n[{}]".format(" | ".join(self.classes)))
+            logger.error("Usage Error: please select one of the available classes:\n[{}]".format(" | ".join(self.classes)))
             return
         
         self.class_name = class_name
@@ -139,7 +139,7 @@ class JobTag():
                 filename="v1/{}.lzma".format(self.class_name)
             )
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
-            print("No internet connection detected. Attempting to load from cache...")
+            logger.info("No internet connection detected. Attempting to load from cache...")
             try:
                 return hf_hub_download(
                     repo_id="loyoladatamining/JobTag", 
