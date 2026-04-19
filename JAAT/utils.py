@@ -9,12 +9,7 @@ from tqdm.auto import tqdm
 
 tqdm.pandas()
 
-from .base import logger
-from .match import MODEL_CACHE
-
-GLOBAL_SETTINGS = {
-    "show_progress": True
-}
+from .config import GLOBAL_SETTINGS, MODEL_CACHE, logger
 
 def setup() -> None:
     logger.info("--- JAAT Setup ---")
