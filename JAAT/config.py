@@ -1,4 +1,5 @@
 import logging
+import os
 
 logger = logging.getLogger("JAAT")
 
@@ -14,3 +15,27 @@ GLOBAL_SETTINGS = {
 }
 
 MODEL_CACHE = {}
+
+VERSION = "0.9.12 (beta)"
+DESCRIPTION = "An NLP-powered engine for the efficient and accurate analysis of job advertisement texts."
+
+CYAN = "\033[96m"
+GREEN = "\033[92m"
+RESET = "\033[0m"
+BOLD = "\033[1m"
+DIM = "\033[2m"
+
+JAAT_ART = r"""
+      ___           ___           ___           ___     
+     /\  \         /\  \         /\  \         /\  \    
+     \:\  \       /::\  \       /::\  \        \:\  \   
+      \:\  \     /:/\:\  \     /:/\:\  \        \:\  \  
+  ___  \:\  \   /::\~\:\  \   /::\~\:\  \       /::\  \ 
+ /\  \  \:\__\ /:/\:\ \:\__\ /:/\:\ \:\__\     /:/\:\__\
+ \:\  \ /:/  / \/__\:\/:/  / \/__\:\/:/  /    /:/  \/__/
+  \:\  /:/  /       \::/  /       \::/  /    /:/  /     
+   \:\/:/  /        /:/  /        /:/  /     \/__/      
+    \::/  /        /:/  /        /:/  /                 
+     \/__/         \/__/         \/__/                  
+"""
+SHOW_ART = os.isatty(1)
