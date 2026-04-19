@@ -3,7 +3,7 @@ from pathlib import Path
 import ahocorasick
 import pickle
 
-from .base import logger
+from .config import logger
 from .utils import progress_bar
 
 class ConceptSearch():

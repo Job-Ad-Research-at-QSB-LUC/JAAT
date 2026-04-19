@@ -11,7 +11,8 @@ import nltk
 import syllables
 import ahocorasick
 
-from .base import ListDataset, sent_tokenize, get_device_settings, logger
+from .base import ListDataset, sent_tokenize, get_device_settings
+from .config import logger
 from .utils import progress_bar
 
 class StdName():

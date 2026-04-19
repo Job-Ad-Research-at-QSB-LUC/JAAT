@@ -14,7 +14,8 @@ from huggingface_hub import hf_hub_download
 from huggingface_hub.utils import LocalEntryNotFoundError
 import requests
 
-from .base import get_device_settings, logger
+from .base import get_device_settings
+from .config import logger
 from .utils import progress_bar
 
 CLEAN_RE = re.compile(r'[^a-z0-9]+')

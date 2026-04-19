@@ -9,10 +9,9 @@ import importlib_resources as impresources
 import pickle
 import json
 
-from .base import ListDataset, get_device_settings, sent_tokenize, logger
+from .base import ListDataset, get_device_settings, sent_tokenize
+from .config import MODEL_CACHE, logger
 from .utils import progress_bar
-
-MODEL_CACHE = {}
 
 def get_shared_model(model_name: str, device: str) -> SentenceTransformer:
     if model_name not in MODEL_CACHE:
