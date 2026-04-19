@@ -2,7 +2,12 @@ import os
 import sys
 import time
 import threading
+import re
 from .config import JAAT_ART, SHOW_ART, VERSION, DESCRIPTION, CYAN, GREEN, RESET, BOLD, DIM
+
+def get_visible_len(text: str) -> int:
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+    return len(ansi_escape.sub('', text))
 
 class Loader:
     def __init__(self, desc="Loading JAAT..."):
@@ -29,15 +34,15 @@ class Loader:
             
             for line in JAAT_ART.strip("\n").split("\n"):
                 content = line.ljust(self.width - 4)
-                print(f"{side}  {CYAN}{content}{RESET} {side}")
+                print(f"{side} {CYAN}{content}{RESET} {side}")
             
             print(f"{side}" + " " * (self.width - 2) + f"{side}")
             
             welcome_msg = f"Welcome to JAAT v{VERSION}".center(self.width - 4)
             desc_msg = DESCRIPTION.center(self.width - 4)
             
-            print(f"{side}  {BOLD}{welcome_msg}{RESET} {side}")
-            print(f"{side}  {DIM}{desc_msg}{RESET} {side}")
+            print(f"{side} {BOLD}{welcome_msg}{RESET} {side}")
+            print(f"{side} {DIM}{desc_msg}{RESET} {side}")
             print(f"{DIM}{top_bottom}{RESET}\n")
             
             self.thread = threading.Thread(target=self._animate, daemon=True)
