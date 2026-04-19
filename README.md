@@ -79,38 +79,54 @@ The first module consists of a tool to extract relevant tasks, according to O*NE
 
 After importing the module, simply instantiate the `TaskMatch` object:
 
-`TM = JAAT.TaskMatch()`
+```python
+TM = JAAT.TaskMatch()
+```
 
 Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
 
-`TM = TaskMatch(threshold=0.85)`
+```python
+TM = TaskMatch(threshold=0.85)
+```
 
 Then, run it on any given (job ad) text:
 
-`tasks = TM.get_tasks(TEXT)`
+```python
+tasks = TM.get_tasks(TEXT)
+```
 
 The output will be a list of tuples, matching an ONET task ID and its title (description). In case no tasks are matched, an empty list will be returned. Example output:
 
-`[('16363', 'Identify operational requirements for new systems to inform selection of technological solutions.'), ('16987', 'Prepare documentation or presentations, including charts, photos, or graphs.'), ('9583', 'Assign duties to other staff and give instructions regarding work methods and routines.')]`
+```python
+[('16363', 'Identify operational requirements for new systems to inform selection of technological solutions.'), ('16987', 'Prepare documentation or presentations, including charts, photos, or graphs.'), ('9583', 'Assign duties to other staff and give instructions regarding work methods and routines.')]
+```
 
 For batch processing, run:
 
-`tasks = TM.get_tasks_batch(LIST_OF_TEXTS)`
+```python
+tasks = TM.get_tasks_batch(LIST_OF_TEXTS)
+```
 
 ### TitleMatch (v2)
 The second module assists in matching input job ad titles to coded job titles from O*NET, along with providing useful information about the title.
 
 After importing the module, simply instantiate the `TitleMatch` object:
 
-`TM = JAAT.TitleMatch()`
+```python
+TM = JAAT.TitleMatch()
+```
 
 Then, run it on any given (job ad) text:
 
-`matched_title = TM.get_title(TEXT)`
+```
+matched_title = TM.get_title(TEXT)
+```
 
 Note that this function will work on either single texts or a list of input texts. The return type will be a list of tuples, each tuple of format:
 
-`(MATCHED_TITLE, MATCHED_TITLE_CODE, MATCH_SCORE, TITLE_VALUE, TITLE_FEATURES)`
+```python
+(MATCHED_TITLE, MATCHED_TITLE_CODE, MATCH_SCORE, TITLE_VALUE, TITLE_FEATURES)
+```
 
 Each tuple returned corresponds in order to the input text(s). Note that the returned features will be a semi-colon separated string of feature codes. 
 
@@ -119,19 +135,25 @@ The third module is capable of extracting the firm (company) name from a text (n
 
 After importing the module, simply instantiate the `FirmExtract` object:
 
-`FE = JAAT.FirmExtract()`
+```python
+FE = JAAT.FirmExtract()
+```
 
 This initiates the firm extraction object with our custom NER model: firmNER. Optionally, you can choose to have all extracted firm names standardized according to the method proposed by [Wasi and Flaeen](https://www.aaronflaaen.com/uploads/3/1/2/4/31243277/wasi_flaaen_statarecordlinkageutilities_20140401.pdf). This can be done by setting the `standardize` parameter to `True`.
 
 Following this, run it on any given (job ad) text:
 
-`firms = FE.get_firm(TEXT)`
+```python
+firms = FE.get_firm(TEXT)
+```
 
 This will return a firm name if found, otherwise `None`.
 
 `FirmExtract` also features batch processing. For batch processing, run:
 
-`firm_names = FE.get_firm_batch(LIST_OF_TEXTS)`
+```python
+firm_names = FE.get_firm_batch(LIST_OF_TEXTS)
+```
 
 This will return a list of firm names (or `None` where no name is found).
 
@@ -140,15 +162,21 @@ This will return a list of firm names (or `None` where no name is found).
 
 To get started, create a new `WageExtract` object:
 
-`W = JAAT.WageExtract()`
+```python
+W = JAAT.WageExtract()
+```
 
 Then, you can classify any text by calling the following function:
 
-`prediction = W.get_wage(TEXT)`
+```python
+prediction = W.get_wage(TEXT)
+```
 
 This will return either a dictionary of the extra min/max/frequency values, or the statement `The provided text does not contain a wage statement.`. For larger batches of texts, use the batch function:
 
-`predictions = W.get_wage_batch(LIST_OF_TEXTS)`
+```python
+predictions = W.get_wage_batch(LIST_OF_TEXTS)
+```
 
 This now will return a list predictions in the same order as the inputted texts, with each value either as a dictionary or `None`.
 
@@ -157,42 +185,56 @@ This now will return a list predictions in the same order as the inputted texts,
 
 After importing the module, simply instantiate the `SkillMatch` object:
 
-`SM = JAAT.SkillMatch()`
+```python
+SM = JAAT.SkillMatch()
+```
 
 Optionally, we can provide a threshold value (default = 0.87, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
 
-`SM = SkillMatch(threshold=0.8)`
+```python
+SM = SkillMatch(threshold=0.8)
+```
 
 Then, run it on any given (job ad) text:
 
-`skills = SM.get_skills(TEXT)`
+```python
+skills = SM.get_skills(TEXT)
+```
 
 The output will be a list of tuples, matching an skills label to its EuropaCode. In case no skills are matched, an empty list will be returned. Example output:
 
-`[('designing systems and products', 'S1.11'), ('work conceptually', 'T2.4'), ('interact with users to gather requirements', 'S1.7')]`
+```python
+[('designing systems and products', 'S1.11'), ('work conceptually', 'T2.4'), ('interact with users to gather requirements', 'S1.7')]
+```
 
 For batch processing, run:
 
-`skills = SM.get_skills_batch(LIST_OF_TEXTS)`
+```python
+skills = SM.get_skills_batch(LIST_OF_TEXTS)
+```
 
 ### AIMatch (beta!)
 This module extracts and codifies all AI-related tasks, skills, expertise, and requirements that are stated in job ad texts.
 
 As per usual, load in the module:
 
-`AI = JAAT.AIMatch()`
+```python
+AI = JAAT.AIMatch()
+```
 
 Following this, `AIMatch` can be used on single texts or in batch mode:
 
-`res = AI.get_ai(TEXT)`
-
-or
-
-`res = CS.get_ai_batch(LIST_OF_TEXTS)`
+```python
+res = AI.get_ai(TEXT)
+# or
+res = AI.get_ai_batch(LIST_OF_TEXTS)
+```
 
 The return value for `get_ai` is a 5-tuple, with the following structure:
 
-`(LIST OF MATECHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)`
+```python
+(LIST OF MATCHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)
+```
 
 The matched concept/codes are presented in tuples. The "average AI score" is a high-level indicator of the "AI-ness" of the matches, averaged by the number of matches. Both confidence scores are semicolon-delimiter, and they correspond directly to the list of matched concepts. In the case of batch mode, all of these returned values are placed in lists, corresponding to each text input.
 
@@ -211,7 +253,9 @@ In the most basic form, the *labels* are binary: 1 denotes the presence of a cla
 
 Given these two inputs, one can instantiate the `CREAM` object.
 
-`C = JAAT.CREAM(keywords=KEYWORDS, rules=RULES)`
+```python
+C = JAAT.CREAM(keywords=KEYWORDS, rules=RULES)
+```
 
 There are also three optional parameters:
 
@@ -221,7 +265,9 @@ There are also three optional parameters:
 
 With this set up, all you need to do is run `CREAM` on a list of texts, and the output will be a DataFrame will the relevant results.
 
-`res = C.run(LIST_OF_TEXTS)`
+```python
+res = C.run(LIST_OF_TEXTS)
+```
 
 Specifically, the output will be a Pandas DataFrame will the following columns:
 
@@ -238,30 +284,40 @@ As of now the following classes are supported:
 
 To get started, create a new `JobTag` object by doing the following:
 
-`J = JAAT.JobTag(class_name=CLASS)`
+```python
+J = JAAT.JobTag(class_name=CLASS)
+```
 
 where `CLASS` is replaced by one of the supported classes. Optionally, you can also specify an `n` parameter (default: 4), which defines how large of a context window around keywords to consider.
 
 Then, you can classify any text (binary classification, 1 == positive) by calling the following function:
 
-`prediction = J.get_tag(TEXT)`
+```python
+prediction = J.get_tag(TEXT)
+```
 
 This will return a tuple of the form `(class_name, 1/0)`. For larger batches of texts, use the batch function:
 
-`predictions = J.get_tag_batch(LIST_OF_TEXTS)`
+```python
+predictions = J.get_tag_batch(LIST_OF_TEXTS)
+```
 
 This now will return a list of 1/0 predictions, in the same order as the input texts.
 
 ### Readability
 This module provides a simple utility for calculating the Flesch-Kincaid readability score for a job posting text or texts. To start:
 
-`R = JAAT.Readability()`
+```python
+R = JAAT.Readability()
+```
 
 Then, simply run on a text or batch of texts:
 
-`score = R.get_readability(TEXT)`
-
-`scores = R.get_readability_batch(LIST_OF_TEXTS)`
+```python
+score = R.get_readability(TEXT)
+# or
+scores = R.get_readability_batch(LIST_OF_TEXTS)
+```
 
 The returned scores are floats, rounded to two decimal places.
 
@@ -270,7 +326,7 @@ This module is a simple and highly efficient tool to extract "concepts" from a c
 
 In the `data/automatons` directory, we provide some pre-packaged concept maps, which can be used direct in `ConceptSearch`. Additionally, you can create your own, with the following structure:
 
-```
+```json
 CONCEPTS = {
     "keyword1": ("value1", "value2", ...),
     "keyword2": ("value1", "value2", ...),
@@ -281,19 +337,19 @@ CONCEPTS = {
 
 Using this structure, you can initialize `ConceptSearch` in one of the following two ways:
 
-`CS = JAAT.ConceptSearch(concept_map=CONCEPTS)`
-
-OR
-
-`CS = JAAT.ConceptSearch(concept_file=/path/to/concepts.pkl)`
+```python
+CS = JAAT.ConceptSearch(concept_map=CONCEPTS)
+# or
+CS = JAAT.ConceptSearch(concept_file=/path/to/concepts.pkl)
+```
 
 Following this, `ConceptSearch` can be used on single texts or in batch mode:
 
-`res = CS.get_concepts(TEXT)`
-
-or
-
-`res = CS.get_concepts_batch(LIST_OF_TEXTS)`
+```python
+res = CS.get_concepts(TEXT)
+# or
+res = CS.get_concepts_batch(LIST_OF_TEXTS)
+```
 
 The returned objects will be a list of tuples for each text, wherein the tuples represent the value tuples of the found (matched) keywords.
 
