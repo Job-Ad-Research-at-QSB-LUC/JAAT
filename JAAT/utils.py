@@ -10,7 +10,7 @@ from tqdm.auto import tqdm
 tqdm.pandas()
 
 from .base import logger
-from .matching import MODEL_CACHE
+from .match import MODEL_CACHE
 
 GLOBAL_SETTINGS = {
     "show_progress": True
