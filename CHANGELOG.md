@@ -1,18 +1,20 @@
-## [0.9.7] - 2026-04-19
+## [0.9.0-8] - 2026-04-19
+Our biggest updates yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
+
 ### Added
  - `JAAT` now includes a bunch of helpful utils. Check out the README for more details!
-
-## [0.9.0-6] - 2026-04-17
-Our biggest updates yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
+ - You can also toggle progress bars globally (use `toggle_progress`).
 
 ### Changed
  - All `JAAT` modules can now be imported individually, allowing for faster load times. Simply call `from JAAT import XYZ` with your module of choice.
  - Match-based modules have been optimized for speed.
  - Other minor optimizations and improvements to allow for faster compuation and less RAM load.
+ - Typing hints for enhanced ease of use in IDEs and notebooks.
 
 ### Removed
  - Old data files and demos have been archived.
 
+---
 
 ## [0.8.3] - 2026-04-12
 ### Changed

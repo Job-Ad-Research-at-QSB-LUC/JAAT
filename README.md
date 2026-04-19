@@ -48,6 +48,7 @@ To process (potentially) millions of text records without crashing your system, 
 
 ```python
 from JAAT import TaskMatch, utils
+utils.toggle_progress(False) # supress progress bars for all modules (they are enabled by default)
 
 TM = TaskMatch()
 job_ads = [...] # List of (many) documents / strings
