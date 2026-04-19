@@ -1,4 +1,4 @@
-## [0.9.0-8] - 2026-04-19
+## [0.9.x] - 2026-04-19
 Our biggest updates yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
 
 ### Added
