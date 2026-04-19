@@ -27,7 +27,54 @@ or alternatively...
 
 `from JAAT import [MODULE]`
 
-## TaskMatch (v2)
+## Utilities and Pipeline Best Practices
+The `utils` module of `JAAT` provides helpful tools for managing hardware resources and optimizing throughput for large datasets.
+
+### Hardware Diagnostics and Setup
+Before running `JAAT`, use `setup` to verify environment integrity and `diagnostic` to ensure your GPU is correctly recognized.
+
+```python
+import JAAT
+
+# Download and verify necessary resources
+JAAT.setup()
+
+# Print a diagnostic report 
+JAAT.diagnostic()
+```
+
+### High-Volume Processing
+To process (potentially) millions of text records without crashing your system, use `chunker` to feed modules, `validate_inputs` to ensure correct text format, and `clear_cache` to manage memory between stages.
+
+```python
+from JAAT import TaskMatch, utils
+
+TM = TaskMatch()
+job_ads = [...] # List of (many) documents / strings
+
+for batch in utils.chunker(job_ads, size=2048):
+    valid = validate_inputs(batch)
+    results = TM.get_tasks_batch(valid)
+    
+    # ... save or process your outputs here ...
+    
+# Clear memory and free up resources before starting the next JAAT module
+utils.clear_cache()
+```
+
+### Resource Management
+For long-running pipelines or scripts that use multiple JAAT modules, use `shutdown` to completely release GPU resources.
+
+```python
+JAAT.shutdown()
+```
+
+---
+
+## Primary Modules
+Below, you will find helpful usage tips for the primary `JAAT` modules. Starting up is quick and easy!
+
+### TaskMatch (v2)
 The first module consists of a tool to extract relevant tasks, according to O*NET, given input job ad texts.
 
 After importing the module, simply instantiate the `TaskMatch` object:
@@ -50,7 +97,7 @@ For batch processing, run:
 
 `tasks = TM.get_tasks_batch(LIST_OF_TEXTS)`
 
-## TitleMatch (v2)
+### TitleMatch (v2)
 The second module assists in matching input job ad titles to coded job titles from O*NET, along with providing useful information about the title.
 
 After importing the module, simply instantiate the `TitleMatch` object:
@@ -67,7 +114,7 @@ Note that this function will work on either single texts or a list of input text
 
 Each tuple returned corresponds in order to the input text(s). Note that the returned features will be a semi-colon separated string of feature codes. 
 
-## FirmExtract
+### FirmExtract
 The third module is capable of extracting the firm (company) name from a text (not necessarily only job ad texts).
 
 After importing the module, simply instantiate the `FirmExtract` object:
@@ -88,7 +135,7 @@ This will return a firm name if found, otherwise `None`.
 
 This will return a list of firm names (or `None` where no name is found).
 
-## WageExtract
+### WageExtract
 `WageExtract` is used to extract wages (min and max) from a text, as well as the frequency associated with these values (i.e., hourly, weekly, monthly, or annually).
 
 To get started, create a new `WageExtract` object:
@@ -105,7 +152,7 @@ This will return either a dictionary of the extra min/max/frequency values, or t
 
 This now will return a list predictions in the same order as the inputted texts, with each value either as a dictionary or `None`.
 
-## SkillMatch
+### SkillMatch
 `SkillMatch` is a tool to identify and extract required skills from a job posting, very similar to `TaskMatch`. The output of this tool will be all identified skill labels in a provided text, mapped to their respective EuropaCode.
 
 After importing the module, simply instantiate the `SkillMatch` object:
@@ -128,7 +175,7 @@ For batch processing, run:
 
 `skills = SM.get_skills_batch(LIST_OF_TEXTS)`
 
-## AIMatch (beta!)
+### AIMatch (beta!)
 This module extracts and codifies all AI-related tasks, skills, expertise, and requirements that are stated in job ad texts.
 
 As per usual, load in the module:
