@@ -3,7 +3,7 @@ import sys
 import time
 import threading
 import re
-from .config import JAAT_ART, SHOW_ART, VERSION, DESCRIPTION, CYAN, GREEN, RESET, BOLD, DIM
+from .config import JAAT_ART, SHOW_ART, VERSION, COPYRIGHT, DESCRIPTION, CYAN, GREEN, RESET, BOLD, DIM
 
 def get_visible_len(text: str) -> int:
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
@@ -39,9 +39,11 @@ class Loader:
             print(f"{side}" + " " * (self.width - 2) + f"{side}")
             
             welcome_msg = f"Welcome to JAAT v{VERSION}".center(self.width - 4)
+            copyright_msg = COPYRIGHT.center(self.width - 4)
             desc_msg = DESCRIPTION.center(self.width - 4)
             
             print(f"{side} {BOLD}{welcome_msg}{RESET} {side}")
+            print(f"{side} {DIM}{copyright_msg}{RESET} {side}")
             print(f"{side} {DIM}{desc_msg}{RESET} {side}")
             print(f"{DIM}{top_bottom}{RESET}\n")
             
