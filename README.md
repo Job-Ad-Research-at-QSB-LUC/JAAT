@@ -325,7 +325,7 @@ The returned scores are floats, rounded to two decimal places.
 ### ConceptSearch
 This module is a simple and highly efficient tool to extract "concepts" from a corpus of texts. These concepts are defined by keywords, and they can be mapped to any arbitrary amount of rule values.
 
-In the `data/automatons` directory, we provide some pre-packaged concept maps, which can be used direct in `ConceptSearch`. Additionally, you can create your own, with the following structure:
+In the `automatons` directory, we provide some pre-packaged concept maps, which can be used directly in `ConceptSearch`. Additionally, you can create your own, with the following structure:
 
 ```json
 CONCEPTS = {
@@ -358,7 +358,7 @@ The returned objects will be a list of tuples for each text, wherein the tuples 
 
 This project has received generous support from the National Labor Exchange, the Russell Sage Foundation, the Washington Center for Equitable Growth.
 
-### Software and Data Citation
+### Citation
 If you find `JAAT` useful in your research, please consider citing our working paper that introduces many of the abovementioned modules:
 
 ```
