@@ -1,4 +1,4 @@
-![JAAT](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/raw/66e430896a8900038858a71161b20c19d0c67d89/public/logo.png "JAAT")
+![JAAT](https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/blob/main/public/logo_square.png?raw=true "JAAT")
 
 <div align="center">
 
