@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/logo.png" alt="JAAT" width="200"/>
+  <img src="https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/blob/66e430896a8900038858a71161b20c19d0c67d89/public/logo.png" alt="JAAT" width="200"/>
 
   # Job Ad Analysis Toolkit (JAAT)
 
