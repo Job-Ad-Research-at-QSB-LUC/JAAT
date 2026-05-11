@@ -159,7 +159,7 @@ class TitleMatch():
         self.value_pipe = pipeline("text-classification", model=self.value_model, tokenizer=self.value_tokenizer, device=self.device, function_to_apply="none")
 
         self.feature_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_feature").to(self.device)
-        self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature")
+        self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature", use_fast=False)
         self.feature_batch = batch_size
 
         logger.info("Finished.")
@@ -193,7 +193,7 @@ class TitleMatch():
         batches = self.batch(text, n=self.feature_batch)
         batches = ListDataset(list(batches))
         for b in progress_bar(batches, total=len(batches)):
-            inputs = self.feature_tokenizer.batch_encode_plus(b, truncation=True, max_length=32, padding="max_length", return_tensors="pt").to(self.device)
+            inputs = self.feature_tokenizer(list(b), truncation=True, max_length=32, padding="max_length", return_tensors="pt").to(self.device)
             outputs = self.feature_model(inputs.input_ids)
             logits = outputs.logits
             with torch.no_grad():

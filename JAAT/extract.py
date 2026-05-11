@@ -54,7 +54,7 @@ class FirmExtract():
 
         remove = string.punctuation
         remove = remove.replace(".", "").replace(",", "").replace("-", "").replace("&", "").replace("'","")
-        self.pattern = r"[{}]".format(remove)
+        self.pattern = re.compile(r"[{}]".format(re.escape(remove)))
 
         self.standardize = standardize
         if self.standardize == True:
