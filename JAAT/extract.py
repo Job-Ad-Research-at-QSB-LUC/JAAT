@@ -12,7 +12,7 @@ import syllables
 import ahocorasick
 
 from .base import ListDataset, sent_tokenize, get_device_settings
-from .config import logger
+from .config import logger, GLOBAL_SETTINGS
 from .utils import progress_bar
 
 class StdName():
@@ -46,10 +46,11 @@ class FirmExtract():
 
     def __init__(self, standardize: bool = True) -> None:
         self.device, _ = get_device_settings()
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
         model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/firmNER-v3", id2label={0: 'O', 1: 'B-ORG', 2: 'I-ORG'}, label2id={'O': 0, 'B-ORG': 1, 'I-ORG': 2})
         tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/firmNER-v3", model_max_length=1024, max_length=1024, truncation=True)
-        self.pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="max")
+        self.pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="max", num_workers=self.num_workers)
 
         remove = string.punctuation
         remove = remove.replace(".", "").replace(",", "").replace("-", "").replace("&", "").replace("'","")
@@ -126,6 +127,7 @@ class FirmExtract():
 class WageExtract():
     def __init__(self) -> None:
         self.device, self.batch_size = get_device_settings()
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
         self.keywords = [
             '$', 'dollar', 'dollars',
@@ -145,7 +147,7 @@ class WageExtract():
             max_length=64,
             truncation=True
         )
-        self.ispay_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        self.ispay_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=self.num_workers)
 
         model = model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/wage-ner-v2", max_length=128, id2label={0:'O', 1:'B-MIN', 2:'B-MAX'}, label2id={'O': 0, 'B-MIN': 1, 'B-MAX': 2})
         tokenizer = AutoTokenizer.from_pretrained(
@@ -154,7 +156,7 @@ class WageExtract():
             model_max_length=128,
             truncation=True
         )
-        self.ner_pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="simple")
+        self.ner_pipe = pipeline("ner", model=model, tokenizer=tokenizer, device=self.device, aggregation_strategy="simple", num_workers=self.num_workers)
 
         model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/pay-freq-v2")
         tokenizer = AutoTokenizer.from_pretrained(
@@ -162,7 +164,7 @@ class WageExtract():
             max_length=128,
             truncation=True
         )
-        self.freq_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=128, device=self.device, truncation=True)
+        self.freq_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=128, device=self.device, truncation=True, num_workers=self.num_workers)
 
     def preproc(self, text: str) -> str:
         text = text.replace("401k", "")
@@ -295,6 +297,7 @@ class WageExtract():
 class Readability():
     def __init__(self) -> None:
         self.PUNCT = set(string.punctuation)
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
     def fk(self, text: str) -> Optional[float]:
         if text == "":
@@ -311,7 +314,7 @@ class Readability():
     
     def get_readability_batch(self, texts: List[str]) -> List[Optional[float]]:
         scores = []
-        with mp.Pool(int(mp.cpu_count() / 2)) as pool:
+        with mp.Pool(self.num_workers) as pool:
             for res in progress_bar(pool.imap(self.fk, texts), total=len(texts)):
                 scores.append(res)
         return scores

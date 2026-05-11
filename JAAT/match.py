@@ -10,14 +10,12 @@ import pickle
 import json
 
 from .base import ListDataset, get_device_settings, sent_tokenize
-from .config import MODEL_CACHE, logger
+from .config import MODEL_CACHE, logger, GLOBAL_SETTINGS
 from .utils import progress_bar
 
 def get_shared_model(model_name: str, device: str) -> SentenceTransformer:
     if model_name not in MODEL_CACHE:
         model = SentenceTransformer(model_name, device=device)
-        # if device == "cuda":
-        #     model = model.half()
         MODEL_CACHE[model_name] = model
     return MODEL_CACHE[model_name]
 
@@ -25,6 +23,7 @@ class TaskMatch():
     def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-small", classification_model: str = "loyoladatamining/task-classifier-mini-v3") -> None:
         logger.info("Initalizing TaskMatch...")
         self.device, self.batch_size = get_device_settings()
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
         self.threshold = threshold
 
@@ -44,7 +43,7 @@ class TaskMatch():
             max_length=64,
             truncation=True
         )
-        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=self.num_workers)
         logger.info("Finished.")
 
     def get_candidates(self, text: str) -> List[str]:
@@ -289,6 +288,7 @@ class SkillMatch():
     def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-large", classification_model: str = "loyoladatamining/skill-classifier-base-v2") -> None:
         logger.info("Initializing SkillMatch...")
         self.device, self.batch_size = get_device_settings()
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
         self.threshold = threshold
 
@@ -310,7 +310,7 @@ class SkillMatch():
             max_length=64,
             truncation=True
         )
-        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=mp.cpu_count())
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=self.num_workers)
         logger.info("Finished.")
 
     def get_candidates(self, text: str) -> List[str]:
@@ -405,12 +405,8 @@ class SkillMatch():
 class AIMatch():
     def __init__(self, threshold: float = 0.87, embedding_model: str = "thenlper/gte-small", classification_model: str = "loyoladatamining/ai-classifier-small-v4") -> None:
         logger.info("Initializing AIMatch...")
-        if torch.cuda.is_available() == True:
-            self.device = "cuda"
-            self.batch_size = 2048
-        else:
-            self.device = "cpu"
-            self.batch_size = 64
+        self.device, self.batch_size = get_device_settings()
+        self.num_workers = 1 if GLOBAL_SETTINGS["single_threaded"] == True else int(mp.cpu_count() / 2)
 
         self.threshold = threshold
 
@@ -433,7 +429,7 @@ class AIMatch():
             max_length=128,
             truncation=True
         )
-        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=128, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=8)
+        self.pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer, max_length=128, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=self.num_workers)
         logger.info("Finished.")
 
     def get_candidates(self, text: str) -> List[str]:

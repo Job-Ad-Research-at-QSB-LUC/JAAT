@@ -117,6 +117,12 @@ def toggle_progress(show: bool) -> None:
     status = "enabled" if show else "disabled"
     logger.info("JAAT progress bars are now {}.".format(status))
 
+def toggle_threads(single_threaded: bool) -> None:
+    """Globally enable or disable single-threaded pipelines."""
+    GLOBAL_SETTINGS["single_threaded"] = single_threaded
+    status = "single threaded: True" if single_threaded else "single threaded: True"
+    logger.info("JAAT setting updated | {}.".format(status))
+
 def progress_bar(iterable: Iterable[Any], desc: str = "Processing", **kwargs) -> Iterable[Any]:
     """
     Wraps an iterable with a progress bar, if enabled globally.

@@ -11,12 +11,13 @@ if not logger.handlers:
     logger.setLevel(logging.INFO)
 
 GLOBAL_SETTINGS = {
-    "show_progress": True
+    "show_progress": True,
+    "single_threaded": False
 }
 
 MODEL_CACHE = {}
 
-VERSION = "1.0.0"
+VERSION = "1.0.6"
 COPYRIGHT = "© 2025-2026 Loyola University Chicago. All rights reserved."
 DESCRIPTION = "An NLP-powered toolkit for job ad text analysis."
 
