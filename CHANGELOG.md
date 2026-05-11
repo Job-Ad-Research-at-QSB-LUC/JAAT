@@ -1,3 +1,10 @@
+## [1.0.x] - 2026-04-21
+`JAAT` is now out of beta! We invite you to test all of the new features.
+
+### Changed
+ - Minor updates
+ - Users can now toggle single- vs. multi-threaded running (for processing pipelines), using `toggle_threads`
+
 ## [0.9.x] - 2026-04-19
 Our biggest updates yet! `JAAT` has been modularized and optimized for ease of use and even faster results.
 

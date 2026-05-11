@@ -68,10 +68,10 @@ with Loader():
     from .extract import FirmExtract, WageExtract, Readability
     from .label import CREAM, JobTag
     from .search import ConceptSearch
-    from .utils import setup, chunker, validate_inputs, diagnostic, clear_cache, shutdown, toggle_progress
+    from .utils import setup, chunker, validate_inputs, diagnostic, clear_cache, shutdown, toggle_progress, toggle_threads
 
 __all__ = [
-    "setup", "chunker", "validate_inputs", "diagnostic", "clear_cache", "shutdown", "toggle_progress",
+    "setup", "chunker", "validate_inputs", "diagnostic", "clear_cache", "shutdown", "toggle_progress", "toggle_threads",
     "TaskMatch", "TitleMatch", "SkillMatch", "ActivityMatch", "AIMatch",
     "FirmExtract", "WageExtract", "Readability",
     "CREAM", "JobTag", "ConceptSearch"
