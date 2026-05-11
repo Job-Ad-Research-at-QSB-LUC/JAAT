@@ -210,7 +210,7 @@ class TitleMatch():
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
         
         with torch.no_grad():
-            sim_scores = torch.mm(q_embed, self.title_embed.T)
+            sim_scores = torch.mm(q_embed.float(), self.title_embed.T.float())
         max_scores, max_indices = torch.max(sim_scores, dim=1)
 
         max_scores = [round(x, 3) for x in max_scores.cpu().tolist()]

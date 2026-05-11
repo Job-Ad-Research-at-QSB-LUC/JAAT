@@ -109,7 +109,7 @@ class FirmExtract():
             ret = set(company)
 
         if return_score == True and return_one == True:
-            return ret, score
+            return ret, float(score)
         else:
             return ret
 
