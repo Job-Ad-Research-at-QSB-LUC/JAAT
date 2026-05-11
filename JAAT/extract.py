@@ -149,7 +149,7 @@ class WageExtract():
         )
         self.ispay_pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, max_length=64, device=self.device, truncation=True, batch_size=self.batch_size, num_workers=self.num_workers)
 
-        model = model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/wage-ner-v2", max_length=128, id2label={0:'O', 1:'B-MIN', 2:'B-MAX'}, label2id={'O': 0, 'B-MIN': 1, 'B-MAX': 2})
+        model = AutoModelForTokenClassification.from_pretrained("loyoladatamining/wage-ner-v2", id2label={0:'O', 1:'B-MIN', 2:'B-MAX'}, label2id={'O': 0, 'B-MIN': 1, 'B-MAX': 2})
         tokenizer = AutoTokenizer.from_pretrained(
             "loyoladatamining/wage-ner-v2",
             max_length=128,
