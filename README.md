@@ -126,7 +126,7 @@ matched_title = TM.get_title(TEXT)
 Note that this function will work on either single texts or a list of input texts. The return type will be a list of tuples, each tuple of format:
 
 ```python
-(MATCHED_TITLE, MATCHED_TITLE_CODE, MATCH_SCORE, TITLE_VALUE, TITLE_FEATURES)
+(MATCHED_TITLE_CODE, MATCH_SCORE, TITLE_VALUE, TITLE_FEATURES)
 ```
 
 Each tuple returned corresponds in order to the input text(s). Note that the returned features will be a semi-colon separated string of feature codes. 
@@ -234,7 +234,7 @@ res = AI.get_ai_batch(LIST_OF_TEXTS)
 The return value for `get_ai` is a 5-tuple, with the following structure:
 
 ```python
-(LIST OF MATCHED CONCEPTS/CODES, AVERAGE AI SCORE, TOTAL MATCHES, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)
+(LIST OF MATCHED CONCEPTS/CODES, TOTAL MATCHES, AVERAGE AI SCORE, EXTRACTION CONFIDENCES, MATCH CONFIDENCES)
 ```
 
 The matched concept/codes are presented in tuples. The "average AI score" is a high-level indicator of the "AI-ness" of the matches, averaged by the number of matches. Both confidence scores are semicolon-delimiter, and they correspond directly to the list of matched concepts. In the case of batch mode, all of these returned values are placed in lists, corresponding to each text input.
