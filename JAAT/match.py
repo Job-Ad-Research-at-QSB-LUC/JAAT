@@ -31,7 +31,7 @@ class TaskMatch():
         self.embedding_model = get_shared_model(embedding_model, self.device)
         tasks = pd.read_csv(impresources.files("JAAT.data") / "Task_DWA.csv")[["Task ID", "Task"]].drop_duplicates()
         self.tasks = tasks.reset_index().drop("index", axis=1)
-        self.task_embed = self.embedding_model.encode(tasks.Task.to_list(), convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.task_embed = self.embedding_model.encode(tasks.Task.to_list(), convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         self.task_embed = self.task_embed.to(self.device)
         self.task_embed = torch.nn.functional.normalize(self.task_embed, p=2, dim=1)
 
@@ -54,7 +54,7 @@ class TaskMatch():
         predictions = []
 
         temp = ListDataset(all_data)
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -74,7 +74,7 @@ class TaskMatch():
         predictions = []
 
         temp = ListDataset([x[1] for x in all_data])
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -85,11 +85,12 @@ class TaskMatch():
         return positive
 
     def get_tasks(self, text: str) -> List[Tuple[str, str]]:
+        logger.info("Extracting task candidates...")
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
 
-        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -109,11 +110,12 @@ class TaskMatch():
         return matched_tasks
     
     def get_tasks_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
+        logger.info("Extracting task candidates...")
         all_data = self.get_candidates_batch(texts)
         if len(all_data) == 0:
             return [[] for _ in range(len(texts))]
 
-        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -205,7 +207,7 @@ class TitleMatch():
                     features.append(";".join(temp))
   
         logger.info("Matching titles to codes...")
-        q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True)
+        q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
         
@@ -232,11 +234,12 @@ class ActivityMatch(TaskMatch):
         self.act_embed = torch.nn.functional.normalize(self.act_embed, p=2, dim=1)
 
     def get_activities(self, text: str) -> List[Tuple[str, str, str]]:
+        logger.info("Extracting activity candidates...")
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
 
-        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -257,11 +260,12 @@ class ActivityMatch(TaskMatch):
         return matched_acts
     
     def get_activities_batch(self, texts: List[str]) -> List[List[Tuple[str, str, str]]]:
+        logger.info("Extracting activity candidates...")
         all_data = self.get_candidates_batch(texts)
         if len(all_data) == 0:
             return [[] for _ in range(len(texts))]
 
-        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -296,7 +300,7 @@ class SkillMatch():
         self.embedding_model = get_shared_model(embedding_model, self.device)
         self.skills_df = pd.read_csv(impresources.files("JAAT.data") / "skills.csv")
         self.skills = list(set(self.skills_df["label"]))
-        self.skill_embed = self.embedding_model.encode(self.skills, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.skill_embed = self.embedding_model.encode(self.skills, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         self.skill_embed = self.skill_embed.to(self.device)
         self.skill_embed = torch.nn.functional.normalize(self.skill_embed, p=2, dim=1)
 
@@ -321,7 +325,7 @@ class SkillMatch():
         predictions = []
 
         temp = ListDataset(all_data)
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -341,7 +345,7 @@ class SkillMatch():
         predictions = []
 
         temp = ListDataset([x[1] for x in all_data])
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -352,11 +356,12 @@ class SkillMatch():
         return positive
 
     def get_skills(self, text: str) -> List[Tuple[str, str]]:
+        logger.info("Extracting skill candidates...")
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return []
 
-        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode(positive, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -376,11 +381,12 @@ class SkillMatch():
         return matched_skills
     
     def get_skills_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
+        logger.info("Extracting skill candidates...")
         all_data = self.get_candidates_batch(texts)
         if not all_data:
             return [[] for _ in range(len(texts))]
 
-        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode([x[1] for x in all_data], convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -414,7 +420,7 @@ class AIMatch():
         self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
         self.ai_df = pd.read_csv(impresources.files("JAAT.data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
-        self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=True)
+        self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         self.ai_embed = self.ai_embed.to(self.device)
         self.ai_embed = torch.nn.functional.normalize(self.ai_embed, p=2, dim=1)
 
@@ -440,7 +446,7 @@ class AIMatch():
         predictions = []
 
         temp = ListDataset(all_data)
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -460,7 +466,7 @@ class AIMatch():
         predictions = []
 
         temp = ListDataset([x[1] for x in all_data])
-        for r in self.pipe(temp):
+        for r in progress_bar(self.pipe(temp)):
             predictions.append(r)
 
         count = 0
@@ -471,11 +477,12 @@ class AIMatch():
         return positive
 
     def get_ai(self, text: str) -> Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]:
+        logger.info("Extracting AI candidates...")
         positive = self.get_candidates(text)
         if len(positive) == 0:
             return [], 0, 0.0, [], []
 
-        q_embed = self.embedding_model.encode([x[0] for x in positive], convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode([x[0] for x in positive], convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 
@@ -503,11 +510,12 @@ class AIMatch():
         return matched_ai, count, round(total_score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
     
     def get_ai_batch(self, texts: List[str]) -> List[Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]]:
+        logger.info("Extracting AI candidates...")
         all_data = self.get_candidates_batch(texts)
         if len(all_data) == 0: 
             return [[] for _ in range(len(texts))], [0]*len(texts), [0.0]*len(texts), [[] for _ in range(len(texts))], [[] for _ in range(len(texts))]
 
-        q_embed = self.embedding_model.encode([x[0][1] for x in all_data], convert_to_tensor=True, batch_size=64)
+        q_embed = self.embedding_model.encode([x[0][1] for x in all_data], convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
 

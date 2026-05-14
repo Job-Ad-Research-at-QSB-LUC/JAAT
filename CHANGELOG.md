@@ -4,6 +4,7 @@
 ### Changed
  - Minor updates
  - Bug fixes from the v0.9 updates
+ - More progress bar indicators, when enabled
  - Users can now toggle single- vs. multi-threaded running (for processing pipelines), using `toggle_threads`
 
 ## [0.9.x] - 2026-04-19
