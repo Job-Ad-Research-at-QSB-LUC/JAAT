@@ -207,7 +207,7 @@ class TitleMatch():
                     features.append(";".join(temp))
   
         logger.info("Matching titles to codes...")
-        q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=True, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
+        q_embed = self.embedding_model.encode(text, convert_to_tensor=True, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
         q_embed = q_embed.to(self.device)
         q_embed = torch.nn.functional.normalize(q_embed, p=2, dim=1)
         

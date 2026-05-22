@@ -17,7 +17,7 @@ GLOBAL_SETTINGS = {
 
 MODEL_CACHE = {}
 
-VERSION = "1.0.11"
+VERSION = "1.0.12"
 COPYRIGHT = "© 2025-2026 Loyola University Chicago. All rights reserved."
 DESCRIPTION = "An NLP-powered toolkit for job ad text analysis."
 
