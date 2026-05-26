@@ -1,3 +1,4 @@
+requests
 importlib_resources
 nltk
 pandas
