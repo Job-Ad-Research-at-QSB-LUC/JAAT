@@ -140,7 +140,7 @@ class TaskMatch():
     
 class TitleMatch():
     ## Note: since the title embeddings are pre-computed here, using the non-default embedding model will not work as intended!
-    def __init__(self, batch_size: int = 16, embedding_model: str = "thenlper/gte-small", feature_threshold: float = 0.9) -> None:
+    def __init__(self, batch_size: int = 16, embedding_model: str = "thenlper/gte-small", feature_threshold: float = 0.95) -> None:
         logger.info("Initializing TitleMatch...")
         self.device, _ = get_device_settings()
 
