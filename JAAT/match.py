@@ -140,7 +140,7 @@ class TaskMatch():
     
 class TitleMatch():
     ## Note: since the title embeddings are pre-computed here, using the non-default embedding model will not work as intended!
-    def __init__(self, batch_size: int = 16, embedding_model: str = "thenlper/gte-small") -> None:
+    def __init__(self, batch_size: int = 16, embedding_model: str = "thenlper/gte-small", feature_threshold: float = 0.9) -> None:
         logger.info("Initializing TitleMatch...")
         self.device, _ = get_device_settings()
 
@@ -163,6 +163,7 @@ class TitleMatch():
         self.feature_model = AutoModelForSequenceClassification.from_pretrained("loyoladatamining/title_feature").to(self.device)
         self.feature_tokenizer = AutoTokenizer.from_pretrained("loyoladatamining/title_feature", use_fast=False)
         self.feature_batch = batch_size
+        self.feature_threshold = feature_threshold
 
         logger.info("Finished.")
 
@@ -200,7 +201,7 @@ class TitleMatch():
             logits = outputs.logits
             with torch.no_grad():
                 for l in logits:
-                    res = (self.sigmoid(l.cpu()) > 0.98).numpy().astype(int).reshape(-1)
+                    res = (self.sigmoid(l.cpu()) > self.feature_threshold).numpy().astype(int).reshape(-1)
                     temp = sorted([self.feature_model.config.id2label[x] for x in np.where(res == 1)[0]])
                     if "none" in temp and len(temp) > 1:
                         temp = [x for x in temp if x != "none"]

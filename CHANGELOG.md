@@ -1,3 +1,9 @@
+## [1.1.x] - 2026-06-08
+Minor improvements and new features.
+
+### Changed
+ - For feature extraction in `TitleMatch`, the threshold is now paramterized and set to a default 0.9.
+
 ## [1.0.x] - 2026-04-21
 `JAAT` is now out of beta! We invite you to test all of the new features.
 
