@@ -418,7 +418,7 @@ class AIMatch():
         self.threshold = threshold
 
         logger.info("Preparing embeddings...")
-        self.embedding_model = SentenceTransformer(embedding_model, device=self.device)
+        self.embedding_model = get_shared_model(embedding_model, self.device)
         self.ai_df = pd.read_csv(impresources.files("JAAT.data") / "ai_a6_5_redacted_final2.csv")
         self.ai = self.ai_df["Statement"].to_list()
         self.ai_embed = self.embedding_model.encode(self.ai, convert_to_tensor=True, batch_size=64, show_progress_bar=GLOBAL_SETTINGS["show_progress"])
