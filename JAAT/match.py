@@ -109,7 +109,7 @@ class TaskMatch():
 
         return matched_tasks
     
-    def get_tasks_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
+    def get_tasks_batch(self, texts: List[str], return_original: bool = False) -> List[List[Tuple[str, str]]]:
         logger.info("Extracting task candidates...")
         all_data = self.get_candidates_batch(texts)
         if len(all_data) == 0:
@@ -130,11 +130,14 @@ class TaskMatch():
         for _ in range(len(texts)):
             matched_tasks.append([])
 
-        for i, (score, idx) in enumerate(zip(max_scores, max_indices)):
+        for i, (score, idx, d) in enumerate(zip(max_scores, max_indices, all_data)):
             if score >= self.threshold:
                 text_idx = all_data[i][0]
                 task_row = self.tasks.iloc[idx]
-                matched_tasks[text_idx].append((str(task_row["Task ID"]), task_row["Task"]))
+                if return_original:
+                    matched_tasks[text_idx].append((str(task_row["Task ID"]), task_row["Task"], d[1]))
+                else:
+                    matched_tasks[text_idx].append((str(task_row["Task ID"]), task_row["Task"]))
 
         return matched_tasks
     
@@ -381,7 +384,7 @@ class SkillMatch():
 
         return matched_skills
     
-    def get_skills_batch(self, texts: List[str]) -> List[List[Tuple[str, str]]]:
+    def get_skills_batch(self, texts: List[str], return_original: bool = False) -> List[List[Tuple[str, str]]]:
         logger.info("Extracting skill candidates...")
         all_data = self.get_candidates_batch(texts)
         if not all_data:
@@ -402,11 +405,14 @@ class SkillMatch():
         for _ in range(len(texts)):
             matched_skills.append([])
 
-        for i, (score, idx) in enumerate(zip(max_scores, max_indices)):
+        for i, (score, idx, d) in enumerate(zip(max_scores, max_indices, all_data)):
             if score >= self.threshold:
                 text_idx = all_data[i][0]
                 skill_row = self.skills[idx]
-                matched_skills[text_idx].append((skill_row, self.skill_map[skill_row]))
+                if return_original:
+                    matched_skills[text_idx].append((skill_row, self.skill_map[skill_row], d[1]))
+                else:
+                    matched_skills[text_idx].append((skill_row, self.skill_map[skill_row]))
         return matched_skills
     
 class AIMatch():
@@ -510,7 +516,7 @@ class AIMatch():
 
         return matched_ai, count, round(total_score / len(matched_ai), 3) if len(matched_ai) > 0 else 0, binary_scores, match_scores
     
-    def get_ai_batch(self, texts: List[str]) -> List[Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]]:
+    def get_ai_batch(self, texts: List[str], return_original: bool = False) -> List[Tuple[List[Tuple[str, str]], int, float, List[float], List[float]]]:
         logger.info("Extracting AI candidates...")
         all_data = self.get_candidates_batch(texts)
         if len(all_data) == 0: 
@@ -539,11 +545,14 @@ class AIMatch():
             binary_scores.append([])
             match_scores.append([])
 
-        for i, (score, idx) in enumerate(zip(max_scores, max_indices)):
+        for i, (score, idx, d) in enumerate(zip(max_scores, max_indices, all_data)):
             if score >= self.threshold:
                 text_idx = all_data[i][0][0]
                 ai_row = self.ai[idx]
-                matched_ai[text_idx].append((ai_row, self.ai_map[ai_row]))
+                if return_original:
+                    matched_ai[text_idx].append((ai_row, self.ai_map[ai_row], d[0][1]))
+                else:
+                    matched_ai[text_idx].append((ai_row, self.ai_map[ai_row]))
                 match_scores[text_idx].append(score)
                 scores[text_idx] += self.score_map[ai_row]
                 counts[text_idx] += 1

@@ -1,5 +1,8 @@
-## [1.1.x] - 2026-06-08
+## [1.1.x] - 2026-06-08 --
 Minor improvements and new features.
+
+### Added
+ - Allow for returning of the original matched context if any `match` module, currently limited to the batch functions. Use the `return_original` flag.
 
 ### Changed
  - For feature extraction in `TitleMatch`, the threshold is now paramterized and set to a default 0.9.
