@@ -84,7 +84,7 @@ After importing the module, simply instantiate the `TaskMatch` object:
 TM = JAAT.TaskMatch()
 ```
 
-Optionally, we can provide a threshold value (default = 0.9, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
+Optionally, we can provide a threshold value (default = 0.87, [0, 1]), which governs how lenient to be with the matching (lower means more matches, but potentially less correct ones).
 
 ```python
 TM = TaskMatch(threshold=0.85)
